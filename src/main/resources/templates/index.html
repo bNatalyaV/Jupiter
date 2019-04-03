@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Temp Photo</title>
+</head>
+
+<body>
+
+<div>
+    <div th:text=" 'Time life:' + ${timeLife}"></div>
+    <div th:text=" 'Animation,' + ${animation}"></div>
+    <div th:text=" 'Text,' + ${text}"></div>
+
+    <img th:src="@{'data:image/png;base64,'+${imageName}}"/>
+</div>
+
+</body>
+</html>
