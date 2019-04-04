@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "user")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -28,6 +28,7 @@ public class User implements Serializable {
     public String password;
     @Column(name = "Birth_date")
     public Date birthDate;
+
 
     public User() {
 
