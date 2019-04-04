@@ -1,5 +1,7 @@
 package id.bnv.jupiter.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -25,6 +27,7 @@ public class User implements Serializable {
     @Column(name = "Email")
     public String email;
     @Column(name = "Password")
+    @JsonIgnore
     public String password;
     @Column(name = "Birth_date")
     public Date birthDate;

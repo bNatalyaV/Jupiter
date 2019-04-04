@@ -21,7 +21,7 @@ public class Dao {
         this.sessionFactory = sessionFactory;
     }
 
-    private Session getSession() {
+    Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 
@@ -36,17 +36,5 @@ public class Dao {
 
     public void delete(Object object) {
         getSession().delete(object);
-    }
-
-    public User getUser(int id) {
-        Session session = getSession();
-        User user = session.get(User.class, id);
-        return user;
-    }
-
-    public List<User> getAllUsers() {
-        Session session = getSession();
-        List<User> users = session.createQuery("from User").list();
-        return users;
     }
 }

@@ -1,6 +1,7 @@
 package id.bnv.jupiter.controller;
 
 import id.bnv.jupiter.dao.Dao;
+import id.bnv.jupiter.dao.UserDao;
 import id.bnv.jupiter.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,13 +9,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * СУТЬ ПРОЕКТА JUPITER
+ *
+ * вся суть в тарифах и их смене (у 1 юзера > 1 номера (тарифа))
+ *
+ * 1) в базе не храним пароль (только шифрованные (md5, sha256))
+ * 2)
+ * */
+
 @RestController
 @RequestMapping(value = "/v1")
 public class UserController {
-    private final Dao dao;
+    private final UserDao dao;
 
     @Autowired
-    public UserController(Dao dao) {
+    public UserController(UserDao dao) {
         this.dao = dao;
     }
 
@@ -67,5 +77,23 @@ public class UserController {
         dao.delete(user);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(value = "/user/enter")
+    public ResponseEntity login(User user) {
+        String email = user.email;
+        String password = user.password;
+
+        User user1 = dao.getUser(email);
+
+        if (user1 == null) {
+            return ResponseEntity.badRequest().body("no user with this email exist");
+        }
+
+        if (user1.password.equals(password)) {
+            return ResponseEntity.ok(user1);
+        }
+
+        return ResponseEntity.status(401).body("password is wrong");
     }
 }
