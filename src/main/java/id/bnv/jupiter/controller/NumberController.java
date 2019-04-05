@@ -1,7 +1,7 @@
 package id.bnv.jupiter.controller;
 
 import id.bnv.jupiter.dao.NumberDao;
-import id.bnv.jupiter.pojo.Number;
+import id.bnv.jupiter.pojo.PhoneNumber;
 import id.bnv.jupiter.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -24,7 +23,10 @@ public class NumberController {
 
     @GetMapping(value = "/numbers")
     public ResponseEntity getAllNumbers(User user) {
-        List<Number> numbers = dao.getAllNumbersOfUser(user);
-        return ResponseEntity.ok(numbers);
+        List<PhoneNumber> phoneNumbers = dao.getAllNumbersOfUser(user);
+
+
+                dao.addNumber()
+        return ResponseEntity.ok(phoneNumbers);
     }
 }
