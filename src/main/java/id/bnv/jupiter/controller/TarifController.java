@@ -5,10 +5,7 @@ import id.bnv.jupiter.pojo.PhoneNumber;
 import id.bnv.jupiter.pojo.Tarif;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/tarif")
@@ -25,6 +22,14 @@ public class TarifController {
         Tarif tarif = dao.getTarifByNumber(number);
         return ResponseEntity.ok(tarif);
     }
-//    @PostMapping(name = "/newtarif")
-//    public ResponseEntity crea
+    @PostMapping(name = "/newtarif")
+    public ResponseEntity addTarif(PhoneNumber number, Tarif tarif) {
+        dao.addTarifForNumber(number, tarif);
+        return ResponseEntity.ok("Successfully!");
+    }
+    @PutMapping(value = "/changetarif")
+    public ResponseEntity changeTarif(PhoneNumber number, Tarif tarif) {
+        dao.changeTarif(number, tarif);
+        return ResponseEntity.ok(tarif);
+    }
 }

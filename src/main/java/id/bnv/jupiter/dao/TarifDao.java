@@ -26,4 +26,13 @@ public class TarifDao extends Dao {
         List<Tarif> listOfTarif = query.list();
         return listOfTarif.isEmpty() ? null : listOfTarif.get(0);
     }
+    public Tarif addTarifForNumber (PhoneNumber number, Tarif tarif) {
+        number.tarifId=tarif.tarifId;
+        create(tarif);
+        return  tarif;
+    }
+    public void changeTarif(PhoneNumber number, Tarif tarif) {
+        number.tarifId=tarif.tarifId;
+        update(number);
+    }
 }
