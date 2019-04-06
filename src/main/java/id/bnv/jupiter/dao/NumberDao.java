@@ -30,5 +30,11 @@ public class NumberDao extends Dao {
    public PhoneNumber addNumber (User user, PhoneNumber number) {
         number.userId = user.id;
         create(number);
+        return number;
+   }
+   public PhoneNumber deleteNumber (User user, PhoneNumber number) {
+        number.userId=user.id;
+        delete(number);
+        return  number;
    }
 }
