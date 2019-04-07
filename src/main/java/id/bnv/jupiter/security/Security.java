@@ -10,9 +10,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-//@Configuration
-//@EnableWebSecurity
-//@ComponentScan("id.bnv.jupiter.security")
+@Configuration
+@EnableWebSecurity
+@ComponentScan("id.bnv.jupiter.security")
 public class Security extends WebSecurityConfigurerAdapter {
 
     private final AuthProvider provider;
@@ -38,7 +38,7 @@ public class Security extends WebSecurityConfigurerAdapter {
 
 //        http.antMatcher("/v1/user").
 
-        http.anonymous();
+        http.anonymous().and().csrf().disable();
 //        http//.authorizeRequests()
 //                .anyRequest()
 //                .authenticated()

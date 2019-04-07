@@ -24,12 +24,13 @@ public class NumberController {
         List<PhoneNumber> phoneNumbers = dao.getAllNumbersOfUser(user);
         return ResponseEntity.ok(phoneNumbers);
     }
-    @PutMapping(value = "/newnumber")
+    @PutMapping(value = "/number")
     public ResponseEntity addNewNumber(User user, PhoneNumber number) {
         dao.addNumber(user, number);
         return ResponseEntity.ok(number);
     }
-    @DeleteMapping(value = "/deletenumber")
+
+    @DeleteMapping(value = "/number")
     public ResponseEntity deleteNumber(User user, PhoneNumber number) {
         dao.deleteNumber(user, number);
         return ResponseEntity.ok(number);

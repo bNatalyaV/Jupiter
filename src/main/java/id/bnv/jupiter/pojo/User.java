@@ -27,13 +27,12 @@ public class User implements Serializable {
     @Column(name = "Email")
     public String email;
     @Column(name = "Password")
-    @JsonIgnore
     public String password;
     @Column(name = "Birth_date")
     public Date birthDate;
-
 
     public User() {
 
     }
 }
+

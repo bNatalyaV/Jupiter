@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 
-//@Component
+@Component
 public class AuthProvider implements AuthenticationProvider {
 
     private final UserDao dao;
