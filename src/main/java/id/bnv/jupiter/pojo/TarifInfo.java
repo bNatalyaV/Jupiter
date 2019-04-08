@@ -14,8 +14,8 @@ public class TarifInfo implements Serializable {
     public int tarifInfoId;
     @Column(name = "Tariff_name")
     public String tarifName;
-    @Column(name = "Tariff_descr")
-    public String tarifDescr;
+    @Column(name = "Tariff_desc")
+    public String tarifDesc;
 
     public TarifInfo() {
 
