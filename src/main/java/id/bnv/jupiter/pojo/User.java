@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-//@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "user")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
