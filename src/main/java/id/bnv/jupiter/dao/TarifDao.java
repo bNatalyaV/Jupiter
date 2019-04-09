@@ -33,8 +33,8 @@ public class TarifDao extends Dao {
         return tarif;
     }
 
-    public void changeTarif(PhoneNumber number, Tarif tarif) {
-        number.tarifId = tarif.tarifId;
+    public void changeTariff(PhoneNumber number, Tarif tariff) {
+        number.tarifId = tariff.tarifId;
         update(number);
     }
 }

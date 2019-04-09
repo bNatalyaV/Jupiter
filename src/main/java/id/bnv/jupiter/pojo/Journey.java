@@ -5,13 +5,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "tariff")
+@Table(name = "journey")
 public class Journey implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Journey_id")
     public int journeyId;
     @Column(name = "Phone_number_id")
     public int phoneNumberId;

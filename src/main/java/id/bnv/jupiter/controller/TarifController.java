@@ -29,7 +29,7 @@ public class TarifController {
     }
     @PutMapping(value = "/changetarif")
     public ResponseEntity changeTarif(PhoneNumber number, Tarif tarif) {
-        dao.changeTarif(number, tarif);
+        dao.changeTariff(number, tarif);
         return ResponseEntity.ok(tarif);
     }
 }
