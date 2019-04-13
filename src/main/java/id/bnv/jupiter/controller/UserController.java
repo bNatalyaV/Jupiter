@@ -9,15 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * СУТЬ ПРОЕКТА JUPITER
- *
- * вся суть в тарифах и их смене (у 1 юзера > 1 номера (тарифа))
- *
- * 1) в базе не храним пароль (только шифрованные (md5, sha256))
- * 2)
- * */
-
 @RestController
 @RequestMapping(value = "/v1")
 public class UserController {

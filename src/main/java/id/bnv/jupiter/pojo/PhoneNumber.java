@@ -11,13 +11,16 @@ public class PhoneNumber implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Phone_number_id")
     public int id;
-    //@ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "User_id")
     public int userId;
     @Column(name = "Phone_number")
     public String phoneNumber;
+
+   // @ManyToOne(optional = true)
+   // @JoinColumn(name = "Phone_number_id")
     @Column(name = "Tariff_id")
     public int tarifId;
+
     @Column(name = "Balance")
     public int balance;
 

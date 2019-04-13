@@ -2,6 +2,7 @@ package id.bnv.jupiter.pojo;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "tariff")
@@ -19,6 +20,9 @@ public class Tarif implements Serializable {
     public int tarifInfoId;
     @Column(name = "Tariff_price")
     public String tarifPrice;
+
+//    @OneToMany(mappedBy = "tariff", fetch = FetchType.LAZY)
+//    public List<PhoneNumber> list;
 
     public Tarif() {
     }
