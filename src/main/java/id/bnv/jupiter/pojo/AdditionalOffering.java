@@ -3,7 +3,7 @@ package id.bnv.jupiter.pojo;
 import javax.persistence.*;
 import java.io.Serializable;
 @Entity
-@Table(name = "Additional_offering")
+@Table(name = "additional_offering")
 public class AdditionalOffering implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -12,7 +12,7 @@ public class AdditionalOffering implements Serializable {
     @Column(name = "Offering_id")
     public int offeringId;
     @Column(name = "Offering_name")
-    public int offeringName;
+    public String offeringName;
     @Column(name = "Offering_desc")
     public String offeringDesc;
 

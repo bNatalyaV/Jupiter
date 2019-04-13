@@ -27,14 +27,16 @@ public class NumberDao extends Dao {
         List<PhoneNumber> phoneNumbers = query.list();
         return phoneNumbers;
     }
-   public PhoneNumber addNumber (User user, PhoneNumber number) {
+
+    public PhoneNumber addNumber(User user, PhoneNumber number) {
         number.userId = user.id;
         create(number);
         return number;
-   }
-   public PhoneNumber deleteNumber (User user, PhoneNumber number) {
-        number.userId=user.id;
+    }
+
+    public PhoneNumber deleteNumber(User user, PhoneNumber number) {
+        number.userId = user.id;
         delete(number);
-        return  number;
-   }
+        return number;
+    }
 }
