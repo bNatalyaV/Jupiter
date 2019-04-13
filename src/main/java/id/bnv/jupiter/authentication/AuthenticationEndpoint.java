@@ -34,8 +34,7 @@ public class AuthenticationEndpoint {
             } else {
                 return null;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error");
         }
     }
@@ -44,16 +43,13 @@ public class AuthenticationEndpoint {
         User user = dao.getUser(email);
         String passwordFromDB = user.email;
         return (passwordFromDB.equals(password)) ? true : false;
-
-
-        // Authenticate against a database, LDAP, file or whatever
-        // Throw an Exception if the credentials are invalid
     }
 
-    private String issueToken(String username) {
+    private String issueToken(String email) {
         // Issue a token (can be a random String persisted to a database or a JWT token)
         // The issued token must be associated to a user
         // Return the issued token
+        return "token";
     }
 
 }
