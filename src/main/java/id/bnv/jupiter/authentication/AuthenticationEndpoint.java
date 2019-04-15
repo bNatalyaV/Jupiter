@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Key;
+
 
 //выдача пользователю токена
 @RestController
@@ -29,7 +31,7 @@ public class AuthenticationEndpoint {
                                            @RequestParam("password") String password) {
         try {
             if (authenticate(email, password)) {
-                String token = issueToken(email); // Issue a token for the user
+                String token = "";//issueToken(email); // Issue a token for the user
                 return ResponseEntity.ok(token);// Return the token on the response
             } else {
                 return null;
@@ -45,11 +47,14 @@ public class AuthenticationEndpoint {
         return (passwordFromDB.equals(password)) ? true : false;
     }
 
-    private String issueToken(String email) {
-        // Issue a token (can be a random String persisted to a database or a JWT token)
-        // The issued token must be associated to a user
-        // Return the issued token
-        return "token";
-    }
-
+//    private String issueToken(String email) {
+//        Key key = Keys.secretKeyFor(SignatureAlgorithm.RS256);
+//
+//        String jwt = Jwts.builder()
+//                .setSubject(email)
+//                .setPayload(email)
+//                .signWith(key)
+//                .compact();
+//        return jwt;
+//    }
 }

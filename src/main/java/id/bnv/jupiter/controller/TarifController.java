@@ -18,7 +18,9 @@ public class TarifController {
     }
 
     @GetMapping(name = "/")
-    public ResponseEntity getTarifByNumber(PhoneNumber number) {
+    public ResponseEntity getTarifByNumber(@RequestHeader String token, PhoneNumber number) {
+//        User user = Helper.getUser(token);
+
         Tarif tarif = dao.getTarifByNumber(number);
         return ResponseEntity.ok(tarif);
     }
