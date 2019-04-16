@@ -15,29 +15,34 @@ import static id.bnv.jupiter.authentication.AuthenticationEndpoint.decode;
 
 @Repository
 @Transactional
-public  class Decoder /* extends Dao */ {
-    private final SessionFactory sessionFactoryForDecoder;
+public class Decoder /* extends Dao */ {
+    private static SessionFactory sessionFactoryForDecoder;
 
     @Autowired
     public Decoder(SessionFactory sessionFactory) {
         this.sessionFactoryForDecoder = sessionFactory;
     }
 
-    Session getSession() {return sessionFactoryF}
+    static Session getSession() {
+        return sessionFactoryForDecoder.getCurrentSession();
+    }
 
-    //
 //    @Autowired
 //    public Decoder(SessionFactory sessionFactory) {
 //        super(sessionFactory);
 //    }
 
-    public String authorization(String token) {
+    public static User identifyUser(String token) {
         String emailFromToken = decode(token);
         Query query = getSession().createQuery("from User u where u.email=:email");
         query.setParameter("email", emailFromToken);
         List<User> list = query.list();
         if (list.isEmpty()) return null;
-        else return list.get(0).email;
+        else return list.get(0);
     }
 
+    public static boolean auth(String token) {
+        User user = identifyUser(token);
+        return (!user.equals(null)) ? true : false;
+    }
 }
