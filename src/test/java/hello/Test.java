@@ -54,9 +54,6 @@ public class Test {
         String email = decode(s);
         System.out.println(email);
 
-        //KgZU3jAQXR_F2qDJDsbAEfs6vZ6qzledhKoaq8eVpAw
-        //Ll76P8tNsuhmySwfGId7Wx7amX-2JDACCWXaL32rAto
-        //Ll76P8tNsuhmySwfGId7Wx7amX-2JDACCWXaL32rAto
     }
 
     //https://github.com/auth0/java-jwt

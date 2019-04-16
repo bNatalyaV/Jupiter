@@ -1,5 +1,10 @@
 package id.bnv.jupiter.authentication;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import id.bnv.jupiter.dao.Dao;
 import id.bnv.jupiter.dao.UserDao;
 import id.bnv.jupiter.pojo.User;
@@ -18,6 +23,7 @@ import java.security.Key;
 @RestController
 @RequestMapping(value = "/authentication")
 public class AuthenticationEndpoint {
+    static Algorithm algorithm = Algorithm.HMAC256("jupiter");
 
     private final UserDao dao;
 
@@ -27,11 +33,11 @@ public class AuthenticationEndpoint {
     }
 
     @PostMapping
-    public ResponseEntity authenticateUser(@RequestParam("username") String email,
+    public ResponseEntity authenticateUser(@RequestParam("username") String email,//user, but only email, password
                                            @RequestParam("password") String password) {
         try {
             if (authenticate(email, password)) {
-                String token = "";//issueToken(email); // Issue a token for the user
+                String token = issueToken(email);// Issue a token for the user
                 return ResponseEntity.ok(token);// Return the token on the response
             } else {
                 return null;
@@ -43,18 +49,24 @@ public class AuthenticationEndpoint {
 
     private boolean authenticate(String email, String password) throws Exception {
         User user = dao.getUser(email);
-        String passwordFromDB = user.email;
+        String passwordFromDB = user.password;
         return (passwordFromDB.equals(password)) ? true : false;
     }
 
-//    private String issueToken(String email) {
-//        Key key = Keys.secretKeyFor(SignatureAlgorithm.RS256);
-//
-//        String jwt = Jwts.builder()
-//                .setSubject(email)
-//                .setPayload(email)
-//                .signWith(key)
-//                .compact();
-//        return jwt;
-//    }
+    private static String issueToken(String email) {
+        String token = JWT.create()
+                .withIssuer("jupiter")
+                .withClaim("email", email)
+                .sign(algorithm);
+        return token;
+    }
+    public static String decode(String token) {
+        JWTVerifier verifier = JWT.require(algorithm)
+                .withIssuer("me")
+                .build();
+
+        DecodedJWT verify = verifier.verify(token);
+        Claim email = verify.getClaim("email");
+        return email.asString();
+    }
 }

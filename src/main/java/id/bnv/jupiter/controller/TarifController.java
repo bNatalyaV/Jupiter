@@ -19,17 +19,18 @@ public class TarifController {
 
     @GetMapping(name = "/")
     public ResponseEntity getTarifByNumber(@RequestHeader String token, PhoneNumber number) {
-//        User user = Helper.getUser(token);
+//        User user = Decoder.getUser(token);
+
 
         Tarif tarif = dao.getTarifByNumber(number);
         return ResponseEntity.ok(tarif);
     }
-    @PostMapping(name = "/newtarif")
+    @PostMapping(name = "/tarif")
     public ResponseEntity addTarif(PhoneNumber number, Tarif tarif) {
         dao.addTarifForNumber(number, tarif);
         return ResponseEntity.ok("Successfully!");
     }
-    @PutMapping(value = "/changetarif")
+    @PutMapping(value = "/tarif")
     public ResponseEntity changeTarif(PhoneNumber number, Tarif tarif) {
         dao.changeTariff(number, tarif);
         return ResponseEntity.ok(tarif);
