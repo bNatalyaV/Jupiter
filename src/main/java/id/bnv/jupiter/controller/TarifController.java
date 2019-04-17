@@ -6,9 +6,6 @@ import id.bnv.jupiter.pojo.Tarif;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.ws.Response;
-
 import static id.bnv.jupiter.authentication.Decoder.auth;
 
 @RestController

@@ -28,6 +28,7 @@ public class User implements Serializable {
     @Column(name = "Password")
     public String password;
     @Column(name = "Birth_date")
+    @Temporal(TemporalType.DATE)
     public Date birthDate;
 
     public User() {

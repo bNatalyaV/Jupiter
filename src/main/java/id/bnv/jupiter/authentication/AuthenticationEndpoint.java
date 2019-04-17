@@ -9,17 +9,14 @@ import id.bnv.jupiter.dao.Dao;
 import id.bnv.jupiter.dao.UserDao;
 import id.bnv.jupiter.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Key;
+import static id.bnv.jupiter.authentication.IssueTokenAndDecode.issueToken;
 
-
-//выдача пользователю токена
 @RestController
 @RequestMapping(value = "/authentication")
 public class AuthenticationEndpoint {
@@ -33,7 +30,7 @@ public class AuthenticationEndpoint {
     }
 
     @PostMapping
-    public ResponseEntity authenticateUser(@RequestParam("username") String email,//user, but only email, password
+    public ResponseEntity authenticateUser(@RequestParam("email") String email,
                                            @RequestParam("password") String password) {
         try {
             if (authenticate(email, password)) {
@@ -51,22 +48,5 @@ public class AuthenticationEndpoint {
         User user = dao.getUser(email);
         String passwordFromDB = user.password;
         return (passwordFromDB.equals(password)) ? true : false;
-    }
-
-    private static String issueToken(String email) {
-        String token = JWT.create()
-                .withIssuer("jupiter")
-                .withClaim("email", email)
-                .sign(algorithm);
-        return token;
-    }
-    public static String decode(String token) {
-        JWTVerifier verifier = JWT.require(algorithm)
-                .withIssuer("me")
-                .build();
-
-        DecodedJWT verify = verifier.verify(token);
-        Claim email = verify.getClaim("email");
-        return email.asString();
     }
 }

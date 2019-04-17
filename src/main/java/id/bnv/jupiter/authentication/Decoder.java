@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static id.bnv.jupiter.authentication.AuthenticationEndpoint.decode;
+import static id.bnv.jupiter.authentication.IssueTokenAndDecode.decode;
+
 
 @Repository
 @Transactional
