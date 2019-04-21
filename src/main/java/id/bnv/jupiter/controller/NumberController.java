@@ -24,6 +24,7 @@ public class NumberController {
         List<PhoneNumber> phoneNumbers = dao.getAllNumbersOfUser(user);
         return ResponseEntity.ok(phoneNumbers);
     }
+
     @PutMapping(value = "/number")
     public ResponseEntity addNewNumber(User user, PhoneNumber number) {
         dao.addNumber(user, number);

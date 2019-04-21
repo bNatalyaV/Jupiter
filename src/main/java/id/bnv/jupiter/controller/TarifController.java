@@ -3,6 +3,7 @@ package id.bnv.jupiter.controller;
 import id.bnv.jupiter.dao.TarifDao;
 import id.bnv.jupiter.pojo.PhoneNumber;
 import id.bnv.jupiter.pojo.Tarif;
+import id.bnv.jupiter.pojo.TarifInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class TarifController {
         this.dao = dao;
     }
 
-    @GetMapping(name = "/")
+    @GetMapping(value = "/")
     public ResponseEntity getTarifByNumber(@RequestHeader String token, PhoneNumber number) {
         if (auth(token)) {
             Tarif tarif = dao.getTarifByNumber(number);
@@ -26,9 +27,21 @@ public class TarifController {
         } else return ResponseEntity.badRequest().body("Not authorized");
     }
 
-    @PostMapping(name = "/tarif")
-    public ResponseEntity addTarif(PhoneNumber number, Tarif tarif) {
-        dao.addTarifForNumber(number, tarif);
+    @GetMapping(value = "/info/{tarifId}")
+    public ResponseEntity getInfo(@PathVariable int tarifId) {
+        TarifInfo tarifInfo = dao.getInfo(tarifId);
+        return ResponseEntity.ok(tarifInfo);
+    }
+
+    @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
+    public ResponseEntity addTarif(@PathVariable(value = "idnumber") int idNumber,
+                                   @PathVariable(value = "idtarif") int idTarif) {
+        PhoneNumber phoneNumber = new PhoneNumber();
+        dao.addTarifForNumber(idNumber, idTarif);
+        if (phoneNumber.hasTarif) {
+            return changeTarif(phoneNumber, idTarif);
+        }
+        // save
         return ResponseEntity.ok("Successfully!");
     }
 

@@ -1,7 +1,8 @@
 package id.bnv.jupiter.dao;
 
-import id.bnv.jupiter.pojo.Tarif;
 import id.bnv.jupiter.pojo.PhoneNumber;
+import id.bnv.jupiter.pojo.Tarif;
+import id.bnv.jupiter.pojo.TarifInfo;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,9 @@ public class TarifDao extends Dao {
         return listOfTarif.isEmpty() ? null : listOfTarif.get(0);
     }
 
-    public Tarif addTarifForNumber(PhoneNumber number, Tarif tarif) {
-        number.tarifId=tarif.tarifId;
+    public Tarif addTarifForNumber(PhoneNumber number, int idTarif) {
+        number.tarifId = idTarif;
+//        getSession().saveOrUpdate();
         create(tarif);
         return tarif;
     }
@@ -36,5 +38,12 @@ public class TarifDao extends Dao {
     public void changeTariff(PhoneNumber number, Tarif tariff) {
         number.tarifId = tariff.tarifId;
         update(number);
+    }
+
+    public TarifInfo getInfo(Integer tarifId ) {
+        Query query = getSession().createQuery("from Tarif u where u.tarifInfoId=:tarifInfoId");
+        query.setParameter("tarifInfoId", tarifId);
+        List<TarifInfo> list = query.list();
+        return list.get(0);
     }
 }
