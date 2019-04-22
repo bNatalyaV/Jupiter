@@ -32,18 +32,18 @@ public class TarifController {
         TarifInfo tarifInfo = dao.getInfo(tarifId);
         return ResponseEntity.ok(tarifInfo);
     }
-
-    @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
-    public ResponseEntity addTarif(@PathVariable(value = "idnumber") int idNumber,
-                                   @PathVariable(value = "idtarif") int idTarif) {
-        PhoneNumber phoneNumber = new PhoneNumber();
-        dao.addTarifForNumber(idNumber, idTarif);
-        if (phoneNumber.hasTarif) {
-            return changeTarif(phoneNumber, idTarif);
-        }
-        // save
-        return ResponseEntity.ok("Successfully!");
-    }
+//
+//    @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
+//    public ResponseEntity addOrUpdateTarif(@PathVariable(value = "idnumber") int idNumber,
+//                                   @PathVariable(value = "idtarif") int idTarif) {
+//        PhoneNumber phoneNumber = new PhoneNumber();
+//        dao.addTarifForNumber(idNumber, idTarif);
+//        if (phoneNumber.hasTarif) {
+//            return changeTarif(phoneNumber, idTarif);
+//        }
+//        // save
+//        return ResponseEntity.ok("Successfully!");
+//    }
 
     @PutMapping(value = "/tarif")
     public ResponseEntity changeTarif(PhoneNumber number, Tarif tarif) {

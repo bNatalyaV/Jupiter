@@ -1,3 +1,47 @@
+GET http://localhost:8080/v1/users
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
+
+<> 2019-04-22T014628.200.json
+
+###
+
+GET http://localhost:8080/v1/users
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
+
+<> 2019-04-22T014519.500.json
+
+###
+
+GET http://localhost:8080/v1/userы
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
+
+<> 2019-04-22T014457.404.json
+
+###
+
+GET http://localhost:8080/v1/user/1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
+
+<> 2019-04-22T014104.200.json
+
+###
+
 GET http://localhost:8080/numbersinfo/numbers
 Accept: */*
 Cache-Control: no-cache
@@ -495,50 +539,6 @@ Content-Type: application/json
 {"id":6,"surname":"I","name":"I","patronymic":"I","passport":"75","email":"000@yandex.ru","birthDate":0, "password": "1234567890"}
 
 <> 2019-04-08T090636.500.json
-
-###
-
-POST http://localhost:8080/v1/user
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":6,"surname":"I","name":"I","patronymic":"I","passport":"75","email":"000@yandex.ru","birthDate":0, "password": "1234567890"}
-
-<> 2019-04-08T090621.500.json
-
-###
-
-POST http://localhost:8080/v1/user
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":6,"surname":"I","name":"I","patronymic":"I","passport":"75","email":"000@yandex.ru","birthDate":0, "password": "1234567890"}
-
-<> 2019-04-08T090444.500.json
-
-###
-
-GET http://localhost:8080/v1/users
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":6,"surname":"I","name":"I","patronymic":"I","passport":"75","email":"000@yandex.ru","birthDate":0, "password": "1234567890"}
-
-<> 2019-04-08T090357.200.json
-
-###
-
-POST http://localhost:8080/v1/user
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":6,"surname":"I","name":"I","patronymic":"I","passport":"75","email":"000@yandex.ru","birthDate":0, "password": "1234567890"}
-
-<> 2019-04-07T102916.500.json
 
 ###
 

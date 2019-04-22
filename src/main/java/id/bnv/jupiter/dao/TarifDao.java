@@ -27,12 +27,17 @@ public class TarifDao extends Dao {
         List<Tarif> listOfTarif = query.list();
         return listOfTarif.isEmpty() ? null : listOfTarif.get(0);
     }
-
-    public Tarif addTarifForNumber(PhoneNumber number, int idTarif) {
-        number.tarifId = idTarif;
+//
+//    public Tarif addTarifForNumber(PhoneNumber number, int idTarif) {
+//        number.tarifId = idTarif;
 //        getSession().saveOrUpdate();
-        create(tarif);
-        return tarif;
+//        create(tarif);
+//        return tarif;
+//    }
+    public void addTarifToNumber(int idNumber, int idTarif) {
+        PhoneNumber phoneNumber= getSession().get(PhoneNumber.class, idNumber);
+        phoneNumber.tarifId=idTarif;
+        update(phoneNumber);
     }
 
     public void changeTariff(PhoneNumber number, Tarif tariff) {

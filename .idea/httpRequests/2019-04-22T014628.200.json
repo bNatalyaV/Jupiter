@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "login": "Mary",
+    "surname": "Petrova",
+    "name": "Mary",
+    "patronymic": null,
+    "passport": "4564 465846",
+    "email": "jupiter@mail.ru",
+    "password": "000000",
+    "birthDate": "1970-01-01"
+  },
+  {
+    "id": 2,
+    "login": "Anna_S",
+    "surname": "Sviridova",
+    "name": "Anna",
+    "patronymic": null,
+    "passport": "5654 895124",
+    "email": "Anna_87@mail.ru",
+    "password": "545454",
+    "birthDate": "1987-02-02"
+  },
+  {
+    "id": 4,
+    "login": "JUP",
+    "surname": "jupiter",
+    "name": "jupiter",
+    "patronymic": null,
+    "passport": "7850 000000",
+    "email": "jupiter@mail.ru",
+    "password": "545454",
+    "birthDate": "1987-02-02"
+  },
+  {
+    "id": 6,
+    "login": "lll",
+    "surname": "JJJLupiter",
+    "name": "JupiLter",
+    "patronymic": null,
+    "passport": "0000 045779",
+    "email": "jupiter@mail.ru",
+    "password": "545454",
+    "birthDate": "1970-01-01"
+  }
+]
