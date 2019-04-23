@@ -39,14 +39,14 @@ public class TarifController {
     @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
     public ResponseEntity addOrUpdateTarif(@PathVariable(value = "idnumber") int idNumber,
                                    @PathVariable(value = "idtarif") int idTarif) {
-        PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber=numberDao.getNumberById(idNumber);
-
-        if (dao.hasTariff(phoneNumber)) dao.changeTariff(idNumber, idTarif);
+        PhoneNumber phoneNumber = numberDao.getNumberById(idNumber);
+        if (dao.hasTariff(phoneNumber)) {
+            if (dao.changeTariff(idNumber, idTarif)==true) return ResponseEntity.ok("Tariff was changed");
+            else return ResponseEntity.badRequest().body("Balance is less than zero");
+        }
         else dao.addTarifToNumber(idNumber, idTarif);
         return ResponseEntity.ok().build();
     }
-
         //        PhoneNumber phouneNumber = new PhoneNumber();
 //        dao.addTarifForNumber(idNumber, idTarif);
 //        if (phoneNumber.hasTarif) {

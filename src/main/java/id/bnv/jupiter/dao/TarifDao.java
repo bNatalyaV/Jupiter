@@ -47,15 +47,21 @@ public class TarifDao extends Dao {
         Query query= getSession().createQuery("from PhoneNumber u where u.tarifId=:idtarif");
         query.setParameter("idtarif", phoneNumber.tarifId);
         List<Integer> list=query.list();
+        int tarifid=phoneNumber.tarifId;
+      //if (tarifid.equals(null))
         if (list.get(0)==null) return false;
         else return true;
     }
 
 //add
-    public void changeTariff(int idnumber, int idTariff) {
+    public boolean changeTariff(int idnumber, int idTariff) {
         PhoneNumber number=getSession().get(PhoneNumber.class, idnumber);
-        number.tarifId = idTariff;
-        update(number);
+        if (number.balance>=0) {
+            number.tarifId = idTariff;
+            update(number);
+            return true;
+        }
+        else return false;
     }
 
     public TarifInfo getInfo(Integer tarifId) {

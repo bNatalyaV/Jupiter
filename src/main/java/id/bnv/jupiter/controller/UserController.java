@@ -30,16 +30,16 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping(value = "/user")
-    public ResponseEntity getUserByIdRequestParam(@RequestParam(value = "id") int id) {
-        User user = dao.getUser(id);
-
-        if (user == null) {
-            return ResponseEntity.badRequest().body("User not exist");
-        }
-
-        return ResponseEntity.ok(user);
-    }
+//    @GetMapping(value = "/user")
+//    public ResponseEntity getUserByIdRequestParam(@RequestParam(value = "id") int id) {
+//        User user = dao.getUser(id);
+//
+//        if (user == null) {
+//            return ResponseEntity.badRequest().body("User not exist");
+//        }
+//
+//        return ResponseEntity.ok(user);
+//    }
 
     @GetMapping(value = "/users")
     public ResponseEntity getAllUsers() {

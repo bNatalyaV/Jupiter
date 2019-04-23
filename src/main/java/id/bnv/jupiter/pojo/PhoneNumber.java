@@ -19,7 +19,7 @@ public class PhoneNumber implements Serializable {
    // @ManyToOne(optional = true)
    // @JoinColumn(name = "Phone_number_id")
     @Column(name = "Tariff_id")
-    public int tarifId;
+    public Integer tarifId;
 
     @Column(name = "Balance")
     public int balance;
