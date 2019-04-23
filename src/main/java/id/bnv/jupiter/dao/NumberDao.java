@@ -27,6 +27,17 @@ public class NumberDao extends Dao {
         List<PhoneNumber> phoneNumbers = query.list();
         return phoneNumbers;
     }
+    public PhoneNumber getNumberById (int id) {
+        PhoneNumber phoneNumber= getSession().get(PhoneNumber.class, id);
+        return phoneNumber;
+    }
+    public boolean hasTariff(PhoneNumber phoneNumber) {
+        Query query= getSession().createQuery("from PhoneNumber u where u.idtarif=:idtarif");
+        query.setParameter("idtarif", phoneNumber.tarifId);
+        List<Integer> list=query.list();
+        if (list.get(0)==null) return false;
+        else return true;
+    }
 
     public PhoneNumber addNumber(User user, PhoneNumber number) {
         number.userId = user.id;

@@ -4,6 +4,7 @@ import id.bnv.jupiter.pojo.PhoneNumber;
 import id.bnv.jupiter.pojo.Tarif;
 import id.bnv.jupiter.pojo.TarifInfo;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,8 @@ public class TarifDao extends Dao {
         List<Tarif> listOfTarif = query.list();
         return listOfTarif.isEmpty() ? null : listOfTarif.get(0);
     }
-//
+
+    //
 //    public Tarif addTarifForNumber(PhoneNumber number, int idTarif) {
 //        number.tarifId = idTarif;
 //        getSession().saveOrUpdate();
@@ -35,17 +37,28 @@ public class TarifDao extends Dao {
 //        return tarif;
 //    }
     public void addTarifToNumber(int idNumber, int idTarif) {
-        PhoneNumber phoneNumber= getSession().get(PhoneNumber.class, idNumber);
-        phoneNumber.tarifId=idTarif;
+        PhoneNumber phoneNumber = getSession().get(PhoneNumber.class, idNumber);
+        phoneNumber.tarifId = idTarif;
         update(phoneNumber);
     }
 
-    public void changeTariff(PhoneNumber number, Tarif tariff) {
-        number.tarifId = tariff.tarifId;
+
+    public boolean hasTariff(PhoneNumber phoneNumber) {
+        Query query= getSession().createQuery("from PhoneNumber u where u.tarifId=:idtarif");
+        query.setParameter("idtarif", phoneNumber.tarifId);
+        List<Integer> list=query.list();
+        if (list.get(0)==null) return false;
+        else return true;
+    }
+
+//add
+    public void changeTariff(int idnumber, int idTariff) {
+        PhoneNumber number=getSession().get(PhoneNumber.class, idnumber);
+        number.tarifId = idTariff;
         update(number);
     }
 
-    public TarifInfo getInfo(Integer tarifId ) {
+    public TarifInfo getInfo(Integer tarifId) {
         Query query = getSession().createQuery("from Tarif u where u.tarifInfoId=:tarifInfoId");
         query.setParameter("tarifInfoId", tarifId);
         List<TarifInfo> list = query.list();

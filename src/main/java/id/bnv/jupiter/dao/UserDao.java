@@ -1,5 +1,6 @@
 package id.bnv.jupiter.dao;
 
+import id.bnv.jupiter.pojo.PhoneNumber;
 import id.bnv.jupiter.pojo.User;
 import org.hibernate.Query;
 import org.hibernate.Session;

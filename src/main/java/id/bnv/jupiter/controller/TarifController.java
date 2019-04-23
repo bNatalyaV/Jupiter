@@ -1,5 +1,6 @@
 package id.bnv.jupiter.controller;
 
+import id.bnv.jupiter.dao.NumberDao;
 import id.bnv.jupiter.dao.TarifDao;
 import id.bnv.jupiter.pojo.PhoneNumber;
 import id.bnv.jupiter.pojo.Tarif;
@@ -13,10 +14,12 @@ import static id.bnv.jupiter.authentication.Decoder.auth;
 @RequestMapping(value = "/tarif")
 public class TarifController {
     private final TarifDao dao;
+    private final NumberDao numberDao;
 
     @Autowired
-    public TarifController(TarifDao dao) {
+    public TarifController(TarifDao dao, NumberDao numberdao) {
         this.dao = dao;
+        this.numberDao = numberdao;
     }
 
     @GetMapping(value = "/")
@@ -32,11 +35,19 @@ public class TarifController {
         TarifInfo tarifInfo = dao.getInfo(tarifId);
         return ResponseEntity.ok(tarifInfo);
     }
-//
-//    @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
-//    public ResponseEntity addOrUpdateTarif(@PathVariable(value = "idnumber") int idNumber,
-//                                   @PathVariable(value = "idtarif") int idTarif) {
-//        PhoneNumber phoneNumber = new PhoneNumber();
+
+    @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
+    public ResponseEntity addOrUpdateTarif(@PathVariable(value = "idnumber") int idNumber,
+                                   @PathVariable(value = "idtarif") int idTarif) {
+        PhoneNumber phoneNumber = new PhoneNumber();
+        phoneNumber=numberDao.getNumberById(idNumber);
+
+        if (dao.hasTariff(phoneNumber)) dao.changeTariff(idNumber, idTarif);
+        else dao.addTarifToNumber(idNumber, idTarif);
+        return ResponseEntity.ok().build();
+    }
+
+        //        PhoneNumber phouneNumber = new PhoneNumber();
 //        dao.addTarifForNumber(idNumber, idTarif);
 //        if (phoneNumber.hasTarif) {
 //            return changeTarif(phoneNumber, idTarif);
@@ -44,10 +55,9 @@ public class TarifController {
 //        // save
 //        return ResponseEntity.ok("Successfully!");
 //    }
-
-    @PutMapping(value = "/tarif")
-    public ResponseEntity changeTarif(PhoneNumber number, Tarif tarif) {
-        dao.changeTariff(number, tarif);
-        return ResponseEntity.ok(tarif);
+    @PutMapping(value = "/tarif/{idnumber}/{idtarif}")
+    public ResponseEntity changeTarif(@PathVariable int idnumber, @PathVariable int idtarif) {
+        dao.changeTariff(idnumber, idtarif);
+        return ResponseEntity.ok().build();
     }
 }
