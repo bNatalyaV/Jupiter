@@ -12,7 +12,7 @@ public class Region implements Serializable {
     @Column(name = "Region_id")
     public int regionId;
     @Column(name = "Country_id")
-    public int coountryId;
+    public int countryId;
     @Column(name = "Region_name")
     public String regionName;
 

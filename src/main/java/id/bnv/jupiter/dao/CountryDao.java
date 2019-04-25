@@ -1,6 +1,8 @@
 package id.bnv.jupiter.dao;
 
 import id.bnv.jupiter.pojo.Country;
+import id.bnv.jupiter.pojo.Region;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +21,11 @@ public class CountryDao extends Dao {
         Session session=getSession();
         List<Country> countryList=session.createQuery("from Country").list();
         return countryList;
+    }
+    public List<Region> getAllRegionsForCountry(int idCountry) {
+        Query query = getSession().createQuery("from Region u where u.countryId=:countryId");
+        query.setParameter("countryId", idCountry);
+        List<Region> regionList=query.list();
+        return regionList;
     }
 }

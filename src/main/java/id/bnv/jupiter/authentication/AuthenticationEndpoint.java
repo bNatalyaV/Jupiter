@@ -44,8 +44,8 @@ public class AuthenticationEndpoint {
         }
     }
 
-    private boolean authenticate(String email, String password) throws Exception {
-        User user = dao.getUser(email);
+    private boolean authenticate(String login, String password) throws Exception {
+        User user = dao.getUserBy(login);
         String passwordFromDB = user.password;
         return (passwordFromDB.equals(password)) ? true : false;
     }

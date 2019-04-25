@@ -6,9 +6,8 @@ import id.bnv.jupiter.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
+//
 @RestController
 @RequestMapping(value = "/numbersinfo")
 public class NumberController {
@@ -24,7 +23,7 @@ public class NumberController {
         List<PhoneNumber> phoneNumbers = dao.getAllNumbersOfUser(user);
         return ResponseEntity.ok(phoneNumbers);
     }
-
+    //передача номиера строкой, создать номер в бд
     @PutMapping(value = "/number")
     public ResponseEntity addNewNumber(User user, PhoneNumber number) {
         dao.addNumber(user, number);

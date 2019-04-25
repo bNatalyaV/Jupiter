@@ -6,11 +6,10 @@ import id.bnv.jupiter.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/v1")
+@RequestMapping(value = "/user")
 public class UserController {
     private final UserDao dao;
 
@@ -70,21 +69,21 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "/user/enter")
-    public ResponseEntity login(User user) {
-        String email = user.email;
-        String password = user.password;
-
-        User user1 = dao.getUser(email);
-
-        if (user1 == null) {
-            return ResponseEntity.badRequest().body("no user with this email exist");
-        }
-
-        if (user1.password.equals(password)) {
-            return ResponseEntity.ok(user1);
-        }
-
-        return ResponseEntity.status(401).body("password is wrong");
-    }
+//    @PostMapping(value = "/user/enter")
+//    public ResponseEntity login(User user) {
+//        String email = user.email;
+//        String password = user.password;
+//
+//        User user1 = dao.getUser(email);
+//
+//        if (user1 == null) {
+//            return ResponseEntity.badRequest().body("no user with this email exist");
+//        }
+//
+//        if (user1.password.equals(password)) {
+//            return ResponseEntity.ok(user1);
+//        }
+//
+//        return ResponseEntity.status(401).body("password is wrong");
+//    }
 }

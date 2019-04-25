@@ -10,9 +10,12 @@ import com.jcraft.jsch.Session;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Date;
 
 public class Test {
     public static void main(String[] args) throws Exception {
+        // nohup java -jar jupiter.jar
+
         String user = "kitty";
         String password = "qwerty";
         String remoteHost = "134.209.252.155";
@@ -65,7 +68,7 @@ public class Test {
     private String decode(String token) {
         JWTVerifier verifier = JWT.require(algo)
                 .withIssuer("me")
-              //  .acceptExpiresAt(5)
+                //  .acceptExpiresAt(5)
                 .build();
 
         DecodedJWT verify = verifier.verify(token);

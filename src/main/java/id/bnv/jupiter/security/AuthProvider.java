@@ -26,7 +26,7 @@ public class AuthProvider implements AuthenticationProvider {
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        User user = dao.getUser(name);
+        User user = dao.getUserBy(name);
 
         if (user == null) {
             return null;

@@ -1,8 +1,6 @@
 package id.bnv.jupiter.dao;
 
-import id.bnv.jupiter.pojo.PhoneNumber;
-import id.bnv.jupiter.pojo.Tarif;
-import id.bnv.jupiter.pojo.TarifInfo;
+import id.bnv.jupiter.pojo.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
+
+import static org.aspectj.bridge.Version.getTime;
 
 @Repository
 @Transactional
@@ -52,16 +53,31 @@ public class TarifDao extends Dao {
         if (list.get(0)==null) return false;
         else return true;
     }
+    public Journey getJourney(int idPhoneNumber) {
+        Query query=getSession().createQuery("from Journey u where u.phoneNumberId=:phoneNumberId");
+        query.setParameter("phoneNumberId", idPhoneNumber);
+        List<Journey> journeys=query.list();
+        return journeys.get(0);
+    }
 
 //add
     public boolean changeTariff(int idnumber, int idTariff) {
         PhoneNumber number=getSession().get(PhoneNumber.class, idnumber);
+        Date dateOfStartJourney=new Date();
+        Journey journey=new Journey(dateOfStartJourney, idnumber, idTariff);
+        create(journey);
         if (number.balance>=0) {
             number.tarifId = idTariff;
             update(number);
+            journey.endDate=new Date();
+            update(journey);
             return true;
         }
-        else return false;
+        else {
+            JourneyTask journeyTask=new JourneyTask(journey.journeyId, 2, new Date());
+            create(journeyTask);
+            return false;
+        }
     }
 
     public TarifInfo getInfo(Integer tarifId) {

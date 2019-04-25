@@ -27,7 +27,7 @@ public class UserDao extends Dao {
         return user;
     }
 
-    public User getUser(String email) {
+    public User getUserBy(String email) {
         Query query = getSession().createQuery("from User u where u.email=:email");
         query.setParameter("email", email);
         List<User> list = query.list();

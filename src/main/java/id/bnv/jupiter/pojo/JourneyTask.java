@@ -11,7 +11,6 @@ public class JourneyTask implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Journey_id")
     public int journeyTaskId;
     @Column(name = "Task_id")
@@ -22,5 +21,10 @@ public class JourneyTask implements Serializable {
     public Date taskfinish;
 
     public JourneyTask() {
+    }
+    public JourneyTask(int journeyTaskId, int taskId, Date taskstart) {
+        this.journeyTaskId=journeyTaskId;
+        this.taskId=taskId;
+        this.taskstart=taskstart;
     }
 }

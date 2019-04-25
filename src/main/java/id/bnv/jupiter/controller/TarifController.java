@@ -8,6 +8,7 @@ import id.bnv.jupiter.pojo.TarifInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import static id.bnv.jupiter.authentication.Decoder.auth;
 
 @RestController
@@ -38,23 +39,16 @@ public class TarifController {
 
     @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
     public ResponseEntity addOrUpdateTarif(@PathVariable(value = "idnumber") int idNumber,
-                                   @PathVariable(value = "idtarif") int idTarif) {
+                                           @PathVariable(value = "idtarif") int idTarif) {
         PhoneNumber phoneNumber = numberDao.getNumberById(idNumber);
         if (dao.hasTariff(phoneNumber)) {
-            if (dao.changeTariff(idNumber, idTarif)==true) return ResponseEntity.ok("Tariff was changed");
-            else return ResponseEntity.badRequest().body("Balance is less than zero");
-        }
-        else dao.addTarifToNumber(idNumber, idTarif);
+            changeTarif(phoneNumber.id, idTarif);
+//            if (dao.changeTariff(idNumber, idTarif)==true) return ResponseEntity.ok("Tariff was changed");
+//            else return ResponseEntity.badRequest().body("Balance is less than zero");
+        } else dao.addTarifToNumber(idNumber, idTarif);
         return ResponseEntity.ok().build();
     }
-        //        PhoneNumber phouneNumber = new PhoneNumber();
-//        dao.addTarifForNumber(idNumber, idTarif);
-//        if (phoneNumber.hasTarif) {
-//            return changeTarif(phoneNumber, idTarif);
-//        }
-//        // save
-//        return ResponseEntity.ok("Successfully!");
-//    }
+
     @PutMapping(value = "/tarif/{idnumber}/{idtarif}")
     public ResponseEntity changeTarif(@PathVariable int idnumber, @PathVariable int idtarif) {
         dao.changeTariff(idnumber, idtarif);
