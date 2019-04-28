@@ -15,16 +15,19 @@ public class PhoneNumber implements Serializable {
     public int userId;
     @Column(name = "Phone_number")
     public String phoneNumber;
-
-   // @ManyToOne(optional = true)
-   // @JoinColumn(name = "Phone_number_id")
     @Column(name = "Tariff_id")
     public Integer tarifId;
-
     @Column(name = "Balance")
     public int balance;
 
     public PhoneNumber() {
 
+    }
+
+    public PhoneNumber(int userId, String phoneNumber, Integer tarifId, int balance) {
+        this.userId = userId;
+        this.phoneNumber = phoneNumber;
+        this.tarifId = tarifId;
+        this.balance = balance;
     }
 }

@@ -45,45 +45,95 @@ public class TarifDao extends Dao {
 
 
     public boolean hasTariff(PhoneNumber phoneNumber) {
-        Query query= getSession().createQuery("from PhoneNumber u where u.tarifId=:idtarif");
+        Query query = getSession().createQuery("from PhoneNumber u where u.tarifId=:idtarif");
         query.setParameter("idtarif", phoneNumber.tarifId);
-        List<Integer> list=query.list();
-        int tarifid=phoneNumber.tarifId;
-      //if (tarifid.equals(null))
-        if (list.get(0)==null) return false;
+        List<Integer> list = query.list();
+        int tarifid = phoneNumber.tarifId;
+        //if (tarifid.equals(null))
+        if (list.get(0) == null) return false;
         else return true;
     }
+
     public Journey getJourney(int idPhoneNumber) {
-        Query query=getSession().createQuery("from Journey u where u.phoneNumberId=:phoneNumberId");
+        Query query = getSession().createQuery("from Journey u where u.phoneNumberId=:phoneNumberId");
         query.setParameter("phoneNumberId", idPhoneNumber);
-        List<Journey> journeys=query.list();
+        List<Journey> journeys = query.list();
         return journeys.get(0);
     }
 
-//add
+    //add
     public boolean changeTariff(int idnumber, int idTariff) {
-        PhoneNumber number=getSession().get(PhoneNumber.class, idnumber);
-        Date dateOfStartJourney=new Date();
-        Journey journey=new Journey(dateOfStartJourney, idnumber, idTariff);
+        PhoneNumber number = getSession().get(PhoneNumber.class, idnumber);
+        Date dateOfStartJourney = new Date();
+        Journey journey = new Journey(dateOfStartJourney, idnumber, idTariff);
         create(journey);
-        if (number.balance>=0) {
+        if (number.balance >= 0) {
             number.tarifId = idTariff;
             update(number);
-            journey.endDate=new Date();
+            journey.endDate = new Date();
             update(journey);
             return true;
-        }
-        else {
-            JourneyTask journeyTask=new JourneyTask(journey.journeyId, 2, new Date());
+        } else {
+            JourneyTask journeyTask = new JourneyTask(journey.journeyId, 2, new Date());
             create(journeyTask);
             return false;
         }
     }
 
     public TarifInfo getInfo(Integer tarifId) {
-        Query query = getSession().createQuery("from Tarif u where u.tarifInfoId=:tarifInfoId");
-        query.setParameter("tarifInfoId", tarifId);
+        Tarif tarif = getSession().get(Tarif.class, tarifId);
+        int tarifInfoId = tarif.tarifInfoId;
+        Query query = getSession().createQuery("from TarifInfo u where u.tarifInfoId=:tarifInfoId");
+        query.setParameter("tarifInfoId", tarifInfoId);
         List<TarifInfo> list = query.list();
         return list.get(0);
+    }
+
+    public TarifInfo getTarifInfoByProviderId(int providerId) {
+        Query query = getSession().createQuery("from TarifInfo u where u.proviverId=:providerId");
+        query.setParameter("providerId", providerId);
+        List<TarifInfo> tarifInfoList = query.list();
+        TarifInfo tarifInfo = tarifInfoList.get(0);
+        return tarifInfo;
+    }
+
+    public Tarif getTarifByTarifInfoId(int tarifIndoId) {
+        Query query = getSession().createQuery("from Tarif u where u.tarifInfoId=:tarifInfoId");
+        query.setParameter("tarifInfoId", tarifIndoId);
+        List<Tarif> tarifs = query.list();
+        return tarifs.get(0);
+    }
+
+    public Provider getProviderByTarifId(int tarifId) {
+        Session session = getSession();
+        Tarif tarif = session.get(Tarif.class, tarifId);
+        TarifInfo tarifInfo = session.get(TarifInfo.class, tarif.tarifInfoId);
+        Provider provider = session.get(Provider.class, tarifInfo.providerId);
+        return provider;
+    }
+
+    //6 request
+    public TarifOffering getTarifOffering(int offeringId) {
+        Query query = getSession().createQuery("from TarifOffering u where u.offerigId=:offeringId");
+        query.setParameter("offeringId", offeringId);
+        List<TarifOffering> list = query.list();
+        TarifOffering tarifOffering = list.get(0);
+        return tarifOffering;
+    }
+
+    //vk request
+    public FullInfoAboutTarif getFullInfoAboutTarif(int numberId, int nextTarifId) {
+        Session session = getSession();
+        PhoneNumber phoneNumber = session.get(PhoneNumber.class, numberId);
+        Tarif currentTarif = session.get(Tarif.class, phoneNumber.tarifId);
+        TarifInfo currentTarifInfo=session.get(TarifInfo.class, currentTarif.tarifInfoId);
+        Provider currentProvider = getProviderByTarifId(currentTarif.tarifId);
+        Date date = new Date();
+        Tarif newTarif = session.get(Tarif.class, nextTarifId);
+        TarifInfo newTarifInfo=session.get(TarifInfo.class, newTarif.tarifInfoId);
+        Provider newProvider = getProviderByTarifId(nextTarifId);
+        FullInfoAboutTarif info=new FullInfoAboutTarif(currentProvider.providerName, currentTarifInfo.tarifName,
+                phoneNumber.phoneNumber, date, newProvider.providerName, newTarifInfo.tarifName);
+        return info;
     }
 }

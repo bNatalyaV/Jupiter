@@ -1,12 +1,16 @@
 package id.bnv.jupiter.controller;
 
 import id.bnv.jupiter.dao.NumberDao;
+import id.bnv.jupiter.pojo.FullInfoAboutNumber;
+import id.bnv.jupiter.pojo.InfoAboutNumber;
 import id.bnv.jupiter.pojo.PhoneNumber;
 import id.bnv.jupiter.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+
 //
 @RestController
 @RequestMapping(value = "/numbersinfo")
@@ -23,10 +27,12 @@ public class NumberController {
         List<PhoneNumber> phoneNumbers = dao.getAllNumbersOfUser(user);
         return ResponseEntity.ok(phoneNumbers);
     }
-    //передача номиера строкой, создать номер в бд
-    @PutMapping(value = "/number")
-    public ResponseEntity addNewNumber(User user, PhoneNumber number) {
-        dao.addNumber(user, number);
+
+    //передача номера строкой, создать номер в бд
+    @PutMapping(value = "/addnumber/{iduser}")
+    public ResponseEntity addNewNumber(@PathVariable(value = "iduser") int userId,
+                                       @RequestParam("number") String number) {
+        dao.addNumber(userId, number);
         return ResponseEntity.ok(number);
     }
 
@@ -34,5 +40,16 @@ public class NumberController {
     public ResponseEntity deleteNumber(User user, PhoneNumber number) {
         dao.deleteNumber(user, number);
         return ResponseEntity.ok(number);
+    }
+
+    @GetMapping(value = "/info/{idnumber}")
+    public ResponseEntity getInfoAboutNumber(@PathVariable(value = "idnumber") int numberId) {
+        InfoAboutNumber infoAboutNumber = dao.getInfoAboutNumberByNumberId(numberId);
+        return ResponseEntity.ok(infoAboutNumber);
+    }
+    @GetMapping(value = "/fullinfo/{iduser}")
+    public ResponseEntity getFullInformationAboutNumber(@PathVariable(value = "iduser") int userId) {
+        List<FullInfoAboutNumber> list=dao.getFullInfoAboutNumber(userId);
+        return ResponseEntity.ok(list);
     }
 }

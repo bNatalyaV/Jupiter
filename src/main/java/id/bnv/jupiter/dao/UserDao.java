@@ -20,7 +20,6 @@ public class UserDao extends Dao {
         super(sessionFactory);
     }
 
-
     public User getUser(int id) {
         Session session = getSession();
         User user = session.get(User.class, id);
@@ -41,5 +40,14 @@ public class UserDao extends Dao {
         Session session = getSession();
         List<User> users = session.createQuery("from User").list();
         return users;
+    }
+
+    public boolean checkEmailOfUser(String email) {
+        Query query=getSession().createQuery("from User u where u.email=:email");
+        query.setParameter("email", email);
+        List<User> list=query.list();
+        User user=list.get(0);
+
+        }
     }
 }

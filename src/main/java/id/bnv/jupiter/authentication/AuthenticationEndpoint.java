@@ -30,6 +30,13 @@ public class AuthenticationEndpoint {
     }
 
     @PostMapping
+    public ResponseEntity register(@RequestParam("email") String email,
+                                   @RequestParam("login") String login,
+                                   @RequestParam("password") String password) {
+
+    }
+
+    @PostMapping
     public ResponseEntity authenticateUser(@RequestParam("email") String email,
                                            @RequestParam("password") String password) {
         try {

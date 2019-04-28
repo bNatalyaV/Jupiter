@@ -6,7 +6,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "tariff_inf")
 public class TarifInfo implements Serializable {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +16,8 @@ public class TarifInfo implements Serializable {
     public String tarifName;
     @Column(name = "Tariff_desc")
     public String tarifDesc;
+    @Column(name = "Provider_id")
+    public int providerId;
 
     public TarifInfo() {
 
