@@ -26,7 +26,7 @@ public class RegionController {
         List<Region> regionsList = dao.getAllRegions();
         return ResponseEntity.ok(regionsList);
     }
-
+//has error
     @GetMapping(value = "/providersForRegion/{regionid}")
     public ResponseEntity getProvidersForRegion(@PathVariable(value = "regionid") int idRegion) {
         List<String> namesList = dao.getAllProvidersByRegionId(idRegion);

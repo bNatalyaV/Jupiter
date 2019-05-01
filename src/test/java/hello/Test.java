@@ -16,9 +16,9 @@ public class Test {
     public static void main(String[] args) throws Exception {
         // nohup java -jar jupiter.jar
 
-        String user = "kitty";
-        String password = "qwerty";
-        String remoteHost = "134.209.252.155";
+        String user = "root";
+        String password = "Bilfo_05";
+        String remoteHost = "138.197.187.9";
         int localPort = 7777;
         int remotePort = 3306;
         Session session = null;
@@ -42,39 +42,39 @@ public class Test {
             }
         }
     }
-
-    Algorithm algo;
-
-    @org.junit.Test
-    public void test() {
-        String s = issueToken("id_bnv123@icloud.com");
-        System.out.println(s);
-
-        String email = decode(s);
-        System.out.println(email);
-
-    }
-
-    //https://github.com/auth0/java-jwt
-    private String issueToken(String email) {
-        algo = Algorithm.HMAC256("natasha");
-        String token = JWT.create()
-                .withIssuer("me")
-                .withClaim("email", email)
-                .sign(algo);
-        return token;
-    }
-
-    private String decode(String token) {
-        JWTVerifier verifier = JWT.require(algo)
-                .withIssuer("me")
-                //  .acceptExpiresAt(5)
-                .build();
-
-        DecodedJWT verify = verifier.verify(token);
-
-        Claim email = verify.getClaim("email");
-
-        return email.asString();
-    }
+//
+//    Algorithm algo;
+//
+//    @org.junit.Test
+//    public void test() {
+//        String s = issueToken("id_bnv123@icloud.com");
+//        System.out.println(s);
+//
+//        String email = decode(s);
+//        System.out.println(email);
+//
+//    }
+//
+//    //https://github.com/auth0/java-jwt
+//    private String issueToken(String email) {
+//        algo = Algorithm.HMAC256("natasha");
+//        String token = JWT.create()
+//                .withIssuer("me")
+//                .withClaim("email", email)
+//                .sign(algo);
+//        return token;
+//    }
+//
+//    private String decode(String token) {
+//        JWTVerifier verifier = JWT.require(algo)
+//                .withIssuer("me")
+//                //  .acceptExpiresAt(5)
+//                .build();
+//
+//        DecodedJWT verify = verifier.verify(token);
+//
+//        Claim email = verify.getClaim("email");
+//
+//        return email.asString();
+//    }
 }
