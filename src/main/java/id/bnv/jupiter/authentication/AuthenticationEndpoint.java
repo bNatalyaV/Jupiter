@@ -39,7 +39,7 @@ public class AuthenticationEndpoint {
     }
 
     @PostMapping
-    public ResponseEntity authenticateUser(@RequestParam("email") String email,
+    public ResponseEntity authenticateUser(@RequestParam("ЛОГИН") String email,
                                            @RequestParam("password") String password) {
         try {
             if (authenticate(email, password)) {

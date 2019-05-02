@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class RegionController {
     @GetMapping(value = "/providersForRegion/{regionid}")
     public ResponseEntity getProvidersForRegion(@PathVariable(value = "regionid") int idRegion) {
         List<String> namesList = dao.getAllProvidersByRegionId(idRegion);
-        return ResponseEntity.ok(namesList);
+        return ResponseEntity.ok(new HashSet<>(namesList));
     }
 
 }

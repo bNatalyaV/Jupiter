@@ -37,7 +37,7 @@ public class RegionDao extends Dao {
         for (int i = 0; i < regionList.size(); i++) {
             Tarif tarif = regionList.get(i);
             Query queryForProviderId = getSession().createQuery("from TarifInfo u where u.tarifInfoId=:tarifInfoId");
-            queryForProviderId.setParameter("tarifInfoIdId", tarif.tarifInfoId);
+            queryForProviderId.setParameter("tarifInfoId", tarif.tarifInfoId);
             List<TarifInfo> tarifInfoList = queryForProviderId.list();
             TarifInfo tarifInfo = tarifInfoList.get(0);
             int providerId = tarifInfo.providerId;
@@ -53,4 +53,28 @@ public class RegionDao extends Dao {
         return namesOfProviders;
     }
 
+    /*
+            Query query = getSession().createQuery("select Tarif from Tarif u, TarifInfo ti where u.regionId=:regionId and u.tariff_inf_id=ti.tariff_inf.id");
+        query.setParameter("regionId", regionId);
+        List<Tarif> regionList = query.list();
+        List<Integer> providersId = new ArrayList<>();
+        for (int i = 0; i < regionList.size(); i++) {
+            Tarif tarif = regionList.get(i);
+            Query queryForProviderId = getSession().createQuery("from TarifInfo u where u.tarifInfoId=:tarifInfoId");
+            queryForProviderId.setParameter("tarifInfoIdId", tarif.tarifInfoId);
+            List<TarifInfo> tarifInfoList = queryForProviderId.list();
+            TarifInfo tarifInfo = tarifInfoList.get(0);
+            int providerId = tarifInfo.providerId;
+            providersId.add(providerId);
+        }
+        List<String> namesOfProviders = new ArrayList<>();
+        Session session = getSession();
+        for (int providerId : providersId) {
+            Provider provider = session.get(Provider.class, providerId);
+            String nameOfProvider = provider.providerName;
+            namesOfProviders.add(nameOfProvider);
+        }
+        return namesOfProviders;
+    }
+   */
 }
