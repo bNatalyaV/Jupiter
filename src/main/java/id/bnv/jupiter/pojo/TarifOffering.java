@@ -15,7 +15,7 @@ public class TarifOffering implements Serializable {
     @Column(name = "Tariff_id")
     public int tarifId;
     @Column(name = "Offering_price")
-    public String offeringPrise;
+    public String offeringPrice;
     @Column(name = "Quantity")
     public String quantity;
 

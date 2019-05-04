@@ -1,6 +1,8 @@
 package id.bnv.jupiter.controller;
 
 import id.bnv.jupiter.dao.RegionDao;
+import id.bnv.jupiter.pojo.Provider;
+import id.bnv.jupiter.pojo.ProviderIdAndName;
 import id.bnv.jupiter.pojo.Region;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/region")
@@ -27,11 +30,10 @@ public class RegionController {
         List<Region> regionsList = dao.getAllRegions();
         return ResponseEntity.ok(regionsList);
     }
-//has error
+
     @GetMapping(value = "/providersForRegion/{regionid}")
     public ResponseEntity getProvidersForRegion(@PathVariable(value = "regionid") int idRegion) {
-        List<String> namesList = dao.getAllProvidersByRegionId(idRegion);
-        return ResponseEntity.ok(new HashSet<>(namesList));
+        Set<Provider> providers = dao.getAllProvidersByRegionId(idRegion);
+        return ResponseEntity.ok(providers);
     }
-
 }

@@ -1,7 +1,7 @@
 package id.bnv.jupiter.dao;
 
 import id.bnv.jupiter.pojo.*;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -72,14 +72,14 @@ public class NumberDao extends Dao {
         List<FullInfoAboutNumber> list = new ArrayList<>();
         Session session = getSession();
         for (PhoneNumber number : phoneNumbers) {
-            Tarif tarif = session.get(Tarif.class, number.tarifId); //tariff + price
-            Region region = session.get(Region.class, tarif.regionId); //область
+            Tarif tarif = session.get(Tarif.class, number.tarifId);
+            Region region = session.get(Region.class, tarif.regionId);
             Country country = session.get(Country.class, region.countryId);
             TarifInfo tarifInfo = session.get(TarifInfo.class, tarif.tarifInfoId);
             Provider provider = session.get(Provider.class, tarifInfo.providerId);
             FullInfoAboutNumber info = new FullInfoAboutNumber(number.phoneNumber, country.countryName,
                     region.regionName, provider.providerName,
-                    tarifInfo.tarifName, tarif.tarifPrice);
+                    tarifInfo.tarifName, tarif.tarifPrice, tarif.tarifId);
             list.add(info);
         }
         return list;

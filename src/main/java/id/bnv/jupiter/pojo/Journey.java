@@ -18,10 +18,10 @@ public class Journey implements Serializable {
     public int phoneNumberId;
     @Column(name = "Tariff_id")
     public int tarifId;
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     @Column(name = "Start_date")
     public Date startDate;
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     @Column(name = "End_date")
     public Date endDate;
 

@@ -2,10 +2,11 @@ package id.bnv.jupiter.pojo;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "provider")
-public class Provider implements Serializable {
+public class Provider extends Object implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,5 +18,19 @@ public class Provider implements Serializable {
     public String providerName;
 
     public Provider() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Provider provider = (Provider) o;
+        return providerId == provider.providerId &&
+                Objects.equals(providerName, provider.providerName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(providerId, providerName);
     }
 }

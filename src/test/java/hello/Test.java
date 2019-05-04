@@ -42,7 +42,22 @@ public class Test {
             }
         }
     }
-//
+
+    @org.junit.Test
+    public void test() {
+        String str = "";
+
+        for (String s: new String[]{"natasha","ne","nata","sha","a","b"}) {
+            System.out.println(str.hashCode());
+            str += s;
+
+        }
+    }
+
+    public Integer a() {
+        return 5;
+    }
+
 //    Algorithm algo;
 //
 //    @org.junit.Test

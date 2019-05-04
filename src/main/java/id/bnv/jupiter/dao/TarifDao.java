@@ -1,13 +1,14 @@
 package id.bnv.jupiter.dao;
 
 import id.bnv.jupiter.pojo.*;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -90,7 +91,7 @@ public class TarifDao extends Dao {
     }
 
     public TarifInfo getTarifInfoByProviderId(int providerId) {
-        Query query = getSession().createQuery("from TarifInfo u where u.proviverId=:providerId");
+        Query query = getSession().createQuery("from TarifInfo u where u.providerId=:providerId");
         query.setParameter("providerId", providerId);
         List<TarifInfo> tarifInfoList = query.list();
         TarifInfo tarifInfo = tarifInfoList.get(0);
@@ -114,7 +115,7 @@ public class TarifDao extends Dao {
 
     //6 request
     public TarifOffering getTarifOffering(int offeringId) {
-        Query query = getSession().createQuery("from TarifOffering u where u.offerigId=:offeringId");
+        Query query = getSession().createQuery("from TarifOffering u where u.offeringId=:offeringId");
         query.setParameter("offeringId", offeringId);
         List<TarifOffering> list = query.list();
         TarifOffering tarifOffering = list.get(0);
@@ -126,14 +127,31 @@ public class TarifDao extends Dao {
         Session session = getSession();
         PhoneNumber phoneNumber = session.get(PhoneNumber.class, numberId);
         Tarif currentTarif = session.get(Tarif.class, phoneNumber.tarifId);
-        TarifInfo currentTarifInfo=session.get(TarifInfo.class, currentTarif.tarifInfoId);
+        TarifInfo currentTarifInfo = session.get(TarifInfo.class, currentTarif.tarifInfoId);
         Provider currentProvider = getProviderByTarifId(currentTarif.tarifId);
         Date date = new Date();
         Tarif newTarif = session.get(Tarif.class, nextTarifId);
-        TarifInfo newTarifInfo=session.get(TarifInfo.class, newTarif.tarifInfoId);
+        TarifInfo newTarifInfo = session.get(TarifInfo.class, newTarif.tarifInfoId);
         Provider newProvider = getProviderByTarifId(nextTarifId);
-        FullInfoAboutTarif info=new FullInfoAboutTarif(currentProvider.providerName, currentTarifInfo.tarifName,
+        FullInfoAboutTarif info = new FullInfoAboutTarif(currentProvider.providerName, currentTarifInfo.tarifName,
                 phoneNumber.phoneNumber, date, newProvider.providerName, newTarifInfo.tarifName);
         return info;
+    }
+
+    //for Vlad
+    public List<TariffNameIdPrice> getTariffNameIdPrice(int regionId, int providerId) {
+        List<TariffNameIdPrice> list = new ArrayList<>();
+        Query queryForTariffName = getSession().createQuery("from TarifInfo u where u.providerId=:providerId");
+        queryForTariffName.setParameter("providerId", providerId);
+        List<TarifInfo> tarifInfoList = queryForTariffName.list();
+        for (int i = 0; i < tarifInfoList.size(); i++) {
+            TarifInfo tarifInfo = tarifInfoList.get(i);//can get name
+            Query queryForTariffIdPrice = getSession().createQuery("from Tarif u where u.tarifInfoId=:tarifInfoId");
+            queryForTariffIdPrice.setParameter("tarifInfoId", tarifInfo.tarifInfoId);
+            List<Tarif> tarifs = queryForTariffIdPrice.list();
+            Tarif tarif = tarifs.get(0);
+            list.add(new TariffNameIdPrice(tarif.tarifId, tarifInfo.tarifName, tarif.tarifPrice));
+        }
+        return list;
     }
 }
