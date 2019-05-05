@@ -40,10 +40,10 @@ public class NumberDao extends Dao {
         return list;
     }
 
-    public PhoneNumber addNumber(int userId, String number) {
-        PhoneNumber phoneNumber = new PhoneNumber(userId, number, null, 100);
-        create(phoneNumber);
-        return phoneNumber;
+    public PhoneNumber addNumber(PhoneNumber number) {
+        number.balance = 100;
+        create(number);
+        return number;
     }
 
     public PhoneNumber deleteNumber(User user, PhoneNumber number) {
@@ -77,12 +77,18 @@ public class NumberDao extends Dao {
             Country country = session.get(Country.class, region.countryId);
             TarifInfo tarifInfo = session.get(TarifInfo.class, tarif.tarifInfoId);
             Provider provider = session.get(Provider.class, tarifInfo.providerId);
-            FullInfoAboutNumber info = new FullInfoAboutNumber(number.phoneNumber, country.countryName,
-                    region.regionName, provider.providerName,
-                    tarifInfo.tarifName, tarif.tarifPrice, tarif.tarifId);
+            FullInfoAboutNumber info = new FullInfoAboutNumber(
+                    number.phoneNumber,
+                    country.countryName,
+                    region.regionName,
+                    provider.providerName,
+                    tarifInfo.tarifName,
+                    tarif.tarifPrice,
+                    tarif.tarifId,
+                    country.countryId
+            );
             list.add(info);
         }
         return list;
     }
-
 }

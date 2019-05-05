@@ -35,8 +35,8 @@ public class AdditionalOfferingDao extends Dao {
         for (int i = 0; i < tariffs.size(); i++) {
             Tarif tarif = tariffs.get(i);
             TarifInfo tarifInfo = getSession().get(TarifInfo.class, tarif.tarifInfoId);
-            Query queryForTariffOfferings = getSession().createQuery("from TarifOffering u where u.tarifId=:tarifId");
-            queryForTariffOfferings.setParameter("tarifId", tarif.tarifId);
+            Query queryForTariffOfferings = getSession().createQuery("from TarifOffering u where u.tarifId=:odin");
+            queryForTariffOfferings.setParameter("odin", tarif.tarifId);
             List<TarifOffering> offerings = queryForTariffOfferings.list();
             List<TariffOfferings> tariffOfferingsList = new ArrayList<>();
             for (int k = 0; k < offerings.size(); k++) {

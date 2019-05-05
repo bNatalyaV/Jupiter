@@ -22,9 +22,18 @@ public class TariffOfferingController {
         this.tariffOfferingDao=tariffOfferingDao;
     }
 
+    // по тарифу список офферингов, offering price != null
     @GetMapping(value = "/{tariffId}")
     public ResponseEntity getOffers(@PathVariable int tariffId) {
         List<OffersAndAddOffers> list=tariffOfferingDao.getOffersAndAddOffers(tariffId);
+
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/offers/{tariffId}")
+    public ResponseEntity getOfferNamePriceQuantity(@PathVariable int tariffId) {
+        List<OffersAndAddOffers> list=tariffOfferingDao.getOfferNamePriceQuantity(tariffId);
+
         return ResponseEntity.ok(list);
     }
 

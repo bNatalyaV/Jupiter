@@ -1,5 +1,7 @@
 package id.bnv.jupiter.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -28,7 +30,8 @@ public class User implements Serializable {
     @Column(name = "Password")
     public String password;
     @Column(name = "Birth_date")
-//    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)// if need ms
+    @JsonFormat(pattern = "dd-MM-yyyy") //
     public Date birthDate;
 
     public User() {

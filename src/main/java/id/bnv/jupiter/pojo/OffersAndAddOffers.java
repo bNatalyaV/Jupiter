@@ -22,4 +22,10 @@ public class OffersAndAddOffers implements Serializable {
         this.offeringName = offeringName;
         this.offeringDesc = offeringDesc;
     }
+
+    public OffersAndAddOffers(String offeringPrice, String quantity, String offeringName) {
+        this.offeringPrice = offeringPrice;
+        this.quantity = quantity;
+        this.offeringName = offeringName;
+    }
 }

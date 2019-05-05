@@ -12,12 +12,13 @@ public class FullInfoAboutNumber implements Serializable {
     public String tariff;
     public String tarifPrice;
     public int tariffId;
+    public int countryId;
 
     public FullInfoAboutNumber() {
     }
 
-    public FullInfoAboutNumber(String number, String country, String region,
-                               String provider, String tariff, String  tarifPrice, int tariffId) {
+    public FullInfoAboutNumber(String number, String country, String region, String provider,
+                               String tariff, String  tarifPrice, int tariffId, int countryId) {
         this.number = number;
         this.country = country;
         this.region = region;
@@ -25,5 +26,6 @@ public class FullInfoAboutNumber implements Serializable {
         this.tariff = tariff;
         this.tarifPrice = tarifPrice;
         this.tariffId=tariffId;
+        this.countryId=countryId;
     }
 }

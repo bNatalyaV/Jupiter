@@ -47,4 +47,20 @@ public class TariffOfferingDao extends Dao{
         return offersAndAddOffers;
     }
 
+    public List<OffersAndAddOffers> getOfferNamePriceQuantity(int tariffId) {
+        Query queryForTariffOffering=getSession().createQuery("from TarifOffering u where u.tarifId=:tarifId");
+        queryForTariffOffering.setParameter("tarifId", tariffId);
+        List<TarifOffering> tarifOfferingList=queryForTariffOffering.list();
+        List<OffersAndAddOffers> list=new ArrayList<>();
+        for (int i=0; i<tarifOfferingList.size(); i++) {
+            TarifOffering tarifOffering=tarifOfferingList.get(i);
+            Query queryForNameOffering=getSession().createQuery("from AdditionalOffering u where u.offeringId=:offeringId");
+            queryForNameOffering.setParameter("offeringId", tarifOffering.offeringId);
+            List<AdditionalOffering> additionalOfferingsList=queryForNameOffering.list();
+            AdditionalOffering additionalOffering=additionalOfferingsList.get(0);
+            list.add(new OffersAndAddOffers(tarifOffering.offeringPrice, tarifOffering.quantity, additionalOffering.offeringName));
+        }
+        return list;
+    }
+
 }

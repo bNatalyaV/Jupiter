@@ -1,3 +1,237 @@
+GET http://localhost:8080/tarif/price/42/24
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+<> 2019-05-05T042312.500.html
+
+###
+
+GET http://localhost:8080/tarif/price/42/24
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+###
+
+GET http://localhost:8080/offer/offerings/42/24
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+###
+
+GET http://localhost:8080/offer/offerings/42/24
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+<> 2019-05-05T023534.500.json
+
+###
+
+GET http://localhost:8080/offer/offerings/42/24
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+###
+
+GET http://localhost:8080/offer/offerings/42/24
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+<> 2019-05-05T022229.500.json
+
+###
+
+GET http://localhost:8080/offer/offerings/42/24
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+<> 2019-05-05T021544.200.json
+
+###
+
+GET http://localhost:8080/offer/offerings/42/24
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+<> 2019-05-05T021516.200.json
+
+###
+
+GET http://localhost:8080/offer/offerings/42/24
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+###
+
+GET http://localhost:8080/offer/offerings/42/24
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+<> 2019-05-05T015421.200.json
+
+###
+
+GET http://localhost:8080/tariffoffers/offers/1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+<> 2019-05-05T015237.200.json
+
+###
+
+POST http://localhost:8080/user/user
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "stringg",   "id": 0,   "login": "strging",   "name": "stgring",   "passport": "stringg",   "password": "stgring",   "patronymic": "stringg",   "surname": "string" }
+
+<> 2019-05-05T110419.200.json
+
+###
+
+POST http://localhost:8080/user/user
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "string",   "id": 0,   "login": "string",   "name": "string",   "passport": "string",   "password": "string",   "patronymic": "string",   "surname": "string" }
+
+<> 2019-05-05T110301.500.json
+
+###
+
+POST http://localhost:8080/user/user/1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "180000000",   "email": "string",   "id": 0,   "login": "string",   "name": "string",   "passport": "string",   "password": "string",   "patronymic": "string",   "surname": "string" }
+
+<> 2019-05-05T110245.405.json
+
+###
+
+GET http://localhost:8080/user/user/1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "08-08-2019",   "email": "string",   "id": 0,   "login": "string",   "name": "string",   "passport": "string",   "password": "string",   "patronymic": "string",   "surname": "string" }
+
+<> 2019-05-05T110214.200.json
+
+###
+
+GET http://localhost:8080/user/user/1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "08-08-2019",   "email": "string",   "id": 0,   "login": "string",   "name": "string",   "passport": "string",   "password": "string",   "patronymic": "string",   "surname": "string" }
+
+<> 2019-05-05T104825.200.json
+
+###
+
+GET http://localhost:8080/user/user/1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "08-08-2019",   "email": "string",   "id": 0,   "login": "string",   "name": "string",   "passport": "string",   "password": "string",   "patronymic": "string",   "surname": "string" }
+
+<> 2019-05-05T104758.200.json
+
+###
+
+GET http://localhost:8080/user/user/1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "08-08-2019",   "email": "string",   "id": 0,   "login": "string",   "name": "string",   "passport": "string",   "password": "string",   "patronymic": "string",   "surname": "string" }
+
+<> 2019-05-05T104739.200.json
+
+###
+
+POST http://localhost:8080/user/user
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "08-08-2019",   "email": "string",   "id": 0,   "login": "string",   "name": "string",   "passport": "string",   "password": "string",   "patronymic": "string",   "surname": "string" }
+
+<> 2019-05-05T104651.500.json
+
+###
+
+POST http://localhost:8080/user/user
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "birthDate": "08-08-2019",   "email": "string",   "id": 0,   "login": "string",   "name": "string",   "passport": "string",   "password": "string",   "patronymic": "string",   "surname": "string" }
+
+<> 2019-05-05T104552.500.json
+
+###
+
+GET http://localhost:8080/tariffoffers/offers/11
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
+
+<> 2019-05-04T103714.200.json
+
+###
+
+GET http://localhost:8080/tariffoffers/offers/1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
+
+<> 2019-05-04T103655.200.json
+
+###
+
 GET http://localhost:8080/tariffoffers/1
 Accept: */*
 Cache-Control: no-cache
@@ -303,236 +537,6 @@ Content-Type: application/json
 {"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
 
 <> 2019-05-02T101333.500.json
-
-###
-
-GET http://localhost:8080/region/providersForRegion/36
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-05-02T100808.200.json
-
-###
-
-GET http://localhost:8080/region/providersForRegion/36
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-05-02T100526.500.json
-
-###
-
-GET http://localhost:8080/region/providersForRegion/36
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-###
-
-GET http://localhost:8080/region/providersForRegion/36
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-###
-
-GET http://localhost:8080/region/providersForRegion/36
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-05-02T100409.500.json
-
-###
-
-GET http://localhost:8080/region/providersForRegion/36
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-05-02T100301.500.json
-
-###
-
-GET http://localhost:8080/region/providersForRegion/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-05-02T095612.200.json
-
-###
-
-GET http://localhost:8080/user/users
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-05-01T031147.200.json
-
-###
-
-GET http://138.197.187.9/user/users
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-###
-
-GET http://138.197.187.9:8080/user/users
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-###
-
-GET http://138.197.187.9:8080/user/users
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-###
-
-GET http://localhost:8080/tarif/tariffoffering/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-04-30T050102.500.json
-
-###
-
-GET http://localhost:8080/tarifinfo/1/5
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-04-30T045954.404.json
-
-###
-
-GET http://localhost:8080/region/all
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-04-30T045847.200.json
-
-###
-
-GET http://localhost:8080/region/providersForRegion/2
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-04-30T045501.200.json
-
-###
-
-GET http://localhost:8080/region/providersForRegion/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-04-30T045437.200.json
-
-###
-
-GET http://localhost:8080/region/providerForRegion/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-04-30T045418.404.json
-
-###
-
-GET http://localhost:8080/numbersinfo/fullinfo/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-04-30T045228.200.json
-
-###
-
-GET http://localhost:8080/numbersinfo/fullinfo1/
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-04-30T045217.404.json
-
-###
-
-GET http://localhost:8080/numberinfo/fullinfo1/
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-04-30T045154.404.json
-
-###
-
-GET http://localhost:8080/numbersinfo/info/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
-
-<> 2019-04-30T044336.200.json
-
-###
-
-GET http://localhost:8080/numbersinfo/info/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"id":1,"surname":"Petrova","name":"Mary","patronymic":null,"passport":"0000 000000","email":"jupiter@mail.ru","password":"000000","birthDate":0}
 
 ###
 

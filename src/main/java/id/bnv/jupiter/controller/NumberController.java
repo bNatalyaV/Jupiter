@@ -30,9 +30,8 @@ public class NumberController {
 
     //передача номера строкой, создать номер в бд
     @PutMapping(value = "/addnumber/{iduser}")
-    public ResponseEntity addNewNumber(@PathVariable(value = "iduser") int userId,
-                                       @RequestParam("number") String number) {
-        dao.addNumber(userId, number);
+    public ResponseEntity addNewNumber(@RequestBody PhoneNumber number) {
+        dao.addNumber(number);
         return ResponseEntity.ok(number);
     }
 
@@ -47,9 +46,10 @@ public class NumberController {
         InfoAboutNumber infoAboutNumber = dao.getInfoAboutNumberByNumberId(numberId);
         return ResponseEntity.ok(infoAboutNumber);
     }
+
     @GetMapping(value = "/fullinfo/{iduser}")
     public ResponseEntity getFullInformationAboutNumber(@PathVariable(value = "iduser") int userId) {
-        List<FullInfoAboutNumber> list=dao.getFullInfoAboutNumber(userId);
+        List<FullInfoAboutNumber> list = dao.getFullInfoAboutNumber(userId);
         return ResponseEntity.ok(list);
     }
 }

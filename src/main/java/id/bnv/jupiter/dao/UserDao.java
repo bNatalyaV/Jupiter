@@ -1,7 +1,7 @@
 package id.bnv.jupiter.dao;
 
 import id.bnv.jupiter.pojo.User;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

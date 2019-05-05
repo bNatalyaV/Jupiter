@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.aspectj.bridge.Version.getTime;
 
@@ -83,11 +81,7 @@ public class TarifDao extends Dao {
 
     public TarifInfo getInfo(Integer tarifId) {
         Tarif tarif = getSession().get(Tarif.class, tarifId);
-        int tarifInfoId = tarif.tarifInfoId;
-        Query query = getSession().createQuery("from TarifInfo u where u.tarifInfoId=:tarifInfoId");
-        query.setParameter("tarifInfoId", tarifInfoId);
-        List<TarifInfo> list = query.list();
-        return list.get(0);
+        return tarif.tarifInfoId;
     }
 
     public TarifInfo getTarifInfoByProviderId(int providerId) {
@@ -140,18 +134,46 @@ public class TarifDao extends Dao {
 
     //for Vlad
     public List<TariffNameIdPrice> getTariffNameIdPrice(int regionId, int providerId) {
-        List<TariffNameIdPrice> list = new ArrayList<>();
-        Query queryForTariffName = getSession().createQuery("from TarifInfo u where u.providerId=:providerId");
-        queryForTariffName.setParameter("providerId", providerId);
-        List<TarifInfo> tarifInfoList = queryForTariffName.list();
-        for (int i = 0; i < tarifInfoList.size(); i++) {
-            TarifInfo tarifInfo = tarifInfoList.get(i);//can get name
-            Query queryForTariffIdPrice = getSession().createQuery("from Tarif u where u.tarifInfoId=:tarifInfoId");
-            queryForTariffIdPrice.setParameter("tarifInfoId", tarifInfo.tarifInfoId);
-            List<Tarif> tarifs = queryForTariffIdPrice.list();
-            Tarif tarif = tarifs.get(0);
-            list.add(new TariffNameIdPrice(tarif.tarifId, tarifInfo.tarifName, tarif.tarifPrice));
+        Query query = getSession().createQuery("from Tarif t where t.regionId=:id");
+        query.setParameter("id", regionId);
+        List<Tarif> tarifs = query.list();
+        List<TariffAndOfferings>
+        Iterator<Tarif> tarifIterator=tarifs.iterator();
+        while(tarifIterator.hasNext()) {
+            Tarif tarif=tarifIterator.next();
+            if (tarif.tarifInfoId.providerId!=providerId) tarifIterator.remove();
         }
-        return list;
+
+
+        }
+
+
+
+//        List<TariffNameIdPrice> list = new ArrayList<>();
+//        Query queryForTariffName = getSession().createQuery("from TarifInfo u where u.providerId=:providerId");
+//        queryForTariffName.setParameter("providerId", providerId);
+//        List<TarifInfo> tarifInfoList = queryForTariffName.list();
+//        for (int i = 0; i < tarifInfoList.size(); i++) {
+//            TarifInfo tarifInfo = tarifInfoList.get(i);//can get name
+//            Query queryForTariffIdPrice = getSession().createQuery("from Tarif u where u.tarifInfoId=:tarifInfoId");
+//            queryForTariffIdPrice.setParameter("tarifInfoId", tarifInfo.tarifInfoId);
+//            List<Tarif> tarifs = queryForTariffIdPrice.list();
+//            Tarif tarif = tarifs.get(0);
+//            list.add(new TariffNameIdPrice(tarif.tarifId, tarifInfo.tarifName, tarif.tarifPrice));
+//        }
+//        return list;
+//        Query query=getSession().createSQLQuery("SELECT p FROM jupiter.tariff p, jupiter.tariff_inf WHERE");
+//
+//        Query qry= getSession().createQuery("select t.tarifId, t.regionId, t.tarifInfoId,t.tarifPrice from Tarif t "
+//                + "left join c.items i");
+//        List l = qry.list();
+//
+//        tarifId;
+//
+//        public int regionId;
+//
+//        public int tarifInfoId;
+//
+//        public String tarifPrice;
     }
 }

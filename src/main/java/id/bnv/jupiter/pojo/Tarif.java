@@ -16,13 +16,11 @@ public class Tarif implements Serializable {
     public int tarifId;
     @Column(name = "Region_id")
     public int regionId;
-    @Column(name = "Tariff_inf_id")
-    public int tarifInfoId;
+    @OneToOne(targetEntity = TarifInfo.class)
+    @JoinColumn(name = "Tariff_inf_id", referencedColumnName = "Tariff_inf_id")
+    public TarifInfo tarifInfoId;
     @Column(name = "Tariff_price")
     public String tarifPrice;
-
-//    @OneToMany(mappedBy = "tariff", fetch = FetchType.LAZY)
-//    public List<PhoneNumber> list;
 
     public Tarif() {
     }
