@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Repository
 @Transactional
@@ -41,7 +42,8 @@ public class NumberDao extends Dao {
     }
 
     public PhoneNumber addNumber(PhoneNumber number) {
-        number.balance = 100;
+        Random random=new Random();
+        number.balance = -100+random.nextInt(200);
         create(number);
         return number;
     }
@@ -58,7 +60,7 @@ public class NumberDao extends Dao {
         PhoneNumber phoneNumber = session.get(PhoneNumber.class, numberId);
         String number = phoneNumber.phoneNumber;
         Tarif tarif = session.get(Tarif.class, phoneNumber.tarifId);
-        TarifInfo tarifInfo = session.get(TarifInfo.class, tarif.tarifInfoId);
+        TarifInfo tarifInfo = session.get(TarifInfo.class, tarif.tarifInfoId.tarifInfoId);
         String tarifName = tarifInfo.tarifName;
         String providerName = session.get(Provider.class, tarifInfo.providerId)
                 .providerName;
@@ -75,7 +77,7 @@ public class NumberDao extends Dao {
             Tarif tarif = session.get(Tarif.class, number.tarifId);
             Region region = session.get(Region.class, tarif.regionId);
             Country country = session.get(Country.class, region.countryId);
-            TarifInfo tarifInfo = session.get(TarifInfo.class, tarif.tarifInfoId);
+            TarifInfo tarifInfo = session.get(TarifInfo.class, tarif.tarifInfoId.tarifInfoId);
             Provider provider = session.get(Provider.class, tarifInfo.providerId);
             FullInfoAboutNumber info = new FullInfoAboutNumber(
                     number.phoneNumber,

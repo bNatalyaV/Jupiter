@@ -1,5 +1,6 @@
 package id.bnv.jupiter.authentication;
 
+import com.sun.xml.bind.v2.TODO;
 import id.bnv.jupiter.dao.Dao;
 import id.bnv.jupiter.pojo.User;
 import org.hibernate.Query;
@@ -11,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static id.bnv.jupiter.authentication.IssueTokenAndDecode.decode;
 
 
 @Repository
@@ -40,6 +40,10 @@ public class Decoder /* extends Dao */ {
         List<User> list = query.list();
         if (list.isEmpty()) return null;
         else return list.get(0);
+    }
+
+    private static String decode(String token) {
+        return null;
     }
 
     public static boolean auth(String token) {

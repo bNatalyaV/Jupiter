@@ -36,7 +36,7 @@ public class RegionDao extends Dao {
         for (int i = 0; i < tarifList.size(); i++) {
             Tarif tarif = tarifList.get(i);
             Query queryForProviderId = getSession().createQuery("from TarifInfo u where u.tarifInfoId=:tarifInfoId");
-            queryForProviderId.setParameter("tarifInfoId", tarif.tarifInfoId);
+            queryForProviderId.setParameter("tarifInfoId", tarif.tarifInfoId.tarifInfoId);
             List<TarifInfo> tarifInfoList = queryForProviderId.list();
             TarifInfo tarifInfo = tarifInfoList.get(0);
             int providerId = tarifInfo.providerId;

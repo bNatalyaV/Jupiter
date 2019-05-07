@@ -7,10 +7,14 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+import id.bnv.jupiter.authentication.IssueAndDecodeToken;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Date;
+import java.util.Random;
+
+import static jdk.nashorn.internal.objects.NativeMath.random;
 
 public class Test {
     public static void main(String[] args) throws Exception {
@@ -45,18 +49,28 @@ public class Test {
 
     @org.junit.Test
     public void test() {
-        String str = "";
-
-        for (String s: new String[]{"natasha","ne","nata","sha","a","b"}) {
-            System.out.println(str.hashCode());
-            str += s;
-
-        }
+        String a = IssueAndDecodeToken.issueToken("ok@mail.ru");
+        System.out.println(a);
+        String b=IssueAndDecodeToken.decode(a);
+        System.out.println(b);
+//        double a;
+//        for (int i = 0; i < 5; i++) {
+//            Random random=new Random();
+//            a = -100 + random.nextInt(200);
+//            System.out.println(a);
+//        }
     }
 
-    public Integer a() {
-        return 5;
-    }
+//        for (String s: new String[]{"natasha","ne","nata","sha","a","b"}) {
+//            System.out.println(str.hashCode());
+//            str += s;
+//
+//        }
+//    }
+//
+//    public Integer a() {
+//        return 5;
+//    }
 
 //    Algorithm algo;
 //
@@ -92,4 +106,4 @@ public class Test {
 //
 //        return email.asString();
 //    }
-}
+    }

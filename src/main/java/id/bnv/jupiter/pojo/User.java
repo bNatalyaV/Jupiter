@@ -31,7 +31,7 @@ public class User implements Serializable {
     public String password;
     @Column(name = "Birth_date")
     //@Temporal(TemporalType.DATE)// if need ms
-    @JsonFormat(pattern = "dd-MM-yyyy") //
+    @JsonFormat(pattern = "yyyy-MM-dd") //
     public Date birthDate;
 
     public User() {

@@ -1,5 +1,6 @@
 package id.bnv.jupiter.controller;
 
+import com.sun.xml.bind.v2.TODO;
 import id.bnv.jupiter.dao.NumberDao;
 import id.bnv.jupiter.dao.TarifDao;
 import id.bnv.jupiter.pojo.*;
@@ -11,7 +12,7 @@ import javax.management.Query;
 
 import java.util.List;
 
-import static id.bnv.jupiter.authentication.Decoder.auth;
+//import static id.bnv.jupiter.authentication.Decoder.auth;
 
 @RestController
 @RequestMapping(value = "/tarif")
@@ -25,19 +26,19 @@ public class TarifController {
         this.numberDao = numberdao;
     }
 
-    @GetMapping(value = "/")
-    public ResponseEntity getTarifByNumber(@RequestHeader String token, PhoneNumber number) {
-        if (auth(token)) {
-            Tarif tarif = dao.getTarifByNumber(number);
-            return ResponseEntity.ok(tarif);
-        } else return ResponseEntity.badRequest().body("Not authorized");
-    }
+//    @GetMapping(value = "/")
+//    public ResponseEntity getTarifByNumber(@RequestHeader String token, PhoneNumber number) {
+//        if (auth(token)) {
+//            Tarif tarif = dao.getTarifByNumber(number);
+//            return ResponseEntity.ok(tarif);
+//        } else return ResponseEntity.badRequest().body("Not authorized");
+//    }
 
-    @GetMapping(value = "/info/{tarifId}")
-    public ResponseEntity getInfo(@PathVariable int tarifId) {
-        TarifInfo tarifInfo = dao.getInfo(tarifId);
-        return ResponseEntity.ok(tarifInfo);
-    }
+//    @GetMapping(value = "/info/{tarifId}")
+//    public ResponseEntity getInfo(@PathVariable int tarifId) {
+//        TarifInfo tarifInfo = dao.getInfo(tarifId);
+//        return ResponseEntity.ok(tarifInfo);
+//    }
 
     @GetMapping(value = "/tariffname/{idprovider}")
     public ResponseEntity getTariffNameByProviderId(@PathVariable(value = "idprovider") int providerId) {

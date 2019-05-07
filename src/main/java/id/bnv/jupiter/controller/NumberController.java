@@ -29,10 +29,16 @@ public class NumberController {
     }
 
     //передача номера строкой, создать номер в бд
-    @PutMapping(value = "/addnumber/{iduser}")
+    @PutMapping(value = "/addnumber")
     public ResponseEntity addNewNumber(@RequestBody PhoneNumber number) {
-        dao.addNumber(number);
-        return ResponseEntity.ok(number);
+        try {
+            PhoneNumber newNumber =dao.addNumber(number);
+            return ResponseEntity.ok(newNumber);
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+
     }
 
     @DeleteMapping(value = "/number")

@@ -61,20 +61,16 @@ public class UserDao extends Dao {
 //            }
 //        }
 //    }
-    public String registerUser(String email, String login, String password) {
-       if (checkEmailOfUser(email))
-       {
-           if (checkLoginOfUser(login))
-           {
-               User user=new User(email, login, password);
-               create(user);
+    public Object registerUser(User user/*String email, String login, String password*/) {
+       if (checkEmailOfUser(user.email)) {
+           if (checkLoginOfUser(user.login)) {
+               User newUser = new User(user.email, user.login, user.password);
+               create(newUser);
 
-               return "User was created";
-           }
-           else
+               return newUser;
+           } else
                return "Login already existed";
-       }
-       else
+       } else
            return "Email already existed";
     }
 

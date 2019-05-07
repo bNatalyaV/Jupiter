@@ -1,16 +1,14 @@
 package id.bnv.jupiter.dao;
 
 import id.bnv.jupiter.pojo.*;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-
-import static org.aspectj.bridge.Version.getTime;
 
 @Repository
 @Transactional
@@ -137,17 +135,16 @@ public class TarifDao extends Dao {
         Query query = getSession().createQuery("from Tarif t where t.regionId=:id");
         query.setParameter("id", regionId);
         List<Tarif> tarifs = query.list();
-        List<TariffAndOfferings>
-        Iterator<Tarif> tarifIterator=tarifs.iterator();
-        while(tarifIterator.hasNext()) {
-            Tarif tarif=tarifIterator.next();
-            if (tarif.tarifInfoId.providerId!=providerId) tarifIterator.remove();
+        List<TariffNameIdPrice> tariffNameIdPriceList = new ArrayList<>();
+        Iterator<Tarif> tarifIterator = tarifs.iterator();
+        while (tarifIterator.hasNext()) {
+            Tarif tarif = tarifIterator.next();
+            if (tarif.tarifInfoId.providerId != providerId) tarifIterator.remove();
         }
-
-
+        for (Tarif tarif: tarifs) {
+            tariffNameIdPriceList.add(new TariffNameIdPrice(tarif.tarifId, tarif.tarifInfoId.tarifName, tarif.tarifPrice));
         }
-
-
+        return tariffNameIdPriceList;
 
 //        List<TariffNameIdPrice> list = new ArrayList<>();
 //        Query queryForTariffName = getSession().createQuery("from TarifInfo u where u.providerId=:providerId");
