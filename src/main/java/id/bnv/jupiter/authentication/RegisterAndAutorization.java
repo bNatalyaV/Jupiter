@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/authentication")
-public class AuthenticationEndpoint {
-    static Algorithm algorithm = Algorithm.HMAC256("jupiter");
-
+public class RegisterAndAutorization {
+   // static Algorithm algorithm = Algorithm.HMAC256("jupiter");
     private final UserDao userDao;
 
     @Autowired
-    public AuthenticationEndpoint(UserDao dao) {
+    public RegisterAndAutorization(UserDao dao) {
         this.userDao = dao;
     }
 
@@ -28,7 +27,7 @@ public class AuthenticationEndpoint {
             return ResponseEntity.badRequest().body("Login already existed");
         else return ResponseEntity.ok(response);
     }
-
+// авторизация пользователя, вернуть токен+пользователь
 //    @PostMapping
 //    public ResponseEntity authenticateUser(@RequestParam("login") String login,
 //                                           @RequestParam("password") String password) {

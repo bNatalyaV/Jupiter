@@ -1,5 +1,7 @@
 package id.bnv.jupiter;
 
+import id.bnv.jupiter.authentication.Authentication;
+import id.bnv.jupiter.authentication.IssueAndDecodeToken;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +24,11 @@ public class Application {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("id.bnv.jupiter"))
                 .build();
+    }
+
+    @Bean
+    public IssueAndDecodeToken issueAndDecodeToken() {
+        return new IssueAndDecodeToken();
     }
 }
 

@@ -8,6 +8,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import id.bnv.jupiter.authentication.IssueAndDecodeToken;
+import id.bnv.jupiter.pojo.ForDecode;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -49,10 +50,10 @@ public class Test {
 
     @org.junit.Test
     public void test() {
-        String a = IssueAndDecodeToken.issueToken("ok@mail.ru");
-        System.out.println(a);
-        String b=IssueAndDecodeToken.decode(a);
-        System.out.println(b);
+//        String a = IssueAndDecodeToken.issueToken(5);
+//        System.out.println(a);
+//        ForDecode b=IssueAndDecodeToken.decode(a);
+//        System.out.println(b.userId+"\n"+b.dateIssue+"\n"+b.dateExpire);
 //        double a;
 //        for (int i = 0; i < 5; i++) {
 //            Random random=new Random();

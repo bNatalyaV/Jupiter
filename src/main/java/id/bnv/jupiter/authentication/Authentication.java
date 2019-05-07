@@ -1,11 +1,11 @@
 package id.bnv.jupiter.authentication;
 
-import com.sun.xml.bind.v2.TODO;
 import id.bnv.jupiter.dao.Dao;
+import id.bnv.jupiter.pojo.ForDecode;
 import id.bnv.jupiter.pojo.User;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,28 +13,19 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 
-
 @Repository
 @Transactional
-public class Decoder /* extends Dao */ {
-    private static SessionFactory sessionFactoryForDecoder;
+public class Authentication extends Dao {
+    private final IssueAndDecodeToken issueAndDecodeToken;
 
     @Autowired
-    public Decoder(SessionFactory sessionFactory) {
-        this.sessionFactoryForDecoder = sessionFactory;
+    public Authentication(SessionFactory sessionFactory, IssueAndDecodeToken iADT) {
+        super(sessionFactory);
+        issueAndDecodeToken = iADT;
     }
 
-    static Session getSession() {
-        return sessionFactoryForDecoder.getCurrentSession();
-    }
-
-//    @Autowired
-//    public Decoder(SessionFactory sessionFactory) {
-//        super(sessionFactory);
-//    }
-
-    public static User identifyUser(String token) {
-        String emailFromToken = decode(token);
+    public User identifyUser(String token) {
+        ForDecode emailFromToken = issueAndDecodeToken.decode(token);
         Query query = getSession().createQuery("from User u where u.email=:email");
         query.setParameter("email", emailFromToken);
         List<User> list = query.list();
@@ -42,11 +33,7 @@ public class Decoder /* extends Dao */ {
         else return list.get(0);
     }
 
-    private static String decode(String token) {
-        return null;
-    }
-
-    public static boolean auth(String token) {
+    public boolean auth(String token) {
         User user = identifyUser(token);
         return (!user.equals(null)) ? true : false;
     }

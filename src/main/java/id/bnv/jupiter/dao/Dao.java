@@ -20,7 +20,7 @@ public class Dao {
         this.sessionFactory = sessionFactory;
     }
 
-    Session getSession() {
+    public Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 
