@@ -1,7 +1,5 @@
 package id.bnv.jupiter.authentication;
 
-import com.auth0.jwt.algorithms.Algorithm;
-import id.bnv.jupiter.dao.UserDao;
 import id.bnv.jupiter.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,18 +7,18 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/authentication")
-public class RegisterAndAutorization {
+public class RegisterAndAutorizationController {
    // static Algorithm algorithm = Algorithm.HMAC256("jupiter");
-    private final UserDao userDao;
+    private final Authentication authentication;
 
     @Autowired
-    public RegisterAndAutorization(UserDao dao) {
-        this.userDao = dao;
+    public RegisterAndAutorizationController(Authentication authentication) {
+        this.authentication=authentication;
     }
 
     @PostMapping(value = "/new")
     public ResponseEntity register(@RequestBody User user) {
-        Object response = userDao.registerUser(user);
+        Object response = authentication.registerUser(user);
         if (response.equals("Email already existed"))
             return ResponseEntity.badRequest().body("Email already existed");
         else if (response.equals("Login already existed"))
@@ -47,9 +45,9 @@ public class RegisterAndAutorization {
 //        }
 //    }
 
-    private boolean authenticate(String login, String password) throws Exception {
-        User user = userDao.getUserBy(login);
-        String passwordFromDB = user.password;
-        return (passwordFromDB.equals(password)) ? true : false;
-    }
+//    private boolean authenticate(String login, String password) throws Exception {
+//        User user = userDao.getUserBy(login);
+//        String passwordFromDB = user.password;
+//        return (passwordFromDB.equals(password)) ? true : false;
+//    }
 }

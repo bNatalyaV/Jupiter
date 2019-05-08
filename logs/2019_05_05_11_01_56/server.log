@@ -1,0 +1,2 @@
+[05-05 11:03:00,700, 66723] org.hibernate.engine.jdbc.spi.SqlExceptionHelper SQL Error: 1062, SQLState: 23000
+[05-05 11:03:00,708, 66731] org.hibernate.engine.jdbc.spi.SqlExceptionHelper Duplicate entry 'string' for key 'passport_unique'

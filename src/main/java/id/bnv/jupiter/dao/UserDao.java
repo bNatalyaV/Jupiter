@@ -61,36 +61,5 @@ public class UserDao extends Dao {
 //            }
 //        }
 //    }
-    public Object registerUser(User user/*String email, String login, String password*/) {
-       if (checkEmailOfUser(user.email)) {
-           if (checkLoginOfUser(user.login)) {
-               User newUser = new User(user.email, user.login, user.password);
-               create(newUser);
-
-               return newUser;
-           } else
-               return "Login already existed";
-       } else
-           return "Email already existed";
-    }
-
-    public boolean checkEmailOfUser(String email) {
-        Query queryForEmail = getSession().createQuery("from User u where u.email=:email");
-        queryForEmail.setParameter("email", email);
-        List<User> userListForEmail = queryForEmail.list();
-        if(userListForEmail.isEmpty())
-            return true;
-        else
-            return false;
-    }
-    public boolean checkLoginOfUser(String login) {
-        Query queryForLogin = getSession().createQuery("from User u where u.login=:login")
-                .setParameter("login", login);
-        List<User> userListForLogin = queryForLogin.list();
-        if (userListForLogin.isEmpty())
-            return true;
-        else
-            return false;
-    }
 }
 
