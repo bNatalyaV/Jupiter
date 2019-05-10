@@ -17,7 +17,7 @@ public class RegisterAndAutorizationController {
     }
 
     @PostMapping(value = "/new")
-    public ResponseEntity register(@RequestBody User user) {
+    public ResponseEntity register(@RequestBody User user, @RequestHeader(value = "Token") String token) {
         Object response = authentication.registerUser(user);
         if (response.equals("Email already existed"))
             return ResponseEntity.badRequest().body("Email already existed");

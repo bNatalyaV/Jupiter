@@ -22,9 +22,9 @@ public class NumberController {
         this.dao = dao;
     }
 
-    @GetMapping(value = "/numbers")
-    public ResponseEntity getAllNumbers(User user) {
-        List<PhoneNumber> phoneNumbers = dao.getAllNumbersOfUser(user);
+    @GetMapping(value = "/numbers/{userId}")
+    public ResponseEntity getAllNumbers(@PathVariable int userId) {
+        List<PhoneNumber> phoneNumbers = dao.getAllNumbersOfUser(userId);
         return ResponseEntity.ok(phoneNumbers);
     }
 

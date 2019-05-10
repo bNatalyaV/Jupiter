@@ -22,9 +22,9 @@ public class NumberDao extends Dao {
         super(sessionFactory);
     }
 
-    public List<PhoneNumber> getAllNumbersOfUser(User user) {
+    public List<PhoneNumber> getAllNumbersOfUser(int userId) {
         Query query = getSession().createQuery("from PhoneNumber u where u.userId=:userId");
-        query.setParameter("userId", user.id);
+        query.setParameter("userId", userId);
         List<PhoneNumber> phoneNumbers = query.list();
         return phoneNumbers;
     }
