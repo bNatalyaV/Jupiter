@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 @Entity
 @Table(name = "adress")
-public class Address implements Serializable {
+public class Adress implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -19,6 +19,6 @@ public class Address implements Serializable {
     public String building;
 
 
-    public Address() {
+    public Adress() {
     }
 }

@@ -21,11 +21,11 @@ public class Journey implements Serializable {
     public int phoneNumberId;
     @Column(name = "Tariff_id")
     public int tarifId;
-//    @Temporal(TemporalType.DATE)
+    //    @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "Start_date")
     public Date startDate;
-//    @Temporal(TemporalType.DATE)
+    //    @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "End_date")
     public Date endDate;
@@ -34,11 +34,14 @@ public class Journey implements Serializable {
 
     public Journey() {
     }
-    public Journey(Date startDate, int phoneNumberId, int tarifId) {
-        this.startDate=startDate;
-        this.phoneNumberId=phoneNumberId;
-        this.tarifId=tarifId;
+
+    public Journey(Date startDate, int phoneNumberId, int oldTariffId, int tarifId) {
+        this.startDate = startDate;
+        this.phoneNumberId = phoneNumberId;
+        this.oldTariffId = oldTariffId;
+        this.tarifId = tarifId;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

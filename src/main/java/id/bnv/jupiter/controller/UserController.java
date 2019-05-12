@@ -1,5 +1,6 @@
 package id.bnv.jupiter.controller;
 
+import id.bnv.jupiter.authentication.Authentication;
 import id.bnv.jupiter.dao.UserDao;
 import id.bnv.jupiter.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,21 +13,30 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
     private final UserDao dao;
+    private final Authentication authentication;
 
     @Autowired
-    public UserController(UserDao dao) {
+    public UserController(UserDao dao, Authentication authentication) {
         this.dao = dao;
+        this.authentication=authentication;
     }
 
     @GetMapping(value = "/user/{id}")
-    public ResponseEntity getUserById(@PathVariable int id) {
-        User user = dao.getUser(id);
+    public ResponseEntity getUserById(@PathVariable int id,
+                                      @RequestHeader(value = "token") String token,
+                                      @RequestHeader(value = "userid") String userId) {
+        //String a=token.getContent
+        if (authentication.identifyUserByToken(token, Integer.parseInt(userId))) {
+            User user = dao.getUser(id);
 
-        if (user == null) {
-            return ResponseEntity.badRequest().body("User not exist");
+
+            if (user == null) {
+                return ResponseEntity.badRequest().body("User not exist");
+            }
+
+            return ResponseEntity.ok(user);
         }
-
-        return ResponseEntity.ok(user);
+        else return ResponseEntity.badRequest().build();
     }
 
 //    @GetMapping(value = "/user")

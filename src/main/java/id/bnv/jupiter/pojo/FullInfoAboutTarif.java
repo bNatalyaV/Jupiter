@@ -12,6 +12,9 @@ public class FullInfoAboutTarif implements Serializable {
     public Date date;
     public String nextProvider;
     public String nextTarif;
+    public int journeyId;
+    public int numberId;
+    public int newTariffId;
 
     public FullInfoAboutTarif() {
     }
@@ -24,5 +27,18 @@ public class FullInfoAboutTarif implements Serializable {
         this.date = date;
         this.nextProvider = nextProvider;
         this.nextTarif = nextTarif;
+    }
+    public FullInfoAboutTarif(String previousProvider, String previousTarif, String number,
+                              Date date, String nextProvider, String nextTarif, int journeyId,
+                              int numberId, int newTariffId ) {
+        this.previousProvider = previousProvider;
+        this.previousTarif = previousTarif;
+        this.number = number;
+        this.date = date;
+        this.nextProvider = nextProvider;
+        this.nextTarif = nextTarif;
+        this.journeyId=journeyId;
+        this.numberId=numberId;
+        this.newTariffId=newTariffId;
     }
 }

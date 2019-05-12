@@ -62,7 +62,7 @@ public class TarifDao extends Dao {
     public boolean changeTariff(int idnumber, int idTariff) {
         PhoneNumber number = getSession().get(PhoneNumber.class, idnumber);
         Date dateOfStartJourney = new Date();
-        Journey journey = new Journey(dateOfStartJourney, idnumber, idTariff);
+        Journey journey = new Journey(dateOfStartJourney, idnumber, number.tarifId, idTariff);
         create(journey);
         if (number.balance >= 0) {
             number.tarifId = idTariff;
@@ -75,11 +75,6 @@ public class TarifDao extends Dao {
             create(journeyTask);
             return false;
         }
-    }
-
-    public TarifInfo getInfo(Integer tarifId) {
-        Tarif tarif = getSession().get(Tarif.class, tarifId);
-        return tarif.tarifInfoId;
     }
 
     public TarifInfo getTarifInfoByProviderId(int providerId) {

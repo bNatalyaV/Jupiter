@@ -15,4 +15,13 @@ public class ForDecode implements Serializable {
         this.dateIssue = dateIssue;
         this.dateExpire = dateExpire;
     }
+
+    @Override
+    public String toString() {
+        return "ForDecode{" +
+                "userId=" + userId +
+                ", dateIssue=" + dateIssue +
+                ", dateExpire=" + dateExpire +
+                '}';
+    }
 }

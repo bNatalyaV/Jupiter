@@ -13,8 +13,9 @@ public class ProviderAdress implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Provider_id")
     public int providerId;
-    @Column(name = "Adress_id")
-    public int adressId;
+    @OneToOne(targetEntity = Adress.class)
+    @JoinColumn(name = "Adress_id", referencedColumnName = "Adress_id")
+    public Adress adressId;
 
     public ProviderAdress() {
     }

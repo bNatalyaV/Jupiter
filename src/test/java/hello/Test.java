@@ -12,7 +12,9 @@ import id.bnv.jupiter.pojo.ForDecode;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 import static jdk.nashorn.internal.objects.NativeMath.random;
@@ -50,6 +52,11 @@ public class Test {
 
     @org.junit.Test
     public void test() {
+        String s = issueToken(46);
+        System.out.println(s);
+
+        ForDecode decode = decode(s);
+        System.out.println(decode);
 //        String a = IssueAndDecodeToken.issueToken(5);
 //        System.out.println(a);
 //        ForDecode b=IssueAndDecodeToken.decode(a);
@@ -60,6 +67,37 @@ public class Test {
 //            a = -100 + random.nextInt(200);
 //            System.out.println(a);
 //        }
+    }
+
+    public  ForDecode decode(String token) {
+        JWTVerifier verifier = JWT.require(algorithm)
+                .withIssuer("jupiter")
+                .build();
+
+        DecodedJWT verify = verifier.verify(token);
+        Claim userId=verify.getClaim("userId");
+        Claim dateIssue=verify.getClaim("dateIssue");
+        Claim dateExpire=verify.getClaim("dateExpire");
+        ForDecode forDecode=new ForDecode(userId.asInt(), dateIssue.asDate(),
+                dateExpire.asDate());
+
+        return forDecode;
+    }
+
+    static Algorithm algorithm = Algorithm.HMAC256("jupiter");
+
+    public String issueToken(int userId) {
+        Calendar calendar=new GregorianCalendar();
+        Date dateIssue= calendar.getTime();
+        calendar.add(Calendar.MINUTE, 5);
+        Date dateExpire = new Date(new Date().getTime() - 1000 * 5);
+        String token = JWT.create()
+                .withIssuer("jupiter")
+                .withClaim("userId", userId)
+                .withClaim("dateIssue", dateIssue)
+                .withClaim("dateExpire", dateExpire)
+                .sign(algorithm);
+        return token;
     }
 
 //        for (String s: new String[]{"natasha","ne","nata","sha","a","b"}) {

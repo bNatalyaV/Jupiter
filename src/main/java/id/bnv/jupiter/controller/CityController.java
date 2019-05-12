@@ -5,6 +5,7 @@ import id.bnv.jupiter.pojo.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
@@ -21,5 +22,11 @@ public class CityController {
     public ResponseEntity getAllCity() {
         List<City> cityList= cityDao.getAllCity();
         return ResponseEntity.ok(cityList);
+    }
+
+    @GetMapping(value = "/cities/{regionId}")
+    public ResponseEntity getCitiesByRegionId(@PathVariable int regionId) {
+        List<City> list=cityDao.getCityByRegionId(regionId);
+        return ResponseEntity.ok(list);
     }
 }

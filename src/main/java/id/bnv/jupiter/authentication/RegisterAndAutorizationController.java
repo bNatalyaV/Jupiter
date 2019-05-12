@@ -8,16 +8,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/authentication")
 public class RegisterAndAutorizationController {
-   // static Algorithm algorithm = Algorithm.HMAC256("jupiter");
     private final Authentication authentication;
 
     @Autowired
     public RegisterAndAutorizationController(Authentication authentication) {
-        this.authentication=authentication;
+        this.authentication = authentication;
     }
 
     @PostMapping(value = "/new")
-    public ResponseEntity register(@RequestBody User user, @RequestHeader(value = "Token") String token) {
+    public ResponseEntity register(@RequestBody User user) {
         Object response = authentication.registerUser(user);
         if (response.equals("Email already existed"))
             return ResponseEntity.badRequest().body("Email already existed");
@@ -25,29 +24,21 @@ public class RegisterAndAutorizationController {
             return ResponseEntity.badRequest().body("Login already existed");
         else return ResponseEntity.ok(response);
     }
-// авторизация пользователя, вернуть токен+пользователь
-//    @PostMapping
-//    public ResponseEntity authenticateUser(@RequestParam("login") String login,
-//                                           @RequestParam("password") String password) {
-//        try {
-//            if (authenticate(email, password)) {
-//                String token = issueToken(email);// Issue a token for the user
-//
-//                return ResponseEntity.ok(token);// Return the token on the response
-//
-//            } else {
-//                return null;
-//            }
-//        } catch (Exception e) {
-//
-//            return ResponseEntity.badRequest().body("Error");
-//
-//        }
-//    }
 
-//    private boolean authenticate(String login, String password) throws Exception {
-//        User user = userDao.getUserBy(login);
-//        String passwordFromDB = user.password;
-//        return (passwordFromDB.equals(password)) ? true : false;
-//    }
+    // авторизация пользователя, вернуть токен+пользователь //done
+    @PutMapping(value = "/signin")
+    public ResponseEntity authenticateUser(@RequestBody User user) {
+        try {
+            Object response = authentication.identifyUserForAutorization(user.login, user.password);
+            if (response.equals("Login or Password is incorrect"))
+
+                return ResponseEntity.badRequest().body("Login or Password is incorrect");
+
+            else return ResponseEntity.ok(response);
+        } catch (Exception e) {
+
+            return ResponseEntity.badRequest().body("Error");
+
+        }
+    }
 }

@@ -17,29 +17,58 @@ public class JourneyController {
     private final JourneyDao journeyDao;
 
     @Autowired
-    public JourneyController(JourneyDao journeyDao) {this.journeyDao=journeyDao;}
+    public JourneyController(JourneyDao journeyDao) {
+        this.journeyDao = journeyDao;
+    }
 
     @GetMapping(value = "/{idjourney}")
-    public ResponseEntity getJourney(@PathVariable (value = "idjourney") int idJourney) {
-        Journey journey =journeyDao.getJourney(idJourney);
+    public ResponseEntity getJourney(@PathVariable(value = "idjourney") int idJourney) {
+        Journey journey = journeyDao.getJourney(idJourney);
         return ResponseEntity.ok(journey);
     }
+
     @GetMapping(value = "/completed/{userId}")
     public ResponseEntity getCompletedNumbers(@PathVariable int userId) {
-        Set<PhoneNumber> list=journeyDao.getCompletedNumbers(userId);
+        List<PhoneNumber> list = journeyDao.getCompletedNumbers(userId);
         return ResponseEntity.ok(list);
     }
+
+    @GetMapping(value = "/completedjourneys/{userId}")
+    public ResponseEntity getCompletedJourneys(@PathVariable int userId) {
+        List<Journey> list = journeyDao.getCompletedJourneys(userId);
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/uncompleted/{userId}")
+    public ResponseEntity getUncompletedNumbers(@PathVariable int userId) {
+        List<PhoneNumber> list = journeyDao.getUncompletedJourneys(userId);
+        return ResponseEntity.ok(list);
+    }
+
+    ////////////////////////////////////////
+    /////////////////////////////
+    ///////////////////
     @PostMapping(value = "/new/{numberId}/{tariffId}")
     public ResponseEntity addJourney(@PathVariable int numberId,
-                                     @PathVariable int tariffId) {
-        Journey journey=journeyDao.addJourney(numberId, tariffId);
-        return ResponseEntity.ok(journey);
+                                     @PathVariable int tariffId) throws Exception {
+        String response = journeyDao.addJourney(numberId, tariffId);
+        return ResponseEntity.ok(response);
     }
+
+    @PostMapping(value = "/continue/{numberId}/{tariffId}/{journeyId}")
+    public ResponseEntity continueJourney(@PathVariable int numberId,
+                                          @PathVariable int tariffId,
+                                          @PathVariable int journeyId) throws Exception {
+        journeyDao.addTask2(numberId, tariffId, journeyId);
+        return ResponseEntity.ok("Journey was finished");
+    }
+
     @GetMapping(value = "/all/{userId}")
     public ResponseEntity getInfoAboutAllJourneys(@PathVariable int userId) {
-        List<FullInfoAboutTarif> list=journeyDao.getInfoAboutJourneys(userId);
+        List<FullInfoAboutTarif> list = journeyDao.getInfoAboutJourneys(userId);
         return ResponseEntity.ok(list);
     }
+
     @PostMapping(value = "/1")
     public ResponseEntity full() {
         journeyDao.fullOldTariffId();

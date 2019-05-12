@@ -72,7 +72,7 @@ public class Authentication extends Dao {
                 .setParameter("login", login);
         List<User> list = query.list();
         User userFromDB = list.get(0);
-        if (userFromDB.password == password) {
+        if (userFromDB.password.equals(password)) {
             String token = issueAndDecodeToken.issueToken(userFromDB.id);
             UserAndToken userAndToken = new UserAndToken(token, userFromDB);
             return userAndToken;
