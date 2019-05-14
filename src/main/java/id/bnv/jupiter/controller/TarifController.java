@@ -41,13 +41,17 @@ public class TarifController {
 //    }
 
     @GetMapping(value = "/tariffname/{idprovider}")
-    public ResponseEntity getTariffNameByProviderId(@PathVariable(value = "idprovider") int providerId) {
+    public ResponseEntity getTariffNameByProviderId(@PathVariable(value = "idprovider") int providerId,
+                                                    @RequestHeader(value = "token") String token,
+                                                    @RequestHeader(value = "userid") String userId) {
         TarifInfo tarifInfo = dao.getTarifInfoByProviderId(providerId);
         return ResponseEntity.ok(tarifInfo.tarifName);
     }
 
     @GetMapping(value = "/tariff/{idprovider}")
-    public ResponseEntity getTarifByProviderId(@PathVariable(value = "idprovider") int providerId) {
+    public ResponseEntity getTarifByProviderId(@PathVariable(value = "idprovider") int providerId,
+                                               @RequestHeader(value = "token") String token,
+                                               @RequestHeader(value = "userid") String userId) {
         TarifInfo tarifInfo = dao.getTarifInfoByProviderId(providerId);
         Tarif tarif = dao.getTarifByTarifInfoId(tarifInfo.tarifInfoId);
         return ResponseEntity.ok(tarif);
@@ -55,7 +59,9 @@ public class TarifController {
 
     //6 request
     @GetMapping(value = "/tariffoffering/{idoffering}")
-    public ResponseEntity getTarifOfferingByOfferingId(@PathVariable(value = "idoffering") int offeringId) {
+    public ResponseEntity getTarifOfferingByOfferingId(@PathVariable(value = "idoffering") int offeringId,
+                                                       @RequestHeader(value = "token") String token,
+                                                       @RequestHeader(value = "userid") String userId) {
         TarifOffering tarifOffering = dao.getTarifOffering(offeringId);
         return ResponseEntity.ok(tarifOffering);
     }
@@ -63,17 +69,21 @@ public class TarifController {
     //vk request
     @GetMapping(value = "info/{idnumber}/{idnexttarif}")
     public ResponseEntity getFullInfoAboutTarif(@PathVariable(value = "idnumber") int numberId,
-                                                @PathVariable(value = "idnexttarif") int nextTarifId) {
+                                                @PathVariable(value = "idnexttarif") int nextTarifId,
+                                                @RequestHeader(value = "token") String token,
+                                                @RequestHeader(value = "userid") String userId) {
         FullInfoAboutTarif infoAboutTarif = dao.getFullInfoAboutTarif(numberId, nextTarifId);
         return ResponseEntity.ok(infoAboutTarif);
     }
 
     @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
     public ResponseEntity addOrUpdateTarif(@PathVariable(value = "idnumber") int idNumber,
-                                           @PathVariable(value = "idtarif") int idTarif) {
+                                           @PathVariable(value = "idtarif") int idTarif,
+                                           @RequestHeader(value = "token") String token,
+                                           @RequestHeader(value = "userid") String userId) {
         PhoneNumber phoneNumber = numberDao.getNumberById(idNumber);
         if (dao.hasTariff(phoneNumber)) {
-            changeTarif(phoneNumber.id, idTarif);
+            changeTarif(phoneNumber.id, idTarif, token, userId);
 //            if (dao.changeTariff(idNumber, idTarif)==true) return ResponseEntity.ok("Tariff was changed");
 //            else return ResponseEntity.badRequest().body("Balance is less than zero");
         } else dao.addTarifToNumber(idNumber, idTarif);
@@ -81,14 +91,18 @@ public class TarifController {
     }
 
     @PutMapping(value = "/tarif/{idnumber}/{idtarif}")
-    public ResponseEntity changeTarif(@PathVariable int idnumber, @PathVariable int idtarif) {
+    public ResponseEntity changeTarif(@PathVariable int idnumber, @PathVariable int idtarif,
+                                      @RequestHeader(value = "token") String token,
+                                      @RequestHeader(value = "userid") String userId) {
         dao.changeTariff(idnumber, idtarif);
         return ResponseEntity.ok().build();
     }
 
     // 9 For Vlad
     @GetMapping(value = "/price/{regionId}/{providerId}")
-    public ResponseEntity getTariffNameIdPrice(@PathVariable int regionId, @PathVariable int providerId) {
+    public ResponseEntity getTariffNameIdPrice(@PathVariable int regionId, @PathVariable int providerId,
+                                               @RequestHeader(value = "token") String token,
+                                               @RequestHeader(value = "userid") String userId) {
         List<TariffNameIdPrice> list=dao.getTariffNameIdPrice(regionId, providerId);
         return ResponseEntity.ok(list);
     }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -31,6 +32,9 @@ public class Journey implements Serializable {
     public Date endDate;
     @Column(name = "Old_tariff_id")
     public int oldTariffId;
+//    @OneToMany(targetEntity = JourneyTask.class)
+//    @JoinColumn(name = "Journey_id", referencedColumnName = "Journey_id")
+//    public List<JourneyTask> list;
 
     public Journey() {
     }

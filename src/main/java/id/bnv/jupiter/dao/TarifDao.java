@@ -51,11 +51,11 @@ public class TarifDao extends Dao {
         else return true;
     }
 
-    public Journey getJourney(int idPhoneNumber) {
+    public List<Journey> getJourney(int idPhoneNumber) {
         Query query = getSession().createQuery("from Journey u where u.phoneNumberId=:phoneNumberId");
         query.setParameter("phoneNumberId", idPhoneNumber);
         List<Journey> journeys = query.list();
-        return journeys.get(0);
+        return journeys;
     }
 
     //add
@@ -95,7 +95,7 @@ public class TarifDao extends Dao {
     public Provider getProviderByTarifId(int tarifId) {
         Session session = getSession();
         Tarif tarif = session.get(Tarif.class, tarifId);
-        TarifInfo tarifInfo = session.get(TarifInfo.class, tarif.tarifInfoId);
+        TarifInfo tarifInfo = session.get(TarifInfo.class, tarif.tarifInfoId.tarifInfoId);
         Provider provider = session.get(Provider.class, tarifInfo.providerId);
         return provider;
     }
@@ -114,14 +114,19 @@ public class TarifDao extends Dao {
         Session session = getSession();
         PhoneNumber phoneNumber = session.get(PhoneNumber.class, numberId);
         Tarif currentTarif = session.get(Tarif.class, phoneNumber.tarifId);
-        TarifInfo currentTarifInfo = session.get(TarifInfo.class, currentTarif.tarifInfoId);
         Provider currentProvider = getProviderByTarifId(currentTarif.tarifId);
         Date date = new Date();
         Tarif newTarif = session.get(Tarif.class, nextTarifId);
-        TarifInfo newTarifInfo = session.get(TarifInfo.class, newTarif.tarifInfoId);
         Provider newProvider = getProviderByTarifId(nextTarifId);
-        FullInfoAboutTarif info = new FullInfoAboutTarif(currentProvider.providerName, currentTarifInfo.tarifName,
-                phoneNumber.phoneNumber, date, newProvider.providerName, newTarifInfo.tarifName);
+        List<Journey> journeys=getJourney(numberId);
+        FullInfoAboutTarif info = new FullInfoAboutTarif(
+                currentProvider.providerName,
+                currentTarif.tarifInfoId.tarifName,
+                phoneNumber.phoneNumber,
+                date,
+                newProvider.providerName,
+                newTarif.tarifInfoId.tarifName
+        );
         return info;
     }
 
@@ -137,7 +142,13 @@ public class TarifDao extends Dao {
             if (tarif.tarifInfoId.providerId != providerId) tarifIterator.remove();
         }
         for (Tarif tarif: tarifs) {
-            tariffNameIdPriceList.add(new TariffNameIdPrice(tarif.tarifId, tarif.tarifInfoId.tarifName, tarif.tarifPrice));
+            tariffNameIdPriceList.add(
+                    new TariffNameIdPrice(
+                            tarif.tarifId,
+                            tarif.tarifInfoId.tarifName,
+                            tarif.tarifPrice
+                    )
+            );
         }
         return tariffNameIdPriceList;
 

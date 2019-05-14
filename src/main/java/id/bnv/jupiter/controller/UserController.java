@@ -51,28 +51,36 @@ public class UserController {
 //    }
 
     @GetMapping(value = "/users")
-    public ResponseEntity getAllUsers() {
+    public ResponseEntity getAllUsers(
+            @RequestHeader(value = "token") String token,
+            @RequestHeader(value = "userid") String userId) {
         List<User> users = dao.getAllUsers();
 
         return ResponseEntity.ok(users);
     }
 
     @PostMapping(value = "/user")
-    public ResponseEntity createUser(@RequestBody User user) {
+    public ResponseEntity createUser(@RequestBody User user,
+                                     @RequestHeader(value = "token") String token,
+                                     @RequestHeader(value = "userid") String userId) {
         dao.create(user);
 
         return ResponseEntity.ok(user);
     }
 
     @PutMapping(value = "/user")
-    public ResponseEntity updateUser(@RequestBody User user) {
+    public ResponseEntity updateUser(@RequestBody User user,
+                                     @RequestHeader(value = "token") String token,
+                                     @RequestHeader(value = "userid") String userId) {
         dao.update(user);
 
         return ResponseEntity.ok(user);
     }
 
     @DeleteMapping(value = "/user/{id}")
-    public ResponseEntity deleteUser(@PathVariable int id) {
+    public ResponseEntity deleteUser(@PathVariable int id,
+                                     @RequestHeader(value = "token") String token,
+                                     @RequestHeader(value = "userid") String userId) {
         User user = dao.getUser(id);
         dao.delete(user);
 

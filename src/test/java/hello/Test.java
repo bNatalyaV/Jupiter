@@ -55,8 +55,6 @@ public class Test {
         String s = issueToken(46);
         System.out.println(s);
 
-        ForDecode decode = decode(s);
-        System.out.println(decode);
 //        String a = IssueAndDecodeToken.issueToken(5);
 //        System.out.println(a);
 //        ForDecode b=IssueAndDecodeToken.decode(a);
@@ -90,7 +88,7 @@ public class Test {
         Calendar calendar=new GregorianCalendar();
         Date dateIssue= calendar.getTime();
         calendar.add(Calendar.MINUTE, 5);
-        Date dateExpire = new Date(new Date().getTime() - 1000 * 5);
+        Date dateExpire = new Date(new Date().getTime() + 1000 * 60 * 60 * 10);
         String token = JWT.create()
                 .withIssuer("jupiter")
                 .withClaim("userId", userId)

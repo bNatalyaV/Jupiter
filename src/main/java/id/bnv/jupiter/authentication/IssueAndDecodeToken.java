@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 
 public class IssueAndDecodeToken {
 
-    static Algorithm algorithm = Algorithm.HMAC256("secretwordjupiter");
+    static Algorithm algorithm = Algorithm.HMAC256("jupiter");//secret word
 
     public String issueToken(int userId) {
         Calendar calendar=new GregorianCalendar();

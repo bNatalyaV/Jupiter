@@ -6,10 +6,7 @@ import id.bnv.jupiter.pojo.Provider;
 import id.bnv.jupiter.pojo.ProviderAdress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,7 +22,9 @@ public class ProviderAdressController {
     }
     @GetMapping(value = "/{cityId}/{providerId}")
     public ResponseEntity getAdresses(@PathVariable int cityId,
-                                      @PathVariable int providerId) {
+                                      @PathVariable int providerId,
+                                      @RequestHeader(value = "token") String token,
+                                      @RequestHeader(value = "userid") String userId) {
         List<Adress> list=providerAdressDao.getAdress(cityId, providerId);
         return ResponseEntity.ok(list);
     }

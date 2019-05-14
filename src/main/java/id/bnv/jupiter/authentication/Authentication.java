@@ -34,7 +34,7 @@ public class Authentication extends Dao {
             if (checkLoginOfUser(user.login)) {
                 User newUser = new User(user.email, user.login, user.password);
                 create(newUser);
-                String tokenForNewUse=issueAndDecodeToken.issueToken(user.id);
+                String tokenForNewUse=issueAndDecodeToken.issueToken(newUser.id);
                 UserAndToken userAndToken=new UserAndToken(tokenForNewUse, newUser);
 
                 return userAndToken;

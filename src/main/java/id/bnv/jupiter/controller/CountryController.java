@@ -5,10 +5,8 @@ import id.bnv.jupiter.pojo.Country;
 import id.bnv.jupiter.pojo.Region;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -20,12 +18,16 @@ public class CountryController {
     public CountryController(CountryDao countryDao) {this.countryDao=countryDao;}
 
     @GetMapping(value = "/all")
-    public ResponseEntity getAllCountry() {
+    public ResponseEntity getAllCountry(
+            @RequestHeader(value = "token") String token,
+            @RequestHeader(value = "userid") String userId) {
         List<Country> countryList= countryDao.getAllCountries();
         return ResponseEntity.ok(countryList);
     }
     @GetMapping(value = "/{idcountry}")
-    public ResponseEntity getRegionsByCountryId(@PathVariable (value="idcountry") int countryId ) {
+    public ResponseEntity getRegionsByCountryId(@PathVariable (value="idcountry") int countryId,
+                                                @RequestHeader(value = "token") String token,
+                                                @RequestHeader(value = "userid") String userId) {
         List<Region> regionList=countryDao.getAllRegionsForCountry(countryId);
         return ResponseEntity.ok(regionList);
     }
