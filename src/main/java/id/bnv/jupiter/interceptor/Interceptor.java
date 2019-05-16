@@ -1,6 +1,7 @@
 package id.bnv.jupiter.interceptor;
 
 import id.bnv.jupiter.authentication.Authentication;
+import id.bnv.jupiter.authentication.Response;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +45,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
 
     private void addResponse(boolean isAuthenticated, HttpServletResponse response) throws Exception {
         if (!isAuthenticated) {
-            String responseToClient = "Not authenticated";
+            String responseToClient = "{\"response\" : \"Not authenticated\"}";
 
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write(responseToClient);

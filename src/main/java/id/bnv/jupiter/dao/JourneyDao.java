@@ -1,8 +1,10 @@
 package id.bnv.jupiter.dao;
 
+import id.bnv.jupiter.authentication.Response;
 import id.bnv.jupiter.pojo.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -23,7 +25,7 @@ public class JourneyDao extends Dao {
     public JourneyDao(SessionFactory sessionFactory, NumberDao numberDao, TarifDao tarifDao) {
         super(sessionFactory);
         this.numberDao = numberDao;
-        this.tarifDao=tarifDao;
+        this.tarifDao = tarifDao;
     }
 
     public Journey getJourney(int idJourney) {
@@ -39,6 +41,7 @@ public class JourneyDao extends Dao {
         List<Journey> journeys = queryForJourney.list();
         return journeys;
     }
+
     //Все journeys завершенные и не только, история переходов
     public List<FullInfoAboutTarif> getInfoAboutJourneys(int userId) {
         List<PhoneNumber> numbers = numberDao.getAllNumbersOfUser(userId);
@@ -60,51 +63,79 @@ public class JourneyDao extends Dao {
         return list;
     }
 
-    public String addJourney(int numberId, int tariffId) throws Exception {
+    public Response addJourney(int numberId, int tariffId) throws Exception {
+        Session session = getSession();
         PhoneNumber phoneNumber = getSession().get(PhoneNumber.class, numberId);
         Journey newJourney = new Journey(new Date(), numberId, phoneNumber.tarifId, tariffId);
         create(newJourney);
         JourneyTask journeyTask1 = new JourneyTask(newJourney.journeyId, 1, new Date());
         create(journeyTask1);
+        session.flush();
+        session.getTransaction().commit();
         Thread.sleep(2000);
+        session.beginTransaction();
         journeyTask1.taskfinish = new Date();
         update(journeyTask1);
+        session.flush();
+        session.getTransaction().commit();
+        Thread.sleep(2000);
+        session.beginTransaction();
         //add second task in 5 seconds
         JourneyTask journeyTask2 = new JourneyTask(newJourney.journeyId, 2, new Date());
         create(journeyTask2);
+        //    session.getTransaction().commit();
+        //  session.beginTransaction();
         if (phoneNumber.balance > 0) {
             journeyTask2.taskfinish = new Date();
-            return "{\"response\" : \"Ok\"}";
-        } else return "{\"response\" : \"Balance is less than zero\"}";
+            return new Response("OK", Response.Status.ok);
+        } else return new Response("Balance is less than zero", Response.Status.smthWrong);
     }
 
 
-    public void addTask2(int numberId, int tariffId, int journeyId) throws Exception{
-        Journey journey = getSession().get(Journey.class, journeyId);
-        JourneyTask journeyTask2= (JourneyTask) getSession()
+    public void addTask2(int numberId, int tariffId, int journeyId) throws Exception {
+        Session session = getSession();
+        Journey journey = session.get(Journey.class, journeyId);
+        JourneyTask journeyTask2 = (JourneyTask) getSession()
                 .createQuery("from JourneyTask jt where jt.journeyId=:journeyId and jt.taskId=:id ")
-                .setParameter("journeyId",journeyId)
+                .setParameter("journeyId", journeyId)
                 .setParameter("id", 2)
                 .list()
                 .get(0);
         if (journeyTask2.taskfinish == null) {
-            journeyTask2.taskfinish=new Date();
+            journeyTask2.taskfinish = new Date();
             update(journeyTask2);
         }
-        for (int i=3; i<7; i++) {
+        session.flush();
+        session.getTransaction().commit();
+        Thread.sleep(3000);
+
+        for (int i = 3; i < 7; i++) {
+            session.beginTransaction();
             JourneyTask journeyTask = new JourneyTask(journeyId, i, new Date());
             create(journeyTask);
             Thread.sleep(5000);
             journeyTask.taskfinish = new Date();
             update(journeyTask);
+            session.flush();
+            session.getTransaction().commit();
         }
-        journey.endDate=new Date();
-        journey.tarifId=tariffId;
-        PhoneNumber number=getSession().get(PhoneNumber.class, numberId);
-        number.tarifId=tariffId;
+        Thread.sleep(2000);
+        journey.endDate = new Date();
+        journey.tarifId = tariffId;
+        PhoneNumber number = session.get(PhoneNumber.class, numberId);
+        number.tarifId = tariffId;
+        session.beginTransaction();
+        update(journey);
         update(number);
     }
 
+    public List<JourneyTask> getJourneyTasksListByJourneyId(int journeyId){
+        List<JourneyTask> list=getSession()
+                .createQuery("from JourneyTask jt where jt.journeyId=:journeyId")
+                .setParameter("journeyId", journeyId)
+                .list();
+        return list;
+    }
 
     public List<NumberAndListJourneys> getTasksByUserId(int userId) {
         List<PhoneNumber> numbers = numberDao.getAllNumbersOfUser(userId);
@@ -114,10 +145,7 @@ public class JourneyDao extends Dao {
             List<Journey> journeys = getJourneysByNumberId(number.id);
             List<JourneyAndTasks> journeyAndTasksList = new ArrayList<>();
             for (Journey journey : journeys) {
-                List<JourneyTask> tasks = getSession()
-                        .createQuery("from JourneyTask jt where jt.journeyId=:journeyId")
-                        .setParameter("journeyId", journey.journeyId)
-                        .list();
+                List<JourneyTask> tasks = getJourneyTasksListByJourneyId(journey.journeyId);
                 for (FullInfoAboutTarif fullInfoAboutTarif : fullInfoAboutTarifList) {
                     if (fullInfoAboutTarif.numberId == number.id && fullInfoAboutTarif.journeyId == journey.journeyId) {
                         FullInfoAboutTarif fullInfoAboutTarif1 = fullInfoAboutTarif;
@@ -125,12 +153,11 @@ public class JourneyDao extends Dao {
                         journeyAndTasksList.add(journeyAndTasks);
                     }
                 }
+                list.add(new NumberAndListJourneys(number.id, journeyAndTasksList));
             }
-            list.add(new NumberAndListJourneys(number.id, journeyAndTasksList));
         }
         return list;
     }
-
 
 
     public List<PhoneNumber> getCompletedNumbers(int userId) {

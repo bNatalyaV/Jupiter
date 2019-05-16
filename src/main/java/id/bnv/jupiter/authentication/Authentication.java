@@ -39,9 +39,9 @@ public class Authentication extends Dao {
 
                 return userAndToken;
             } else
-                return "Login already existed";
+                return new Response("Login already existed", Response.Status.smthWrong);
         } else
-            return "Email already existed";
+            return new Response("Email already existed", Response.Status.smthWrong);
     }
 //проверка уникальности емаила
     public boolean checkEmailOfUser(String email) {
@@ -76,7 +76,7 @@ public class Authentication extends Dao {
             String token = issueAndDecodeToken.issueToken(userFromDB.id);
             UserAndToken userAndToken = new UserAndToken(token, userFromDB);
             return userAndToken;
-        } else return "Login or Password is incorrect";
+        } else return new Response("Login or Password is incorrect", Response.Status.smthWrong);
     }
 //если true, запрос проходит в метод
 // false - вернуть на страницу авторизации (2 api контролерра авторизации)
@@ -86,9 +86,4 @@ public class Authentication extends Dao {
             return true;
         else return false;
     }
-
-//    public boolean auth(String token) {
-//        User user = identifyUser(token);
-//        return (!user.equals(null)) ? true : false;
-//    }
 }

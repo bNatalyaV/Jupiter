@@ -25,7 +25,6 @@ public class UserController {
     public ResponseEntity getUserById(@PathVariable int id,
                                       @RequestHeader(value = "token") String token,
                                       @RequestHeader(value = "userid") String userId) {
-        //String a=token.getContent
         if (authentication.identifyUserByToken(token, Integer.parseInt(userId))) {
             User user = dao.getUser(id);
 
@@ -38,17 +37,6 @@ public class UserController {
         }
         else return ResponseEntity.badRequest().build();
     }
-
-//    @GetMapping(value = "/user")
-//    public ResponseEntity getUserByIdRequestParam(@RequestParam(value = "id") int id) {
-//        User user = dao.getUser(id);
-//
-//        if (user == null) {
-//            return ResponseEntity.badRequest().body("User not exist");
-//        }
-//
-//        return ResponseEntity.ok(user);
-//    }
 
     @GetMapping(value = "/users")
     public ResponseEntity getAllUsers(

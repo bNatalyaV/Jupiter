@@ -75,7 +75,7 @@ public class TarifController {
         FullInfoAboutTarif infoAboutTarif = dao.getFullInfoAboutTarif(numberId, nextTarifId);
         return ResponseEntity.ok(infoAboutTarif);
     }
-
+/////
     @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
     public ResponseEntity addOrUpdateTarif(@PathVariable(value = "idnumber") int idNumber,
                                            @PathVariable(value = "idtarif") int idTarif,

@@ -1,5 +1,7 @@
 package id.bnv.jupiter.controller;
 
+import id.bnv.jupiter.authentication.Authentication;
+import id.bnv.jupiter.authentication.Response;
 import id.bnv.jupiter.dao.JourneyDao;
 import id.bnv.jupiter.pojo.FullInfoAboutTarif;
 import id.bnv.jupiter.pojo.Journey;
@@ -16,10 +18,12 @@ import java.util.Set;
 @RequestMapping(value = "/journey")
 public class JourneyController {
     private final JourneyDao journeyDao;
+    private final Authentication authentication;
 
     @Autowired
-    public JourneyController(JourneyDao journeyDao) {
+    public JourneyController(JourneyDao journeyDao, Authentication authentication) {
         this.journeyDao = journeyDao;
+        this.authentication=authentication;
     }
 
     @GetMapping(value = "/{idjourney}")
@@ -62,8 +66,10 @@ public class JourneyController {
                                      @PathVariable int tariffId,
                                      @RequestHeader(value = "token") String token,
                                      @RequestHeader(value = "userid") String userId) throws Exception {
-        String response = journeyDao.addJourney(numberId, tariffId);
-        return ResponseEntity.ok(response);
+        if (authentication.identifyUserByToken(token, Integer.parseInt(userId))) {
+            Response response = journeyDao.addJourney(numberId, tariffId);
+            return ResponseEntity.ok(response);
+        } else return ResponseEntity.badRequest().build();
     }
 
     @PostMapping(value = "/continue/{numberId}/{tariffId}/{journeyId}")
@@ -72,8 +78,10 @@ public class JourneyController {
                                           @PathVariable int journeyId,
                                           @RequestHeader(value = "token") String token,
                                           @RequestHeader(value = "userid") String userId) throws Exception {
-        journeyDao.addTask2(numberId, tariffId, journeyId);
-        return ResponseEntity.ok("Journey was finished");
+        if (authentication.identifyUserByToken(token, Integer.parseInt(userId))) {
+            journeyDao.addTask2(numberId, tariffId, journeyId);
+            return ResponseEntity.ok("{\"response\" : \"Journey was finished\"}");
+        } else return ResponseEntity.badRequest().build();
     }
 
     @GetMapping(value = "/all/{userId}")

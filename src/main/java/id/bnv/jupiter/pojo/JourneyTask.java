@@ -13,11 +13,6 @@ public class JourneyTask implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "id")
-//    public int id;
     @Id
     @Column(name = "Journey_id")
     public int journeyId;

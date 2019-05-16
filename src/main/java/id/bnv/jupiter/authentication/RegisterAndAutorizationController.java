@@ -18,11 +18,17 @@ public class RegisterAndAutorizationController {
     @PostMapping(value = "/new")
     public ResponseEntity register(@RequestBody User user) {
         Object response = authentication.registerUser(user);
-        if (response.equals("Email already existed"))
-            return ResponseEntity.badRequest().body("Email already existed");
-        else if (response.equals("Login already existed"))
-            return ResponseEntity.badRequest().body("Login already existed");
-        else return ResponseEntity.ok(response);
+
+        if (response instanceof Response) {
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        return ResponseEntity.ok(response);
+//        if (response.equals("{\"Email already existed\"}"))
+//            return ResponseEntity.badRequest().body("{\"response\" : \"Email already existed\"}");
+//        else if (response.equals("{\"response\" : \"Login already existed\"}"))
+//            return ResponseEntity.badRequest().body( "{\"response\" : \"Login already existed\"}");
+//        else return ResponseEntity.ok(response);
     }
 
     // авторизация пользователя, вернуть токен+пользователь //done
@@ -30,14 +36,13 @@ public class RegisterAndAutorizationController {
     public ResponseEntity authenticateUser(@RequestBody User user) {
         try {
             Object response = authentication.identifyUserForAutorization(user.login, user.password);
-            if (response.equals("Login or Password is incorrect"))
-
-                return ResponseEntity.badRequest().body("Login or Password is incorrect");
+            if (response instanceof Response)
+                return ResponseEntity.badRequest().body(response);
 
             else return ResponseEntity.ok(response);
         } catch (Exception e) {
 
-            return ResponseEntity.badRequest().body("Error");
+            return ResponseEntity.badRequest().build();
 
         }
     }
