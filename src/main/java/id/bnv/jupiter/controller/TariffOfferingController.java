@@ -21,9 +21,7 @@ public class TariffOfferingController {
 
     // по тарифу список офферингов, offering price != null
     @GetMapping(value = "/{tariffId}")
-    public ResponseEntity getOffers(@PathVariable int tariffId,
-                                    @RequestHeader(value = "token") String token,
-                                    @RequestHeader(value = "userid") String userId) {
+    public ResponseEntity getOffers(@PathVariable int tariffId) {
         List<OffersAndAddOffers> list=tariffOfferingDao.getOffersAndAddOffers(tariffId);
 
         return ResponseEntity.ok(list);

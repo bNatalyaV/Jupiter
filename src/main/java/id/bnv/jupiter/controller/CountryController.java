@@ -18,16 +18,12 @@ public class CountryController {
     public CountryController(CountryDao countryDao) {this.countryDao=countryDao;}
 
     @GetMapping(value = "/all")
-    public ResponseEntity getAllCountry(
-            @RequestHeader(value = "token") String token,
-            @RequestHeader(value = "userid") String userId) {
+    public ResponseEntity getAllCountry(){
         List<Country> countryList= countryDao.getAllCountries();
         return ResponseEntity.ok(countryList);
     }
     @GetMapping(value = "/{idcountry}")
-    public ResponseEntity getRegionsByCountryId(@PathVariable (value="idcountry") int countryId,
-                                                @RequestHeader(value = "token") String token,
-                                                @RequestHeader(value = "userid") String userId) {
+    public ResponseEntity getRegionsByCountryId(@PathVariable (value="idcountry") int countryId) {
         List<Region> regionList=countryDao.getAllRegionsForCountry(countryId);
         return ResponseEntity.ok(regionList);
     }

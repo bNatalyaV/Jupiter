@@ -76,13 +76,13 @@ public class Authentication extends Dao {
             String token = issueAndDecodeToken.issueToken(userFromDB.id);
             UserAndToken userAndToken = new UserAndToken(token, userFromDB);
             return userAndToken;
-        } else return new Response("Login or Password is incorrect", Response.Status.smthWrong);
+        } else return new Response("Login or Password is incorrect",
+                Response.Status.smthWrong);
     }
-//если true, запрос проходит в метод
-// false - вернуть на страницу авторизации (2 api контролерра авторизации)
     public boolean identifyUserByToken(String token, int userId) {
         ForDecode idAndDates=issueAndDecodeToken.decode(token);
-        if (idAndDates.dateExpire.after(new GregorianCalendar().getTime()) && idAndDates.userId==userId)
+        if (idAndDates.dateExpire.after(new GregorianCalendar().getTime())
+                && idAndDates.userId==userId)
             return true;
         else return false;
     }

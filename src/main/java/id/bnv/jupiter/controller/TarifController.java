@@ -26,20 +26,6 @@ public class TarifController {
         this.numberDao = numberdao;
     }
 
-//    @GetMapping(value = "/")
-//    public ResponseEntity getTarifByNumber(@RequestHeader String token, PhoneNumber number) {
-//        if (auth(token)) {
-//            Tarif tarif = dao.getTarifByNumber(number);
-//            return ResponseEntity.ok(tarif);
-//        } else return ResponseEntity.badRequest().body("Not authorized");
-//    }
-
-//    @GetMapping(value = "/info/{tarifId}")
-//    public ResponseEntity getInfo(@PathVariable int tarifId) {
-//        TarifInfo tarifInfo = dao.getInfo(tarifId);
-//        return ResponseEntity.ok(tarifInfo);
-//    }
-
     @GetMapping(value = "/tariffname/{idprovider}")
     public ResponseEntity getTariffNameByProviderId(@PathVariable(value = "idprovider") int providerId,
                                                     @RequestHeader(value = "token") String token,
@@ -100,9 +86,7 @@ public class TarifController {
 
     // 9 For Vlad
     @GetMapping(value = "/price/{regionId}/{providerId}")
-    public ResponseEntity getTariffNameIdPrice(@PathVariable int regionId, @PathVariable int providerId,
-                                               @RequestHeader(value = "token") String token,
-                                               @RequestHeader(value = "userid") String userId) {
+    public ResponseEntity getTariffNameIdPrice(@PathVariable int regionId, @PathVariable int providerId) {
         List<TariffNameIdPrice> list=dao.getTariffNameIdPrice(regionId, providerId);
         return ResponseEntity.ok(list);
     }

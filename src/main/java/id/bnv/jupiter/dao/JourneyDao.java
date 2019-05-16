@@ -4,10 +4,8 @@ import id.bnv.jupiter.authentication.Response;
 import id.bnv.jupiter.pojo.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +39,18 @@ public class JourneyDao extends Dao {
         List<Journey> journeys = queryForJourney.list();
         return journeys;
     }
+    public FullInfoAboutTarif getFullInfoByJourneyId(int journeyId){
+        Journey journey=getSession().get(Journey.class, journeyId);
+        PhoneNumber number=getSession().get(PhoneNumber.class, journey.phoneNumberId);
+        Tarif oldTarif = getSession().get(Tarif.class, journey.oldTariffId);
+        Provider oldProvider = getSession().get(Provider.class, oldTarif.tarifInfoId.providerId);
+        Tarif newTarif = getSession().get(Tarif.class, journey.tarifId);
+        Provider newProvider = getSession().get(Provider.class, newTarif.tarifInfoId.providerId);
+        return new FullInfoAboutTarif(oldProvider.providerName, oldTarif.tarifInfoId.tarifName,
+                number.phoneNumber, journey.startDate,
+                newProvider.providerName, newTarif.tarifInfoId.tarifName,
+                journey.journeyId, number.id, newTarif.tarifId, journey.endDate);
+    }
 
     //Все journeys завершенные и не только, история переходов
     public List<FullInfoAboutTarif> getInfoAboutJourneys(int userId) {
@@ -50,14 +60,12 @@ public class JourneyDao extends Dao {
                 numbers) {
             List<Journey> journeys = getJourneysByNumberId(number.id);
             for (Journey journey : journeys) {
-                Tarif oldTarif = getSession().get(Tarif.class, journey.oldTariffId);
-                Provider oldProvider = getSession().get(Provider.class, oldTarif.tarifInfoId.providerId);
-                Tarif newTarif = getSession().get(Tarif.class, journey.tarifId);
-                Provider newProvider = getSession().get(Provider.class, newTarif.tarifInfoId.providerId);
-                list.add(new FullInfoAboutTarif(oldProvider.providerName, oldTarif.tarifInfoId.tarifName,
-                        number.phoneNumber, journey.startDate,
-                        newProvider.providerName, newTarif.tarifInfoId.tarifName,
-                        journey.journeyId, number.id, newTarif.tarifId, journey.endDate));
+                FullInfoAboutTarif fullInfoAboutTarif=getFullInfoByJourneyId(journey.journeyId);
+//                Tarif oldTarif = getSession().get(Tarif.class, journey.oldTariffId);
+//                Provider oldProvider = getSession().get(Provider.class, oldTarif.tarifInfoId.providerId);
+//                Tarif newTarif = getSession().get(Tarif.class, journey.tarifId);
+//                Provider newProvider = getSession().get(Provider.class, newTarif.tarifInfoId.providerId);
+                list.add(fullInfoAboutTarif);
             }
         }
         return list;
@@ -137,23 +145,26 @@ public class JourneyDao extends Dao {
         return list;
     }
 
-    public List<NumberAndListJourneys> getTasksByUserId(int userId) {
+    public String getNameOfTask(int taskId) {
+        Task task=getSession().get(Task.class, taskId);
+        return task.taskName;
+
+    }
+
+    public List<JourneysAndTasks> getTasksByUserId(int userId) {
         List<PhoneNumber> numbers = numberDao.getAllNumbersOfUser(userId);
-        List<FullInfoAboutTarif> fullInfoAboutTarifList = getInfoAboutJourneys(userId);
-        List<NumberAndListJourneys> list = new ArrayList<>();
+        List<JourneysAndTasks> list = new ArrayList<>();
         for (PhoneNumber number : numbers) {
             List<Journey> journeys = getJourneysByNumberId(number.id);
-            List<JourneyAndTasks> journeyAndTasksList = new ArrayList<>();
             for (Journey journey : journeys) {
                 List<JourneyTask> tasks = getJourneyTasksListByJourneyId(journey.journeyId);
-                for (FullInfoAboutTarif fullInfoAboutTarif : fullInfoAboutTarifList) {
-                    if (fullInfoAboutTarif.numberId == number.id && fullInfoAboutTarif.journeyId == journey.journeyId) {
-                        FullInfoAboutTarif fullInfoAboutTarif1 = fullInfoAboutTarif;
-                        JourneyAndTasks journeyAndTasks = new JourneyAndTasks(fullInfoAboutTarif1, tasks);
-                        journeyAndTasksList.add(journeyAndTasks);
-                    }
+                List<InfoAboutTasks> infoAboutTasksList=new ArrayList<>();
+                FullInfoAboutTarif fullInfoAboutTarif1=getFullInfoByJourneyId(journey.journeyId);
+                for (JourneyTask journeyTask:tasks) {
+                    String nameOfTask=getNameOfTask(journeyTask.taskId);
+                    infoAboutTasksList.add(new InfoAboutTasks(nameOfTask, journeyTask));
                 }
-                list.add(new NumberAndListJourneys(number.id, journeyAndTasksList));
+                list.add(new JourneysAndTasks(fullInfoAboutTarif1, infoAboutTasksList));
             }
         }
         return list;

@@ -5,14 +5,13 @@ import id.bnv.jupiter.authentication.Response;
 import id.bnv.jupiter.dao.JourneyDao;
 import id.bnv.jupiter.pojo.FullInfoAboutTarif;
 import id.bnv.jupiter.pojo.Journey;
-import id.bnv.jupiter.pojo.NumberAndListJourneys;
+import id.bnv.jupiter.pojo.JourneysAndTasks;
 import id.bnv.jupiter.pojo.PhoneNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/journey")
@@ -24,6 +23,18 @@ public class JourneyController {
     public JourneyController(JourneyDao journeyDao, Authentication authentication) {
         this.journeyDao = journeyDao;
         this.authentication=authentication;
+    }
+
+    @PostMapping(value = "/new/{numberId}/{tariffId}")
+    public ResponseEntity addJourney(@PathVariable int numberId,
+                                     @PathVariable int tariffId,
+                                     @RequestHeader(value = "token") String token,
+                                     @RequestHeader(value = "userid") String userId) throws Exception {
+        if (authentication.identifyUserByToken(token, Integer.parseInt(userId))) {
+            Response response = journeyDao.addJourney(numberId, tariffId);
+            return ResponseEntity.ok(response);
+        } else return ResponseEntity.badRequest()
+                .body(new Response("Not autorized", Response.Status.smthWrong));
     }
 
     @GetMapping(value = "/{idjourney}")
@@ -58,20 +69,6 @@ public class JourneyController {
         return ResponseEntity.ok(list);
     }
 
-    ////////////////////////////////////////
-    /////////////////////////////
-    ///////////////////
-    @PostMapping(value = "/new/{numberId}/{tariffId}")
-    public ResponseEntity addJourney(@PathVariable int numberId,
-                                     @PathVariable int tariffId,
-                                     @RequestHeader(value = "token") String token,
-                                     @RequestHeader(value = "userid") String userId) throws Exception {
-        if (authentication.identifyUserByToken(token, Integer.parseInt(userId))) {
-            Response response = journeyDao.addJourney(numberId, tariffId);
-            return ResponseEntity.ok(response);
-        } else return ResponseEntity.badRequest().build();
-    }
-
     @PostMapping(value = "/continue/{numberId}/{tariffId}/{journeyId}")
     public ResponseEntity continueJourney(@PathVariable int numberId,
                                           @PathVariable int tariffId,
@@ -92,10 +89,10 @@ public class JourneyController {
         return ResponseEntity.ok(list);
     }
     @GetMapping(value = "/alltasks/{userId}")
-    public ResponseEntity getAllTasksByUserId(@PathVariable int userId,
-                                              @RequestHeader(value = "token") String token,
-                                              @RequestHeader(value = "userid") String userid) {
-        List<NumberAndListJourneys> list=journeyDao.getTasksByUserId(userId);
+    public ResponseEntity getAllTasksByUserId(@PathVariable int userId){
+                                             // @RequestHeader(value = "token") String token,
+                                             // @RequestHeader(value = "userid") String userid) {
+        List<JourneysAndTasks> list=journeyDao.getTasksByUserId(userId);
         return ResponseEntity.ok(list);
     }
 }
