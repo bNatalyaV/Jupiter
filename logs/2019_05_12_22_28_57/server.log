@@ -1,0 +1,4 @@
+[05-12 22:37:11,884, 496558] org.hibernate.engine.jdbc.spi.SqlExceptionHelper SQL Error: 0, SQLState: 08S01
+[05-12 22:37:11,901, 496575] org.hibernate.engine.jdbc.spi.SqlExceptionHelper Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.

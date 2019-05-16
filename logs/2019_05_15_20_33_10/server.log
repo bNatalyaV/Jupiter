@@ -1,0 +1,5 @@
+[05-15 20:38:14,923, 307254] org.hibernate.engine.jdbc.spi.SqlExceptionHelper SQL Error: 0, SQLState: 08S01
+[05-15 20:38:14,936, 307267] org.hibernate.engine.jdbc.spi.SqlExceptionHelper Communications link failure
+
+The last packet successfully received from the server was 288 625 milliseconds ago.  The last packet sent successfully to the server was 288 710 milliseconds ago.
+[05-15 20:38:14,952, 307283] org.hibernate.internal.ExceptionMapperStandardImpl HHH000346: Error during managed flush [org.hibernate.exception.JDBCConnectionException: could not execute statement]

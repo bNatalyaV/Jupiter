@@ -1,0 +1,1 @@
+[05-14 22:20:03,165, 6382] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator HHH000342: Could not obtain connection to query metadata : Access denied for user 'root'@'localhost' (using password: YES)

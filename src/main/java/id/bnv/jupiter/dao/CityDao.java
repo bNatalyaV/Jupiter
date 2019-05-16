@@ -22,7 +22,7 @@ public class CityDao extends Dao {
 
     public List<City> getAllCity() {
         Session session = getSession();
-        List<City> cityList = session.createQuery("from Country").list();
+        List<City> cityList = session.createQuery("from City").list();
 
         return cityList;
     }

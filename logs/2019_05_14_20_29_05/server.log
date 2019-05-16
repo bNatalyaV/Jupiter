@@ -1,0 +1,3 @@
+[05-14 20:29:08,619, 5500] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator HHH000342: Could not obtain connection to query metadata : Access denied for user 'root'@'localhost' (using password: YES)
+[05-14 20:29:09,367, 6248] org.hibernate.engine.jdbc.spi.SqlExceptionHelper SQL Error: 1045, SQLState: 28000
+[05-14 20:29:09,367, 6248] org.hibernate.engine.jdbc.spi.SqlExceptionHelper Access denied for user 'root'@'localhost' (using password: YES)

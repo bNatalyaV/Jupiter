@@ -1,0 +1,7 @@
+[05-10 20:43:54,076, 9114] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator HHH000342: Could not obtain connection to query metadata : Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+[05-10 20:43:57,373, 12411] org.hibernate.engine.jdbc.spi.SqlExceptionHelper SQL Error: 0, SQLState: 08S01
+[05-10 20:43:57,373, 12411] org.hibernate.engine.jdbc.spi.SqlExceptionHelper Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.

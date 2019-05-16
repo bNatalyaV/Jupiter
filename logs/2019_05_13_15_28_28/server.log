@@ -1,0 +1,1 @@
+[05-13 15:29:38,712, 94482] org.hibernate.internal.ExceptionMapperStandardImpl HHH000346: Error during managed flush [org.hibernate.HibernateException: Duplicate identifier in table for: [id.bnv.jupiter.pojo.JourneyTask#39]]

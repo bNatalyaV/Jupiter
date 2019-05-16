@@ -1,0 +1,3 @@
+[05-15 21:30:32,739, 164601] org.hibernate.engine.jdbc.spi.SqlExceptionHelper SQL Error: 1205, SQLState: 40001
+[05-15 21:30:32,754, 164616] org.hibernate.engine.jdbc.spi.SqlExceptionHelper Lock wait timeout exceeded; try restarting transaction
+[05-15 21:30:32,763, 164625] org.hibernate.internal.ExceptionMapperStandardImpl HHH000346: Error during managed flush [could not execute statement]

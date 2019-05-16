@@ -1,0 +1,2 @@
+[05-15 21:15:53,258, 161547] org.hibernate.engine.jdbc.spi.SqlExceptionHelper SQL Error: 1205, SQLState: 40001
+[05-15 21:15:53,266, 161555] org.hibernate.engine.jdbc.spi.SqlExceptionHelper Lock wait timeout exceeded; try restarting transaction

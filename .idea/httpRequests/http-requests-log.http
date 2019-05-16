@@ -1,3 +1,328 @@
+GET http://localhost:8080/city/all
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-16T085837.200.json
+
+###
+
+POST http://localhost:8080/journey/new/1/85
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T100452.401.txt
+
+###
+
+POST http://localhost:8080/journey/continue/1/9/111
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T093419.200.txt
+
+###
+
+POST http://localhost:8080/journey/new/1/9/
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T093330.200.txt
+
+###
+
+POST http://localhost:8080/journey/continue/1/71/110
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T093033.500.json
+
+###
+
+POST http://localhost:8080/journey/new/1/71/
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T092822.200.txt
+
+###
+
+POST http://localhost:8080/journey/continue/1/85/109
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T092544.500.json
+
+###
+
+POST http://localhost:8080/journey/new/1/85/109
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T092406.404.json
+
+###
+
+POST http://localhost:8080/journey/new/1/85
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T092248.200.txt
+
+###
+
+POST http://localhost:8080/journey/continue/1/71/108
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T091553.500.json
+
+###
+
+POST http://localhost:8080/journey/comtinue/1/71/108
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T091417.404.json
+
+###
+
+POST http://localhost:8080/journey/new/1/71
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T090527.200.txt
+
+###
+
+POST http://localhost:8080/journey/new/1/71
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T090441.500.json
+
+###
+
+POST http://localhost:8080/journey/new/1/71
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T085832.500.json
+
+###
+
+POST http://localhost:8080/journey/new/1/71
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T084614.200.txt
+
+###
+
+POST http://localhost:8080/journey/new/1/71
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T084232.500.json
+
+###
+
+POST http://localhost:8080/journey/new/1/71
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T084138.500.json
+
+###
+
+POST http://localhost:8080/journey/new/1/71
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T083815.500.json
+
+###
+
+POST http://localhost:8080/journey/new/1/71
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T083256.500.html
+
+###
+
+GET http://localhost:8080/journey/alltasks/46
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T022335.200.json
+
+###
+
+POST http://localhost:8080/journey/new/44/23
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T124531.200.txt
+
+###
+
+POST http://localhost:8080/journey/new/44/23
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T124017.500.json
+
+###
+
+POST http://localhost:8080/journey/new/44/23
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T123852.500.json
+
+###
+
+POST http://localhost:8080/journey/new/44/23
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T123723.500.json
+
+###
+
+POST http://localhost:8080/journey/new/44/23
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlRXhwaXJlIjoxNTU3ODk4NzA5LCJpc3MiOiJqdXBpdGVyIiwidXNlcklkIjo0NiwiZGF0ZUlzc3VlIjoxNTU3ODYyNzA5fQ.TmlY8syEDfxI7rZ67GcHrVN8w0KL8MEZd7cNTJoIjp4
+userid: 46
+
+{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
+
+<> 2019-05-15T122415.500.json
+
+###
+
 POST http://localhost:8080/journey/new/44/23
 Accept: */*
 Cache-Control: no-cache
@@ -318,301 +643,6 @@ userid: 123
 {   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
 
 <> 2019-05-12T105153.500.json
-
-###
-
-POST http://localhost:8080/journey/continue/39/85/27
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-12T105104.500.html
-
-###
-
-POST http://localhost:8080/journey/continue/39/85/27
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-12T105009.500.json
-
-###
-
-POST http://localhost:8080/journey/continue/39/85/27
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-12T104910.500.json
-
-###
-
-POST http://localhost:8080/journey/continue/39/85/27
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-12T104827.500.json
-
-###
-
-POST http://localhost:8080/journey/new/39/85
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-12T104604.200.txt
-
-###
-
-POST http://localhost:8080/journey/new/39/85
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-12T104006.500.json
-
-###
-
-POST http://localhost:8080/journey/new/39/85
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-12T103827.500.json
-
-###
-
-POST http://localhost:8080/journey/new/39/85
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-12T103712.500.json
-
-###
-
-GET http://localhost:8080/journey/completedjourneys/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-12T075917.200.json
-
-###
-
-GET http://localhost:8080/user/user/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-11T084458.500.json
-
-###
-
-GET http://localhost:8080/user/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-token: sda
-userid: 123
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-11T084448.404.json
-
-###
-
-GET http://localhost:8080/journey/uncompleted/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-11T035343.500.json
-
-###
-
-GET http://localhost:8080/journey/completed/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-11T033414.200.json
-
-###
-
-GET http://localhost:8080/journey/completed/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-11T025054.500.json
-
-###
-
-GET http://localhost:8080/journey/completed/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-11T025009.500.json
-
-###
-
-GET http://localhost:8080/journey/completed/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-10T103851.500.json
-
-###
-
-GET http://localhost:8080/journey/completed/1
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-10T103759.500.json
-
-###
-
-POST http://localhost:8080/journey/new/34/71
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-10T100857.200.json
-
-###
-
-PUT http://localhost:8080/journey/new/34/71
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-10T100848.405.json
-
-###
-
-PUT http://localhost:8080/authentication/signin
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70" }
-
-<> 2019-05-10T094822.200.json
-
-###
-
-PUT http://localhost:8080/authentication/signin
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "202cb962ac59075b964b07152d234b70 " }
-
-<> 2019-05-10T094803.400.txt
-
-###
-
-PUT http://localhost:8080/authentication/signin
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "vlad", "password": "123" }
-
-<> 2019-05-10T094615.400.txt
-
-###
-
-PUT http://localhost:8080/authentication/signin?login=Mary Poppins&password=000000
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "strginggggg", "password": "string56" }
-
-<> 2019-05-10T084437.200.json
-
-###
-
-PUT http://localhost:8080/authentication/signin?login=Mary Poppins&password=000000
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "strginggggg", "password": "string56" }
-
-###
-
-PUT http://localhost:8080/authentication/signin?login=Mary Poppins&password=000000
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{   "login": "strginggggg", "password": "string56" }
-
-<> 2019-05-10T083531.400.txt
 
 ###
 

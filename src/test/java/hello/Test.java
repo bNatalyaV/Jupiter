@@ -21,7 +21,6 @@ import static jdk.nashorn.internal.objects.NativeMath.random;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        // nohup java -jar jupiter.jar
 
         String user = "root";
         String password = "Bilfo_05";
@@ -52,75 +51,9 @@ public class Test {
 
     @org.junit.Test
     public void test() {
-        String s = issueToken(46);
-        System.out.println(s);
 
-//        String a = IssueAndDecodeToken.issueToken(5);
-//        System.out.println(a);
-//        ForDecode b=IssueAndDecodeToken.decode(a);
-//        System.out.println(b.userId+"\n"+b.dateIssue+"\n"+b.dateExpire);
-//        double a;
-//        for (int i = 0; i < 5; i++) {
-//            Random random=new Random();
-//            a = -100 + random.nextInt(200);
-//            System.out.println(a);
-//        }
-    }
+}
 
-    public  ForDecode decode(String token) {
-        JWTVerifier verifier = JWT.require(algorithm)
-                .withIssuer("jupiter")
-                .build();
-
-        DecodedJWT verify = verifier.verify(token);
-        Claim userId=verify.getClaim("userId");
-        Claim dateIssue=verify.getClaim("dateIssue");
-        Claim dateExpire=verify.getClaim("dateExpire");
-        ForDecode forDecode=new ForDecode(userId.asInt(), dateIssue.asDate(),
-                dateExpire.asDate());
-
-        return forDecode;
-    }
-
-    static Algorithm algorithm = Algorithm.HMAC256("jupiter");
-
-    public String issueToken(int userId) {
-        Calendar calendar=new GregorianCalendar();
-        Date dateIssue= calendar.getTime();
-        calendar.add(Calendar.MINUTE, 5);
-        Date dateExpire = new Date(new Date().getTime() + 1000 * 60 * 60 * 10);
-        String token = JWT.create()
-                .withIssuer("jupiter")
-                .withClaim("userId", userId)
-                .withClaim("dateIssue", dateIssue)
-                .withClaim("dateExpire", dateExpire)
-                .sign(algorithm);
-        return token;
-    }
-
-//        for (String s: new String[]{"natasha","ne","nata","sha","a","b"}) {
-//            System.out.println(str.hashCode());
-//            str += s;
-//
-//        }
-//    }
-//
-//    public Integer a() {
-//        return 5;
-//    }
-
-//    Algorithm algo;
-//
-//    @org.junit.Test
-//    public void test() {
-//        String s = issueToken("id_bnv123@icloud.com");
-//        System.out.println(s);
-//
-//        String email = decode(s);
-//        System.out.println(email);
-//
-//    }
-//
 //    //https://github.com/auth0/java-jwt
 //    private String issueToken(String email) {
 //        algo = Algorithm.HMAC256("natasha");
