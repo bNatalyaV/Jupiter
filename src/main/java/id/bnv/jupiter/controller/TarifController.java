@@ -61,7 +61,8 @@ public class TarifController {
         FullInfoAboutTarif infoAboutTarif = dao.getFullInfoAboutTarif(numberId, nextTarifId);
         return ResponseEntity.ok(infoAboutTarif);
     }
-/////
+
+    /////
     @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
     public ResponseEntity addOrUpdateTarif(@PathVariable(value = "idnumber") int idNumber,
                                            @PathVariable(value = "idtarif") int idTarif,
@@ -70,8 +71,6 @@ public class TarifController {
         PhoneNumber phoneNumber = numberDao.getNumberById(idNumber);
         if (dao.hasTariff(phoneNumber)) {
             changeTarif(phoneNumber.id, idTarif, token, userId);
-//            if (dao.changeTariff(idNumber, idTarif)==true) return ResponseEntity.ok("Tariff was changed");
-//            else return ResponseEntity.badRequest().body("Balance is less than zero");
         } else dao.addTarifToNumber(idNumber, idTarif);
         return ResponseEntity.ok().build();
     }
@@ -87,7 +86,7 @@ public class TarifController {
     // 9 For Vlad
     @GetMapping(value = "/price/{regionId}/{providerId}")
     public ResponseEntity getTariffNameIdPrice(@PathVariable int regionId, @PathVariable int providerId) {
-        List<TariffNameIdPrice> list=dao.getTariffNameIdPrice(regionId, providerId);
+        List<TariffNameIdPrice> list = dao.getTariffNameIdPrice(regionId, providerId);
         return ResponseEntity.ok(list);
     }
 }

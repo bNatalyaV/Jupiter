@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     public UserController(UserDao dao, Authentication authentication) {
         this.dao = dao;
-        this.authentication=authentication;
+        this.authentication = authentication;
     }
 
     @GetMapping(value = "/user/{id}")
@@ -34,8 +34,7 @@ public class UserController {
             }
 
             return ResponseEntity.ok(user);
-        }
-        else return ResponseEntity.badRequest().build();
+        } else return ResponseEntity.badRequest().build();
     }
 
     @GetMapping(value = "/users")

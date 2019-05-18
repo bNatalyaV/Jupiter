@@ -17,15 +17,16 @@ public class ProviderAdressController {
     private final ProviderAdressDao providerAdressDao;
 
     @Autowired
-    public ProviderAdressController (ProviderAdressDao providerAdressDao) {
-        this.providerAdressDao=providerAdressDao;
+    public ProviderAdressController(ProviderAdressDao providerAdressDao) {
+        this.providerAdressDao = providerAdressDao;
     }
+
     @GetMapping(value = "/{cityId}/{providerId}")
     public ResponseEntity getAdresses(@PathVariable int cityId,
                                       @PathVariable int providerId,
                                       @RequestHeader(value = "token") String token,
                                       @RequestHeader(value = "userid") String userId) {
-        List<Adress> list=providerAdressDao.getAdress(cityId, providerId);
+        List<Adress> list = providerAdressDao.getAdress(cityId, providerId);
         return ResponseEntity.ok(list);
     }
 }

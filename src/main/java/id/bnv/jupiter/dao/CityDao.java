@@ -13,6 +13,7 @@ import java.util.List;
 
 @Repository
 @Transactional
+@SuppressWarnings({"unchecked"})
 public class CityDao extends Dao {
 
     @Autowired

@@ -118,7 +118,7 @@ public class TarifDao extends Dao {
         Date date = new Date();
         Tarif newTarif = session.get(Tarif.class, nextTarifId);
         Provider newProvider = getProviderByTarifId(nextTarifId);
-        List<Journey> journeys=getJourney(numberId);
+        List<Journey> journeys = getJourney(numberId);
         FullInfoAboutTarif info = new FullInfoAboutTarif(
                 currentProvider.providerName,
                 currentTarif.tarifInfoId.tarifName,
@@ -141,7 +141,7 @@ public class TarifDao extends Dao {
             Tarif tarif = tarifIterator.next();
             if (tarif.tarifInfoId.providerId != providerId) tarifIterator.remove();
         }
-        for (Tarif tarif: tarifs) {
+        for (Tarif tarif : tarifs) {
             tariffNameIdPriceList.add(
                     new TariffNameIdPrice(
                             tarif.tarifId,

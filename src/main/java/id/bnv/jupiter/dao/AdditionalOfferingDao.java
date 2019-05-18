@@ -28,7 +28,7 @@ public class AdditionalOfferingDao extends Dao {
 
     // DIFFICULT METHOD FOR VLAD
     public List<TariffAndOfferings> getAdditionalOfferings(int regionId, int providerId) {
-        List<TariffAndOfferings> list=new ArrayList<>();
+        List<TariffAndOfferings> list = new ArrayList<>();
         Query queryForTarif = getSession().createQuery("from Tarif u where u.regionId=:regionId");
         queryForTarif.setParameter("regionId", regionId);
         List<Tarif> tariffs = queryForTarif.list();
@@ -56,32 +56,4 @@ public class AdditionalOfferingDao extends Dao {
         }
         return list;
     }
-//
-//        for (TarifInfo tarifInfo : tarifInfoList) {
-//            Query queryForTarif = getSession().createQuery("from Tarif u where u.tarifInfoId=:tarifInfoId");
-//            queryForTarif.setParameter("tarifInfoId", tarifInfo.tarifInfoId);
-//            List<Tarif> tarifs = queryForTarif.list();
-//            Tarif tarif = tarifs.get(0);
-////             TariffAndOfferings tariffAndOfferings=new TariffAndOfferings(tarif.tarifId,
-////                    tarifInfo.tarifName, tarif.tarifPrice);
-//            Query queryForTariffOfferings = getSession().createQuery("from TarifOffering u where u.tarifId=:tarifId");
-//            queryForTariffOfferings.setParameter("tarifId", tarif.tarifId);
-//            List<TarifOffering> offerings = queryForTariffOfferings.list();
-//            List<TariffOfferings> tariffOfferingsList = new ArrayList<>();
-//            for (int i = 0; i < offerings.size(); i++) {
-//                TarifOffering offering = offerings.get(i);// осталось щф нэйм и деск
-//                Query queryForAdditionalOfferings = getSession().createQuery("from AdditionalOffering u where u.offeringId=:offeringId");
-//                queryForAdditionalOfferings.setParameter("offeringId", offering.offeringId);
-//                List<AdditionalOffering> additionalOfferings = queryForAdditionalOfferings.list();
-//                AdditionalOffering additionalOffering = additionalOfferings.get(0);
-//                TariffOfferings tariffOfferings = new TariffOfferings(offering.tarifId, offering.offeringId,
-//                        offering.offeringPrice, offering.quantity, additionalOffering.offeringName,
-//                        additionalOffering.offeringDesc);
-//                tariffOfferingsList.add(tariffOfferings);
-//            }
-//            TariffAndOfferings tariffAndOfferingsForOneTariff = new TariffAndOfferings(tarif.tarifId,
-//                    tarifInfo.tarifName, tarif.tarifPrice, tariffOfferingsList);
-//            list.add(tariffAndOfferingsForOneTariff);
-//        }
-//        return list;
 }

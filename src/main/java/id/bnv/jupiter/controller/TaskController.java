@@ -12,12 +12,14 @@ public class TaskController {
     private final TaskDao taskDao;
 
     @Autowired
-    public TaskController(TaskDao taskDao) {this.taskDao=taskDao;}
+    public TaskController(TaskDao taskDao) {
+        this.taskDao = taskDao;
+    }
 
     @GetMapping(value = "/{idTask}")
-    public ResponseEntity getTask (@PathVariable int idTask,
-                                   @RequestHeader(value = "token") String token,
-                                   @RequestHeader(value = "userid") String userId) {
+    public ResponseEntity getTask(@PathVariable int idTask,
+                                  @RequestHeader(value = "token") String token,
+                                  @RequestHeader(value = "userid") String userId) {
         Task task = taskDao.getTask(idTask);
         return ResponseEntity.ok(task);
     }

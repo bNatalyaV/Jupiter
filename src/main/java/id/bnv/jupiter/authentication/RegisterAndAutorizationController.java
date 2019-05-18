@@ -1,7 +1,10 @@
 package id.bnv.jupiter.authentication;
 
+import id.bnv.jupiter.Exeption.UserExeptions;
 import id.bnv.jupiter.pojo.User;
+import id.bnv.jupiter.pojo.UserAndToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,18 +20,12 @@ public class RegisterAndAutorizationController {
 
     @PostMapping(value = "/new")
     public ResponseEntity register(@RequestBody User user) {
-        Object response = authentication.registerUser(user);
-
-        if (response instanceof Response) {
-            return ResponseEntity.badRequest().body(response);
-        }
-
-        return ResponseEntity.ok(response);
-//        if (response.equals("{\"Email already existed\"}"))
-//            return ResponseEntity.badRequest().body("{\"response\" : \"Email already existed\"}");
-//        else if (response.equals("{\"response\" : \"Login already existed\"}"))
-//            return ResponseEntity.badRequest().body( "{\"response\" : \"Login already existed\"}");
-//        else return ResponseEntity.ok(response);
+//        try {
+            UserAndToken response = authentication.registerUser(user);
+            return ResponseEntity.ok(response);
+//        } catch (UserExeptions userExeptions) {
+//            return ResponseEntity.badRequest().body(userExeptions);
+//        }
     }
 
     // авторизация пользователя, вернуть токен+пользователь //done

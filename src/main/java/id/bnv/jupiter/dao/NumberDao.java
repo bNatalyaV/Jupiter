@@ -42,8 +42,8 @@ public class NumberDao extends Dao {
     }
 
     public PhoneNumber addNumber(PhoneNumber number) {
-        Random random=new Random();
-        number.balance = -100+random.nextInt(200);
+        Random random = new Random();
+        number.balance = -100 + random.nextInt(200);
         create(number);
         return number;
     }

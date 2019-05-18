@@ -16,13 +16,13 @@ public class TariffOfferingController {
 
     @Autowired
     public TariffOfferingController(TariffOfferingDao tariffOfferingDao) {
-        this.tariffOfferingDao=tariffOfferingDao;
+        this.tariffOfferingDao = tariffOfferingDao;
     }
 
     // по тарифу список офферингов, offering price != null
     @GetMapping(value = "/{tariffId}")
     public ResponseEntity getOffers(@PathVariable int tariffId) {
-        List<OffersAndAddOffers> list=tariffOfferingDao.getOffersAndAddOffers(tariffId);
+        List<OffersAndAddOffers> list = tariffOfferingDao.getOffersAndAddOffers(tariffId);
 
         return ResponseEntity.ok(list);
     }
@@ -31,7 +31,7 @@ public class TariffOfferingController {
     public ResponseEntity getOfferNamePriceQuantity(@PathVariable int tariffId,
                                                     @RequestHeader(value = "token") String token,
                                                     @RequestHeader(value = "userid") String userId) {
-        List<OffersAndAddOffers> list=tariffOfferingDao.getOfferNamePriceQuantity(tariffId);
+        List<OffersAndAddOffers> list = tariffOfferingDao.getOfferNamePriceQuantity(tariffId);
 
         return ResponseEntity.ok(list);
     }

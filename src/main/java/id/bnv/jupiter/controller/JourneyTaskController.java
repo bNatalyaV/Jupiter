@@ -15,12 +15,13 @@ public class JourneyTaskController {
     public JourneyTaskController(JourneyTaskDao journeyTaskDao) {
         this.journeyTaskDao = journeyTaskDao;
     }
+
     @GetMapping(value = "/{idjourneytask}")
-    public ResponseEntity getJourneyTask(@PathVariable (value = "idjourneytask")
-                                                     int idJourneyTask,
+    public ResponseEntity getJourneyTask(@PathVariable(value = "idjourneytask")
+                                                 int idJourneyTask,
                                          @RequestHeader(value = "token") String token,
                                          @RequestHeader(value = "userid") String userId) {
-        JourneyTask journeyTask=journeyTaskDao.getJourneyTask(idJourneyTask);
+        JourneyTask journeyTask = journeyTaskDao.getJourneyTask(idJourneyTask);
         return ResponseEntity.ok(journeyTask);
     }
 

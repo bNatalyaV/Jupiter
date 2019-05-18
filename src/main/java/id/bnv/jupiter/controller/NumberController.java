@@ -31,15 +31,14 @@ public class NumberController {
     }
 
     //передача номера строкой, создать номер в бд
-    @PutMapping(value = "/addnumber")
+    @PostMapping(value = "/addnumber")
     public ResponseEntity addNewNumber(@RequestBody PhoneNumber number,
                                        @RequestHeader(value = "token") String token,
                                        @RequestHeader(value = "userid") String userId) {
         try {
-            PhoneNumber newNumber =dao.addNumber(number);
+            PhoneNumber newNumber = dao.addNumber(number);
             return ResponseEntity.ok(newNumber);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e);
         }
 

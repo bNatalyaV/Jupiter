@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Repository
 @Transactional
+@SuppressWarnings({"unchecked"})
 public class JourneyDao extends Dao {
     private final NumberDao numberDao;
     private final TarifDao tarifDao;
@@ -39,9 +40,10 @@ public class JourneyDao extends Dao {
         List<Journey> journeys = queryForJourney.list();
         return journeys;
     }
-    public FullInfoAboutTarif getFullInfoByJourneyId(int journeyId){
-        Journey journey=getSession().get(Journey.class, journeyId);
-        PhoneNumber number=getSession().get(PhoneNumber.class, journey.phoneNumberId);
+
+    public FullInfoAboutTarif getFullInfoByJourneyId(int journeyId) {
+        Journey journey = getSession().get(Journey.class, journeyId);
+        PhoneNumber number = getSession().get(PhoneNumber.class, journey.phoneNumberId);
         Tarif oldTarif = getSession().get(Tarif.class, journey.oldTariffId);
         Provider oldProvider = getSession().get(Provider.class, oldTarif.tarifInfoId.providerId);
         Tarif newTarif = getSession().get(Tarif.class, journey.tarifId);
@@ -60,7 +62,7 @@ public class JourneyDao extends Dao {
                 numbers) {
             List<Journey> journeys = getJourneysByNumberId(number.id);
             for (Journey journey : journeys) {
-                FullInfoAboutTarif fullInfoAboutTarif=getFullInfoByJourneyId(journey.journeyId);
+                FullInfoAboutTarif fullInfoAboutTarif = getFullInfoByJourneyId(journey.journeyId);
 //                Tarif oldTarif = getSession().get(Tarif.class, journey.oldTariffId);
 //                Provider oldProvider = getSession().get(Provider.class, oldTarif.tarifInfoId.providerId);
 //                Tarif newTarif = getSession().get(Tarif.class, journey.tarifId);
@@ -76,6 +78,7 @@ public class JourneyDao extends Dao {
         PhoneNumber phoneNumber = getSession().get(PhoneNumber.class, numberId);
         Journey newJourney = new Journey(new Date(), numberId, phoneNumber.tarifId, tariffId);
         create(newJourney);
+
         JourneyTask journeyTask1 = new JourneyTask(newJourney.journeyId, 1, new Date());
         create(journeyTask1);
         session.flush();
@@ -137,8 +140,8 @@ public class JourneyDao extends Dao {
         update(number);
     }
 
-    public List<JourneyTask> getJourneyTasksListByJourneyId(int journeyId){
-        List<JourneyTask> list=getSession()
+    public List<JourneyTask> getJourneyTasksListByJourneyId(int journeyId) {
+        List<JourneyTask> list = getSession()
                 .createQuery("from JourneyTask jt where jt.journeyId=:journeyId")
                 .setParameter("journeyId", journeyId)
                 .list();
@@ -146,7 +149,7 @@ public class JourneyDao extends Dao {
     }
 
     public String getNameOfTask(int taskId) {
-        Task task=getSession().get(Task.class, taskId);
+        Task task = getSession().get(Task.class, taskId);
         return task.taskName;
 
     }
@@ -158,10 +161,10 @@ public class JourneyDao extends Dao {
             List<Journey> journeys = getJourneysByNumberId(number.id);
             for (Journey journey : journeys) {
                 List<JourneyTask> tasks = getJourneyTasksListByJourneyId(journey.journeyId);
-                List<InfoAboutTasks> infoAboutTasksList=new ArrayList<>();
-                FullInfoAboutTarif fullInfoAboutTarif1=getFullInfoByJourneyId(journey.journeyId);
-                for (JourneyTask journeyTask:tasks) {
-                    String nameOfTask=getNameOfTask(journeyTask.taskId);
+                List<InfoAboutTasks> infoAboutTasksList = new ArrayList<>();
+                FullInfoAboutTarif fullInfoAboutTarif1 = getFullInfoByJourneyId(journey.journeyId);
+                for (JourneyTask journeyTask : tasks) {
+                    String nameOfTask = getNameOfTask(journeyTask.taskId);
                     infoAboutTasksList.add(new InfoAboutTasks(nameOfTask, journeyTask));
                 }
                 list.add(new JourneysAndTasks(fullInfoAboutTarif1, infoAboutTasksList));
@@ -173,16 +176,6 @@ public class JourneyDao extends Dao {
 
     public List<PhoneNumber> getCompletedNumbers(int userId) {
         List<PhoneNumber> numbers = numberDao.getAllNumbersOfUser(userId);
-//        Iterator<PhoneNumber> phoneNumberIterator = numbers.iterator();
-//        while (phoneNumberIterator.hasNext()) {
-//            PhoneNumber number1 = phoneNumberIterator.next();
-//            List<Journey> journeysForNumber = getJourneysByNumberId(number1.id);
-//            for (Journey journey : journeysForNumber) {
-//                if (journey.endDate == null && journey.startDate != null)
-//                    phoneNumberIterator.remove();
-//            }
-//        }
-
         List<PhoneNumber> n = numbers.stream()
                 .filter(new Predicate<PhoneNumber>() {
                     @Override
@@ -213,7 +206,7 @@ public class JourneyDao extends Dao {
 
     public List<PhoneNumber> getUncompletedJourneys(int userId) {
         List<PhoneNumber> numbers = numberDao.getAllNumbersOfUser(userId);
-        List<PhoneNumber> uncompletedNumbers = new ArrayList<>();
+         List<PhoneNumber> uncompletedNumbers = new ArrayList<>();
         for (PhoneNumber number : numbers) {
             List<Journey> journeys = getJourneysByNumberId(number.id);
             for (Journey journey : journeys) {

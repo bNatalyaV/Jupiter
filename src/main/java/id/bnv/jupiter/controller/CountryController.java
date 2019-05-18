@@ -15,16 +15,19 @@ public class CountryController {
     private final CountryDao countryDao;
 
     @Autowired
-    public CountryController(CountryDao countryDao) {this.countryDao=countryDao;}
+    public CountryController(CountryDao countryDao) {
+        this.countryDao = countryDao;
+    }
 
     @GetMapping(value = "/all")
-    public ResponseEntity getAllCountry(){
-        List<Country> countryList= countryDao.getAllCountries();
+    public ResponseEntity getAllCountry() {
+        List<Country> countryList = countryDao.getAllCountries();
         return ResponseEntity.ok(countryList);
     }
+
     @GetMapping(value = "/{idcountry}")
-    public ResponseEntity getRegionsByCountryId(@PathVariable (value="idcountry") int countryId) {
-        List<Region> regionList=countryDao.getAllRegionsForCountry(countryId);
+    public ResponseEntity getRegionsByCountryId(@PathVariable(value = "idcountry") int countryId) {
+        List<Region> regionList = countryDao.getAllRegionsForCountry(countryId);
         return ResponseEntity.ok(regionList);
     }
 }

@@ -22,7 +22,7 @@ public class JourneyController {
     @Autowired
     public JourneyController(JourneyDao journeyDao, Authentication authentication) {
         this.journeyDao = journeyDao;
-        this.authentication=authentication;
+        this.authentication = authentication;
     }
 
     @PostMapping(value = "/new/{numberId}/{tariffId}")
@@ -88,11 +88,12 @@ public class JourneyController {
         List<FullInfoAboutTarif> list = journeyDao.getInfoAboutJourneys(userId);
         return ResponseEntity.ok(list);
     }
+
     @GetMapping(value = "/alltasks/{userId}")
-    public ResponseEntity getAllTasksByUserId(@PathVariable int userId){
-                                             // @RequestHeader(value = "token") String token,
-                                             // @RequestHeader(value = "userid") String userid) {
-        List<JourneysAndTasks> list=journeyDao.getTasksByUserId(userId);
+    public ResponseEntity getAllTasksByUserId(@PathVariable int userId) {
+        // @RequestHeader(value = "token") String token,
+        // @RequestHeader(value = "userid") String userid) {
+        List<JourneysAndTasks> list = journeyDao.getTasksByUserId(userId);
         return ResponseEntity.ok(list);
     }
 }

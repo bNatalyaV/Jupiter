@@ -8,13 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public class JourneyTaskDao extends Dao{
+public class JourneyTaskDao extends Dao {
 
     @Autowired
-    public JourneyTaskDao(SessionFactory sessionFactory) {super(sessionFactory);}
+    public JourneyTaskDao(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     public JourneyTask getJourneyTask(int id) {
-        JourneyTask journeyTask=getSession().get(JourneyTask.class, id);
+        JourneyTask journeyTask = getSession().get(JourneyTask.class, id);
         return journeyTask;
     }
 }

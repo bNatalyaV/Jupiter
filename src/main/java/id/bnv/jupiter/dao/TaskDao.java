@@ -9,13 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public class TaskDao extends Dao{
+public class TaskDao extends Dao {
 
     @Autowired
-    public TaskDao (SessionFactory sessionFactory) {super(sessionFactory);}
+    public TaskDao(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     public Task getTask(int id) {
-        Task task=getSession().get(Task.class, id);
+        Task task = getSession().get(Task.class, id);
         return task;
     }
 }

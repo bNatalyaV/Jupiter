@@ -14,13 +14,15 @@ public class CityController {
     private final CityDao cityDao;
 
     @Autowired
-    public CityController(CityDao cityDao) {this.cityDao=cityDao;}
+    public CityController(CityDao cityDao) {
+        this.cityDao = cityDao;
+    }
 
     @GetMapping(value = "/all")
     public ResponseEntity getAllCity(
             @RequestHeader(value = "token") String token,
             @RequestHeader(value = "userid") String userId) {
-        List<City> cityList= cityDao.getAllCity();
+        List<City> cityList = cityDao.getAllCity();
         return ResponseEntity.ok(cityList);
     }
 
@@ -28,7 +30,7 @@ public class CityController {
     public ResponseEntity getCitiesByRegionId(@PathVariable int regionId,
                                               @RequestHeader(value = "token") String token,
                                               @RequestHeader(value = "userid") String userId) {
-        List<City> list=cityDao.getCityByRegionId(regionId);
+        List<City> list = cityDao.getCityByRegionId(regionId);
         return ResponseEntity.ok(list);
     }
 }
