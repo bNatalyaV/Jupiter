@@ -1,6 +1,6 @@
 package id.bnv.jupiter.dao;
 
-import id.bnv.jupiter.Exeption.UserException;
+import id.bnv.jupiter.exception.UserException;
 import id.bnv.jupiter.pojo.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,35 +10,31 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Repository
 @Transactional
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings("unchecked")
 public class JourneyDao extends Dao {
     private final NumberDao numberDao;
-    private final TarifDao tarifDao;
 
     @Autowired
-    public JourneyDao(SessionFactory sessionFactory, NumberDao numberDao, TarifDao tarifDao) {
+    public JourneyDao(SessionFactory sessionFactory, NumberDao numberDao) {
         super(sessionFactory);
+
         this.numberDao = numberDao;
-        this.tarifDao = tarifDao;
     }
 
     public Journey getJourney(int idJourney) {
         Session session = getSession();
-        Journey journey = session.get(Journey.class, idJourney);
-        return journey;
+        return session.get(Journey.class, idJourney);
     }
 
     public List<Journey> getJourneysByNumberId(int numberId) {
         Query queryForJourney = getSession()
                 .createQuery("from Journey j where j.phoneNumberId=:phoneNumberId")
                 .setParameter("phoneNumberId", numberId);
-        List<Journey> journeys = queryForJourney.list();
-        return journeys;
+        return (List<Journey>) queryForJourney.list();
     }
 
     public FullInfoAboutTarif getFullInfoByJourneyId(int journeyId) {
@@ -120,7 +116,7 @@ public class JourneyDao extends Dao {
         } else throw new UserException("Balance is less than zero");
     }
 
-    public void addTaskFrom2To6(int numberId, int tariffId, int journeyId) throws Exception {
+    public void addTasksFromSecondToSix(int numberId, int tariffId, int journeyId) throws Exception {
         Session session = getSession();
         Journey journey = session.get(Journey.class, journeyId);
         JourneyTask journeyTask2 = (JourneyTask) getSession()
@@ -178,20 +174,16 @@ public class JourneyDao extends Dao {
 
     public List<PhoneNumber> getCompletedNumbers(int userId) {
         List<PhoneNumber> numbers = numberDao.getAllNumbersOfUser(userId);
-        List<PhoneNumber> n = numbers.stream()
-                .filter(new Predicate<PhoneNumber>() {
-                    @Override
-                    public boolean test(PhoneNumber phoneNumber) {
-                        List<Journey> journeysByNumberId = getJourneysByNumberId(phoneNumber.id);
-                        for (Journey journey : journeysByNumberId) {
-                            if (journey.endDate == null && journey.startDate != null)
-                                return false;
-                        }
-                        return true;
-                    }
-                }).collect(Collectors.toList());
 
-        return n;
+        return numbers.stream()
+                .filter(phoneNumber -> {
+                    List<Journey> journeysByNumberId = getJourneysByNumberId(phoneNumber.id);
+                    for (Journey journey : journeysByNumberId) {
+                        if (journey.endDate == null && journey.startDate != null)
+                            return false;
+                    }
+                    return true;
+                }).collect(Collectors.toList());
     }
 
     public List<Journey> getCompletedJourneys(int userId) {

@@ -1,49 +1,29 @@
 package id.bnv.jupiter.controller;
 
-import id.bnv.jupiter.authentication.Authentication;
+import id.bnv.jupiter.exception.UserException;
 import id.bnv.jupiter.dao.UserDao;
 import id.bnv.jupiter.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
     private final UserDao dao;
-    private final Authentication authentication;
 
     @Autowired
-    public UserController(UserDao dao, Authentication authentication) {
+    public UserController(UserDao dao) {
         this.dao = dao;
-        this.authentication = authentication;
     }
 
     @GetMapping(value = "/user/{id}")
     public ResponseEntity getUserById(@PathVariable int id,
                                       @RequestHeader(value = "token") String token,
                                       @RequestHeader(value = "userid") String userId) {
-        if (authentication.identifyUserByToken(token, Integer.parseInt(userId))) {
-            User user = dao.getUser(id);
+        User user = dao.getUser(id);
 
-
-            if (user == null) {
-                return ResponseEntity.badRequest().body("User not exist");
-            }
-
-            return ResponseEntity.ok(user);
-        } else return ResponseEntity.badRequest().build();
-    }
-
-    @GetMapping(value = "/users")
-    public ResponseEntity getAllUsers(
-            @RequestHeader(value = "token") String token,
-            @RequestHeader(value = "userid") String userId) {
-        List<User> users = dao.getAllUsers();
-
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping(value = "/user")
@@ -59,6 +39,15 @@ public class UserController {
     public ResponseEntity updateUser(@RequestBody User user,
                                      @RequestHeader(value = "token") String token,
                                      @RequestHeader(value = "userid") String userId) {
+        boolean isEmailAlreadyExist = dao.checkEmailExist(user.email, user.id);
+        if (isEmailAlreadyExist) throw new UserException("email already exist");
+
+        boolean isLoginAlreadyExist = dao.checkLoginExist(user.login, user.id);
+        if (isLoginAlreadyExist) throw new UserException("login already exist");
+
+        boolean isPassportAlreadyExist = dao.checkPassportExist(user.passport, user.id);
+        if (isPassportAlreadyExist) throw new UserException("passport already exist");
+
         dao.update(user);
 
         return ResponseEntity.ok(user);
@@ -73,22 +62,4 @@ public class UserController {
 
         return ResponseEntity.ok().build();
     }
-
-//    @PostMapping(value = "/user/enter")
-//    public ResponseEntity login(User user) {
-//        String email = user.email;
-//        String password = user.password;
-//
-//        User user1 = dao.getUser(email);
-//
-//        if (user1 == null) {
-//            return ResponseEntity.badRequest().body("no user with this email exist");
-//        }
-//
-//        if (user1.password.equals(password)) {
-//            return ResponseEntity.ok(user1);
-//        }
-//
-//        return ResponseEntity.status(401).body("password is wrong");
-//    }
 }

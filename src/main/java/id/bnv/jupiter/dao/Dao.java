@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-@SuppressWarnings({"unchecked"})
 public class Dao {
     private final SessionFactory sessionFactory;
 
@@ -22,8 +21,7 @@ public class Dao {
     }
 
     public void create(Object object) {
-        Session session = getSession();
-        session.save(object);
+        getSession().save(object);
     }
 
     public void update(Object object) {

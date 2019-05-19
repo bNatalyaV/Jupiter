@@ -1,18 +1,17 @@
-package id.bnv.jupiter.Exeption;
+package id.bnv.jupiter.exception;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
 @JsonIgnoreProperties({"cause", "stackTrace", "localizedMessage", "message", "suppressed"})
-public class UserException extends JupiterExeptions implements Serializable {
+public class JupiterExeption extends RuntimeException implements Serializable {
 
     @JsonProperty("response")
     public String response;
 
-    public UserException(String message) {
+    public JupiterExeption(String message) {
         super(message);
 
         response = message;

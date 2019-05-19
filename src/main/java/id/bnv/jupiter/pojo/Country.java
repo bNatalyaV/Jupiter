@@ -1,10 +1,7 @@
 package id.bnv.jupiter.pojo;
 
-import org.hibernate.annotations.JoinColumnOrFormula;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name = "country")
@@ -20,5 +17,6 @@ public class Country implements Serializable {
     public String countryName;
 
     public Country() {
+
     }
 }

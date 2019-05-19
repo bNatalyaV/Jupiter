@@ -1,4 +1,4 @@
-package id.bnv.jupiter;
+package id.bnv.jupiter.config;
 
 import id.bnv.jupiter.authentication.Authentication;
 import id.bnv.jupiter.interceptor.Interceptor;

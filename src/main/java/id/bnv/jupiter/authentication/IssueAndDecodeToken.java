@@ -13,23 +13,22 @@ import java.util.GregorianCalendar;
 
 public class IssueAndDecodeToken {
 
-    private static Algorithm algorithm = Algorithm.HMAC256("jupiter");//secret word
+    private static Algorithm algorithm = Algorithm.HMAC256("jupiter");
 
-    public String issueToken(int userId) {
+    String issueToken(int userId) {
         Calendar calendar = new GregorianCalendar();
         Date dateIssue = calendar.getTime();
         calendar.add(Calendar.MINUTE, 5);
         Date dateExpire = calendar.getTime();
-        String token = JWT.create()
+        return JWT.create()
                 .withIssuer("jupiter")
                 .withClaim("userId", userId)
                 .withClaim("dateIssue", dateIssue)
                 .withClaim("dateExpire", dateExpire)
                 .sign(algorithm);
-        return token;
     }
 
-    public ForDecode decode(String token) {
+    ForDecode decode(String token) {
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer("jupiter")
                 .build();
@@ -38,9 +37,11 @@ public class IssueAndDecodeToken {
         Claim userId = verify.getClaim("userId");
         Claim dateIssue = verify.getClaim("dateIssue");
         Claim dateExpire = verify.getClaim("dateExpire");
-        ForDecode forDecode = new ForDecode(userId.asInt(), dateIssue.asDate(),
-                dateExpire.asDate());
 
-        return forDecode;
+        return new ForDecode(
+                userId.asInt(),
+                dateIssue.asDate(),
+                dateExpire.asDate()
+        );
     }
 }

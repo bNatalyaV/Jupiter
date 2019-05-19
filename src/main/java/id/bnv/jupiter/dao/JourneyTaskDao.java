@@ -16,7 +16,6 @@ public class JourneyTaskDao extends Dao {
     }
 
     public JourneyTask getJourneyTask(int id) {
-        JourneyTask journeyTask = getSession().get(JourneyTask.class, id);
-        return journeyTask;
+        return getSession().get(JourneyTask.class, id);
     }
 }

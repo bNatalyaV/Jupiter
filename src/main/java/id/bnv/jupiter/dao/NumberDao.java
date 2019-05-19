@@ -15,6 +15,7 @@ import java.util.Random;
 
 @Repository
 @Transactional
+@SuppressWarnings("unchecked")
 public class NumberDao extends Dao {
 
     @Autowired
@@ -25,20 +26,17 @@ public class NumberDao extends Dao {
     public List<PhoneNumber> getAllNumbersOfUser(int userId) {
         Query query = getSession().createQuery("from PhoneNumber u where u.userId=:userId");
         query.setParameter("userId", userId);
-        List<PhoneNumber> phoneNumbers = query.list();
-        return phoneNumbers;
+        return (List<PhoneNumber>) query.list();
     }
 
     public PhoneNumber getNumberById(int id) {
-        PhoneNumber phoneNumber = getSession().get(PhoneNumber.class, id);
-        return phoneNumber;
+        return getSession().get(PhoneNumber.class, id);
     }
 
     public List<PhoneNumber> getNumberByUserId(int userId) {
         Query query = getSession().createQuery("from PhoneNumber u where u.userId=:userId");
         query.setParameter("userId", userId);
-        List<PhoneNumber> list = query.list();
-        return list;
+        return (List<PhoneNumber>) query.list();
     }
 
     public PhoneNumber addNumber(PhoneNumber number) {
@@ -54,7 +52,6 @@ public class NumberDao extends Dao {
         return number;
     }
 
-    //7request
     public InfoAboutNumber getInfoAboutNumberByNumberId(int numberId) {
         Session session = getSession();
         PhoneNumber phoneNumber = session.get(PhoneNumber.class, numberId);
@@ -68,12 +65,11 @@ public class NumberDao extends Dao {
         return infoAboutNumber;
     }
 
-    // vk request
     public List<FullInfoAboutNumber> getFullInfoAboutNumber(int userId) {
         List<PhoneNumber> phoneNumbers = getNumberByUserId(userId);
         List<FullInfoAboutNumber> list = new ArrayList<>();
         Session session = getSession();
-        for (PhoneNumber number : phoneNumbers) {
+        for (PhoneNumber number: phoneNumbers) {
             Tarif tarif = session.get(Tarif.class, number.tarifId);
             Region region = session.get(Region.class, tarif.regionId);
             Country country = session.get(Country.class, region.countryId);
@@ -92,5 +88,13 @@ public class NumberDao extends Dao {
             list.add(info);
         }
         return list;
+    }
+
+    public boolean isNumberAlreadyExist(PhoneNumber number) {
+        return !getSession()
+                .createQuery("from PhoneNumber p where p.phoneNumber = :number")
+                .setParameter("number", number.phoneNumber)
+                .list()
+                .isEmpty();
     }
 }

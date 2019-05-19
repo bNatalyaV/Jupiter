@@ -1,10 +1,9 @@
-package id.bnv.jupiter.security;
+package id.bnv.jupiter.config;
 
+import id.bnv.jupiter.security.AuthProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,12 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 @ComponentScan("id.bnv.jupiter.security")
-public class Security extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthProvider provider;
 
     @Autowired
-    public Security(AuthProvider provider) {
+    public SecurityConfig(AuthProvider provider) {
         this.provider = provider;
     }
 
@@ -29,19 +28,6 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
-
-//        http.formLogin()
-//                .loginProcessingUrl("/j_security")
-//                .usernameParameter("j_username")
-//                .passwordParameter("j_password");
-
-//        http.antMatcher("/v1/user").
-
         http.anonymous().and().csrf().disable();
-//        http//.authorizeRequests()
-//                .anyRequest()
-//                .authenticated()
-//                .and().httpBasic();
     }
 }

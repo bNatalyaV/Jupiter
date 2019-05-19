@@ -48,32 +48,4 @@ public class Test {
             }
         }
     }
-
-    @org.junit.Test
-    public void test() {
-
 }
-
-//    //https://github.com/auth0/java-jwt
-//    private String issueToken(String email) {
-//        algo = Algorithm.HMAC256("natasha");
-//        String token = JWT.create()
-//                .withIssuer("me")
-//                .withClaim("email", email)
-//                .sign(algo);
-//        return token;
-//    }
-//
-//    private String decode(String token) {
-//        JWTVerifier verifier = JWT.require(algo)
-//                .withIssuer("me")
-//                //  .acceptExpiresAt(5)
-//                .build();
-//
-//        DecodedJWT verify = verifier.verify(token);
-//
-//        Claim email = verify.getClaim("email");
-//
-//        return email.asString();
-//    }
-    }

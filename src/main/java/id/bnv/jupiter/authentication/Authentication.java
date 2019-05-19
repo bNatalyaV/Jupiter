@@ -1,88 +1,49 @@
 package id.bnv.jupiter.authentication;
 
-import id.bnv.jupiter.Exeption.UserException;
-import id.bnv.jupiter.dao.Dao;
+import id.bnv.jupiter.exception.UserException;
+import id.bnv.jupiter.dao.UserDao;
 import id.bnv.jupiter.pojo.ForDecode;
 import id.bnv.jupiter.pojo.User;
 import id.bnv.jupiter.pojo.UserAndToken;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Component;
 
 import java.util.GregorianCalendar;
-import java.util.List;
 
-
-@Repository
-@Transactional
-public class Authentication extends Dao {
+@Component
+public class Authentication {
     private final IssueAndDecodeToken issueAndDecodeToken;
+    private final UserDao userDao;
 
     @Autowired
-    public Authentication(SessionFactory sessionFactory, IssueAndDecodeToken iADT) {
-        super(sessionFactory);
-        issueAndDecodeToken = iADT;
+    public Authentication(IssueAndDecodeToken iADT, UserDao userDao) {
+        this.issueAndDecodeToken = iADT;
+        this.userDao = userDao;
     }
 
-    //проверка данных,
-// регистрация нового пользователя,
-// добавление в базу,
-// вернуть токен+пользователя
-    public UserAndToken registerUser(User user) {
-        if (checkEmailOfUser(user.email)) {
-            if (checkLoginOfUser(user.login)) {
-                User newUser = new User(user.email, user.login, user.password);
-                create(newUser);
-                String tokenForNewUse = issueAndDecodeToken.issueToken(newUser.id);
-                UserAndToken userAndToken = new UserAndToken(tokenForNewUse, newUser);
+    UserAndToken registerUser(User user) {
+        if (userDao.checkEmailExist(user.email, 0)) throw new UserException("email exist");
+        if (userDao.checkLoginExist(user.login, 0)) throw new UserException("login exist");
 
-                return userAndToken;
-            } else
-                throw new UserException("Login already exists");//Response("Login already exists", Response.Status.smthWrong);
-        } else
-            throw new UserException("Email already exists");//Response("Email already exists", Response.Status.smthWrong);
+        User newUser = new User(user.email, user.login, user.password);
+
+        userDao.create(newUser);
+
+        String tokenForNewUse = issueAndDecodeToken.issueToken(newUser.id);
+        return new UserAndToken(tokenForNewUse, newUser);
     }
 
-    //проверка уникальности емаила
-    public boolean checkEmailOfUser(String email) {
-        Query queryForEmail = getSession()
-                .createQuery("from User u where u.email=:email")
-                .setParameter("email", email);
-        List<User> userListForEmail = queryForEmail.list();
-        if (userListForEmail.isEmpty())
-            return true;
-        else
-            return false;
-    }
+    UserAndToken identifyUserForAuthorization(String login, String password) {
+        User user = userDao.getUserByLogin(login);
 
-    public boolean checkLoginOfUser(String login) {
-        Query queryForLogin = getSession()
-                .createQuery("from User u where u.login=:login")
-                .setParameter("login", login);
-        List<User> userListForLogin = queryForLogin.list();
-        if (userListForLogin.isEmpty())
-            return true;
-        else
-            return false;
-    }
+        if (user == null) throw new UserException("Login not exist");
 
-    // for second request in Controller for authorization
-    public UserAndToken identifyUserForAutorization(String login, String password) {
-        Query query = getSession()
-                .createQuery("from User u where u.login=:login")
-                .setParameter("login", login);
-        List<User> list = query.list();
-        try {
-            User userFromDB = list.get(0);
-            if (userFromDB.password.equals(password)) {
-                String token = issueAndDecodeToken.issueToken(userFromDB.id);
-                return new UserAndToken(token, userFromDB);
-            } else throw new UserException("Login or Password is incorrect");
-        } catch (Exception e) {
-            throw new UserException(e.getMessage());
+        if (user.password.equals(password)) {
+            String token = issueAndDecodeToken.issueToken(user.id);
+            return new UserAndToken(token, user);
         }
+
+        throw new UserException("Login or Password is incorrect");
     }
 
     public boolean identifyUserByToken(String token, int userId) {

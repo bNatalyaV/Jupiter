@@ -2,6 +2,7 @@ package id.bnv.jupiter.pojo;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
 @Entity
 @Table(name = "additional_offering")
 public class AdditionalOffering implements Serializable {

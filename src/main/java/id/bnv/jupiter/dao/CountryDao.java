@@ -13,6 +13,7 @@ import java.util.List;
 
 @Repository
 @Transactional
+@SuppressWarnings("unchecked")
 public class CountryDao extends Dao {
 
     @Autowired
@@ -22,14 +23,12 @@ public class CountryDao extends Dao {
 
     public List<Country> getAllCountries() {
         Session session = getSession();
-        List<Country> countryList = session.createQuery("from Country").list();
-        return countryList;
+        return (List<Country>) session.createQuery("from Country").list();
     }
 
     public List<Region> getAllRegionsForCountry(int idCountry) {
         Query query = getSession().createQuery("from Region u where u.countryId=:countryId");
         query.setParameter("countryId", idCountry);
-        List<Region> regionList = query.list();
-        return regionList;
+        return (List<Region>) query.list();
     }
 }

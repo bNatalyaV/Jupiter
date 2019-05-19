@@ -17,7 +17,6 @@ public class TaskDao extends Dao {
     }
 
     public Task getTask(int id) {
-        Task task = getSession().get(Task.class, id);
-        return task;
+        return getSession().get(Task.class, id);
     }
 }

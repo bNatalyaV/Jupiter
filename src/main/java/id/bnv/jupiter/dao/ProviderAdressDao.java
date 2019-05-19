@@ -1,6 +1,5 @@
 package id.bnv.jupiter.dao;
 
-import com.mysql.cj.Query;
 import id.bnv.jupiter.pojo.Adress;
 import id.bnv.jupiter.pojo.ProviderAdress;
 import org.hibernate.SessionFactory;

@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/tariffoffers")
 public class TariffOfferingController {
-
     private final TariffOfferingDao tariffOfferingDao;
 
     @Autowired
@@ -19,7 +18,6 @@ public class TariffOfferingController {
         this.tariffOfferingDao = tariffOfferingDao;
     }
 
-    // по тарифу список офферингов, offering price != null
     @GetMapping(value = "/{tariffId}")
     public ResponseEntity getOffers(@PathVariable int tariffId) {
         List<OffersAndAddOffers> list = tariffOfferingDao.getOffersAndAddOffers(tariffId);
@@ -35,5 +33,4 @@ public class TariffOfferingController {
 
         return ResponseEntity.ok(list);
     }
-
 }

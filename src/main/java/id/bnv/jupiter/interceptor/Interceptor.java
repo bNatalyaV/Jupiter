@@ -1,12 +1,12 @@
 package id.bnv.jupiter.interceptor;
 
 import id.bnv.jupiter.authentication.Authentication;
-import id.bnv.jupiter.authentication.Response;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+// TODO: add logging
 public class Interceptor extends HandlerInterceptorAdapter {
     private final Authentication authentication;
 
@@ -20,34 +20,30 @@ public class Interceptor extends HandlerInterceptorAdapter {
                              Object handler) throws Exception {
         super.preHandle(request, response, handler);
 
-        if (request.getMethod().equals("OPTIONS")) {
-            return true;
-        }
-
         String servletPath = request.getRequestURL().toString();
 
-        if (servletPath.contains("/authentication")) {
-            return true;
-        }
-
-        if (servletPath.contains("swagger")) {
-            return true;
-        }
+        if (servletPath.contains("/authentication")) return true;
+        if (servletPath.contains("/country/")) return true;
+        if (servletPath.contains("/region/providersForRegion")) return true;
+        if (servletPath.contains("/tarif/price")) return true;
+        if (servletPath.contains("/tariffoffers")) return true;
+        if (servletPath.contains("swagger")) return true;
+        if (request.getMethod().equals("OPTIONS")) return true;
 
         String token = request.getHeader("token");
         String userid = request.getHeader("userid");
 
         try {
             boolean isAuthenticated = authentication.identifyUserByToken(token, Integer.parseInt(userid));
-            addResponse(isAuthenticated, response);
+            addResponseIfNeeded(isAuthenticated, response);
             return isAuthenticated;
         } catch (Exception e) {
-            addResponse(false, response);
+            addResponseIfNeeded(false, response);
             return false;
         }
     }
 
-    private void addResponse(boolean isAuthenticated, HttpServletResponse response) throws Exception {
+    private void addResponseIfNeeded(boolean isAuthenticated, HttpServletResponse response) throws Exception {
         if (!isAuthenticated) {
             String responseToClient = "{\"response\" : \"Not authenticated\"}";
 

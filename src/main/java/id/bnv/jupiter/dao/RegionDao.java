@@ -15,6 +15,7 @@ import java.util.Set;
 
 @Repository
 @Transactional
+@SuppressWarnings("unchecked")
 public class RegionDao extends Dao {
 
     @Autowired
@@ -24,8 +25,7 @@ public class RegionDao extends Dao {
 
     public List<Region> getAllRegions() {
         Session session = getSession();
-        List<Region> regionList = session.createQuery("from Region").list();
-        return regionList;
+        return (List<Region>) session.createQuery("from Region").list();
     }
 
     public Set<Provider> getAllProvidersByRegionId(int regionId) {
@@ -33,8 +33,7 @@ public class RegionDao extends Dao {
         query.setParameter("regionId", regionId);
         List<Tarif> tarifList = query.list();
         List<Provider> providers = new ArrayList<>();
-        for (int i = 0; i < tarifList.size(); i++) {
-            Tarif tarif = tarifList.get(i);
+        for (Tarif tarif : tarifList) {
             Query queryForProviderId = getSession().createQuery("from TarifInfo u where u.tarifInfoId=:tarifInfoId");
             queryForProviderId.setParameter("tarifInfoId", tarif.tarifInfoId.tarifInfoId);
             List<TarifInfo> tarifInfoList = queryForProviderId.list();

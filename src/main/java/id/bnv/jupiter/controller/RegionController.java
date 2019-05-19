@@ -31,7 +31,9 @@ public class RegionController {
     }
 
     @GetMapping(value = "/providersForRegion/{regionid}")
-    public ResponseEntity getProvidersForRegion(@PathVariable(value = "regionid") int idRegion) {
+    public ResponseEntity getProvidersForRegion(@PathVariable(value = "regionid") int idRegion,
+                                                @RequestHeader(value = "token") String token,
+                                                @RequestHeader(value = "userid") String userId) {
         Set<Provider> providers = dao.getAllProvidersByRegionId(idRegion);
         return ResponseEntity.ok(providers);
     }

@@ -3,7 +3,6 @@ package id.bnv.jupiter.dao;
 import id.bnv.jupiter.pojo.AdditionalOffering;
 import id.bnv.jupiter.pojo.OffersAndAddOffers;
 import id.bnv.jupiter.pojo.TarifOffering;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @Repository
 @Transactional
+@SuppressWarnings("unchecked")
 public class TariffOfferingDao extends Dao {
 
     @Autowired
@@ -60,5 +57,4 @@ public class TariffOfferingDao extends Dao {
         }
         return list;
     }
-
 }

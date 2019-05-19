@@ -1,6 +1,5 @@
 package id.bnv.jupiter.controller;
 
-import com.sun.xml.bind.v2.TODO;
 import id.bnv.jupiter.dao.NumberDao;
 import id.bnv.jupiter.dao.TarifDao;
 import id.bnv.jupiter.pojo.*;
@@ -8,20 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.Query;
-
 import java.util.List;
-
-//import static id.bnv.jupiter.authentication.Decoder.auth;
 
 @RestController
 @RequestMapping(value = "/tarif")
-public class TarifController {
+public class TariffController {
     private final TarifDao dao;
     private final NumberDao numberDao;
 
     @Autowired
-    public TarifController(TarifDao dao, NumberDao numberdao) {
+    public TariffController(TarifDao dao, NumberDao numberdao) {
         this.dao = dao;
         this.numberDao = numberdao;
     }
@@ -43,7 +38,6 @@ public class TarifController {
         return ResponseEntity.ok(tarif);
     }
 
-    //6 request
     @GetMapping(value = "/tariffoffering/{idoffering}")
     public ResponseEntity getTarifOfferingByOfferingId(@PathVariable(value = "idoffering") int offeringId,
                                                        @RequestHeader(value = "token") String token,
@@ -52,7 +46,6 @@ public class TarifController {
         return ResponseEntity.ok(tarifOffering);
     }
 
-    //vk request
     @GetMapping(value = "info/{idnumber}/{idnexttarif}")
     public ResponseEntity getFullInfoAboutTarif(@PathVariable(value = "idnumber") int numberId,
                                                 @PathVariable(value = "idnexttarif") int nextTarifId,
@@ -62,7 +55,6 @@ public class TarifController {
         return ResponseEntity.ok(infoAboutTarif);
     }
 
-    /////
     @PostMapping(value = "/tarif/{idnumber}/{idtarif}")
     public ResponseEntity addOrUpdateTarif(@PathVariable(value = "idnumber") int idNumber,
                                            @PathVariable(value = "idtarif") int idTarif,
@@ -83,7 +75,6 @@ public class TarifController {
         return ResponseEntity.ok().build();
     }
 
-    // 9 For Vlad
     @GetMapping(value = "/price/{regionId}/{providerId}")
     public ResponseEntity getTariffNameIdPrice(@PathVariable int regionId, @PathVariable int providerId) {
         List<TariffNameIdPrice> list = dao.getTariffNameIdPrice(regionId, providerId);

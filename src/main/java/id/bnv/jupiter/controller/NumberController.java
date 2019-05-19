@@ -1,5 +1,6 @@
 package id.bnv.jupiter.controller;
 
+import id.bnv.jupiter.exception.NumberException;
 import id.bnv.jupiter.dao.NumberDao;
 import id.bnv.jupiter.pojo.FullInfoAboutNumber;
 import id.bnv.jupiter.pojo.InfoAboutNumber;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//
 @RestController
 @RequestMapping(value = "/numbersinfo")
 public class NumberController {
@@ -30,26 +30,23 @@ public class NumberController {
         return ResponseEntity.ok(phoneNumbers);
     }
 
-    //передача номера строкой, создать номер в бд
     @PostMapping(value = "/addnumber")
     public ResponseEntity addNewNumber(@RequestBody PhoneNumber number,
                                        @RequestHeader(value = "token") String token,
                                        @RequestHeader(value = "userid") String userId) {
-        try {
-            PhoneNumber newNumber = dao.addNumber(number);
-            return ResponseEntity.ok(newNumber);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e);
-        }
+        boolean isNumberAlreadyExist = dao.isNumberAlreadyExist(number);
+        if (isNumberAlreadyExist) throw new NumberException("number already exist");
 
+        PhoneNumber newNumber = dao.addNumber(number);
+        return ResponseEntity.ok(newNumber);
     }
 
     @DeleteMapping(value = "/number")
     public ResponseEntity deleteNumber(User user, PhoneNumber number,
                                        @RequestHeader(value = "token") String token,
                                        @RequestHeader(value = "userid") String userId) {
-        dao.deleteNumber(user, number);
-        return ResponseEntity.ok(number);
+        PhoneNumber deleted = dao.deleteNumber(user, number);
+        return ResponseEntity.ok(deleted);
     }
 
     @GetMapping(value = "/info/{idnumber}")

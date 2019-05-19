@@ -1,4 +1,4 @@
-package id.bnv.jupiter.hibinitial;
+package id.bnv.jupiter.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

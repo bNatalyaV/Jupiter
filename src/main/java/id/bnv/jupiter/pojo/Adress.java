@@ -2,6 +2,7 @@ package id.bnv.jupiter.pojo;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
 @Entity
 @Table(name = "adress")
 public class Adress implements Serializable {
@@ -17,7 +18,6 @@ public class Adress implements Serializable {
     public String street;
     @Column(name = "Building")
     public String building;
-
 
     public Adress() {
     }

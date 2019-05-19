@@ -22,18 +22,18 @@ public class AdditionalOfferingController {
     }
 
     @GetMapping(value = "/offers")
-    public ResponseEntity getAllOfferings(
-            @RequestHeader(value = "token") String token,
-            @RequestHeader(value = "userid") String userId) {
+    public ResponseEntity getAllOfferings(@RequestHeader(value = "token") String token,
+                                          @RequestHeader(value = "userid") String userId) {
         List<AdditionalOffering> offers = dao.getAllOffering();
         return ResponseEntity.ok(offers);
     }
 
-    @GetMapping(value = "/offerings/{regionId}/{providerId}")
-    public ResponseEntity getAllInfoAboutAdditionalOfferings(@PathVariable int regionId, @PathVariable int providerId,
-                                                             @RequestHeader(value = "token") String token,
-                                                             @RequestHeader(value = "userid") String userId) {
-        List<TariffAndOfferings> list = dao.getAdditionalOfferings(regionId, providerId);
-        return ResponseEntity.ok(list);
-    }
+//    @GetMapping(value = "/offerings/{regionId}/{providerId}")
+//    public ResponseEntity getAllInfoAboutAdditionalOfferings(@PathVariable int regionId,
+//                                                             @PathVariable int providerId,
+//                                                             @RequestHeader(value = "token") String token,
+//                                                             @RequestHeader(value = "userid") String userId) {
+//        List<TariffAndOfferings> list = dao.getAdditionalOfferings(regionId, providerId);
+//        return ResponseEntity.ok(list);
+//    }
 }
