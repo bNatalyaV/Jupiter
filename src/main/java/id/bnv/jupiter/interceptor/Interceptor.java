@@ -20,6 +20,10 @@ public class Interceptor extends HandlerInterceptorAdapter {
                              Object handler) throws Exception {
         super.preHandle(request, response, handler);
 
+        if (request.getMethod().equals("OPTIONS")) {
+            return true;
+        }
+
         String servletPath = request.getRequestURL().toString();
 
         if (servletPath.contains("/authentication")) {

@@ -25,17 +25,6 @@ public class JourneyController {
         this.authentication = authentication;
     }
 
-    @PostMapping(value = "/new/{numberId}/{tariffId}")
-    public ResponseEntity addJourney(@PathVariable int numberId,
-                                     @PathVariable int tariffId,
-                                     @RequestHeader(value = "token") String token,
-                                     @RequestHeader(value = "userid") String userId) throws Exception {
-        if (authentication.identifyUserByToken(token, Integer.parseInt(userId))) {
-            Response response = journeyDao.addJourney(numberId, tariffId);
-            return ResponseEntity.ok(response);
-        } else return ResponseEntity.badRequest()
-                .body(new Response("Not autorized", Response.Status.smthWrong));
-    }
 
     @GetMapping(value = "/{idjourney}")
     public ResponseEntity getJourney(@PathVariable(value = "idjourney") int idJourney,
@@ -69,14 +58,26 @@ public class JourneyController {
         return ResponseEntity.ok(list);
     }
 
+    @PostMapping(value = "/new/{numberId}/{tariffId}")
+    public ResponseEntity addJourney(@PathVariable int numberId,
+                                     @PathVariable int tariffId) throws Exception{
+        // @RequestHeader(value = "token") String token,
+        // @RequestHeader(value = "userid") String userId) throws Exception {
+        // if (authentication.identifyUserByToken(token, Integer.parseInt(userId))) {
+        journeyDao.addJourney(numberId, tariffId);
+        return ResponseEntity.ok().build();
+        //} else return ResponseEntity.badRequest()
+        //      .body(new Response("Not autorized", Response.Status.smthWrong));
+    }
+
     @PostMapping(value = "/continue/{numberId}/{tariffId}/{journeyId}")
     public ResponseEntity continueJourney(@PathVariable int numberId,
                                           @PathVariable int tariffId,
                                           @PathVariable int journeyId,
-                                          @RequestHeader(value = "token") String token,
+                                         @RequestHeader(value = "token") String token,
                                           @RequestHeader(value = "userid") String userId) throws Exception {
         if (authentication.identifyUserByToken(token, Integer.parseInt(userId))) {
-            journeyDao.addTask2(numberId, tariffId, journeyId);
+            journeyDao.addTaskFrom2To6(numberId, tariffId, journeyId);
             return ResponseEntity.ok("{\"response\" : \"Journey was finished\"}");
         } else return ResponseEntity.badRequest().build();
     }

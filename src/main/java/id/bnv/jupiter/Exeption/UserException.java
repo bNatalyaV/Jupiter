@@ -7,12 +7,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
 @JsonIgnoreProperties({"cause", "stackTrace", "localizedMessage", "message", "suppressed"})
-public class UserExeptions extends JupiterExeptions implements Serializable {
+public class UserException extends JupiterExeptions implements Serializable {
 
     @JsonProperty("response")
     public String response;
 
-    public UserExeptions(String message) {
+    public UserException(String message) {
         super(message);
 
         response = message;
