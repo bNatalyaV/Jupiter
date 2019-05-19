@@ -20,6 +20,7 @@ public class FullInfoAboutTarif implements Serializable {
     public int newTariffId;
     @JsonFormat(pattern = "yyyy-MM-dd")
     public Date endDate;
+    public int balance;
 
     public FullInfoAboutTarif() {
     }
@@ -36,7 +37,7 @@ public class FullInfoAboutTarif implements Serializable {
 
     public FullInfoAboutTarif(String previousProvider, String previousTarif, String number,
                               Date date, String nextProvider, String nextTarif, int journeyId,
-                              int numberId, int newTariffId, Date endDate) {
+                              int numberId, int newTariffId, Date endDate, int balance) {
         this.previousProvider = previousProvider;
         this.previousTarif = previousTarif;
         this.number = number;
@@ -47,5 +48,6 @@ public class FullInfoAboutTarif implements Serializable {
         this.numberId = numberId;
         this.newTariffId = newTariffId;
         this.endDate = endDate;
+        this.balance=balance;
     }
 }

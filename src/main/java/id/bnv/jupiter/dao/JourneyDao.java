@@ -47,7 +47,7 @@ public class JourneyDao extends Dao {
         return new FullInfoAboutTarif(oldProvider.providerName, oldTarif.tarifInfoId.tarifName,
                 number.phoneNumber, journey.startDate,
                 newProvider.providerName, newTarif.tarifInfoId.tarifName,
-                journey.journeyId, number.id, newTarif.tarifId, journey.endDate);
+                journey.journeyId, number.id, newTarif.tarifId, journey.endDate, number.balance);
     }
 
     //Все journeys завершенные и не только, история переходов
