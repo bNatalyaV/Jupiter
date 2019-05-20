@@ -24,9 +24,9 @@ public class Interceptor extends HandlerInterceptorAdapter {
 
         if (servletPath.contains("/authentication")) return true;
         if (servletPath.contains("/country/")) return true;
-        if (servletPath.contains("/region/providersForRegion")) return true;
+        if (servletPath.contains("/region/providersForRegion/")) return true;
         if (servletPath.contains("/tarif/price")) return true;
-        if (servletPath.contains("/tariffoffers")) return true;
+        if (servletPath.contains("/tariffoffers/")) return true;
         if (servletPath.contains("swagger")) return true;
         if (request.getMethod().equals("OPTIONS")) return true;
 

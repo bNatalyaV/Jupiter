@@ -26,9 +26,7 @@ public class TariffOfferingController {
     }
 
     @GetMapping(value = "/offers/{tariffId}")
-    public ResponseEntity getOfferNamePriceQuantity(@PathVariable int tariffId,
-                                                    @RequestHeader(value = "token") String token,
-                                                    @RequestHeader(value = "userid") String userId) {
+    public ResponseEntity getOfferNamePriceQuantity(@PathVariable int tariffId) {
         List<OffersAndAddOffers> list = tariffOfferingDao.getOfferNamePriceQuantity(tariffId);
 
         return ResponseEntity.ok(list);

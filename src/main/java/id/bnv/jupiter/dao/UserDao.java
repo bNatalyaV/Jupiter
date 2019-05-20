@@ -34,11 +34,6 @@ public class UserDao extends Dao {
         return list.get(0);
     }
 
-    public List<User> getAllUsers() {
-        Session session = getSession();
-        return (List<User>) session.createQuery("from User").list();
-    }
-
     public boolean checkEmailExist(String email, int id) {
         List list = getSession()
                 .createQuery("from User u where u.id != :id and u.email = :email")

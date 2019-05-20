@@ -36,9 +36,9 @@ public class UserController {
     }
 
     @PutMapping(value = "/user")
-    public ResponseEntity updateUser(@RequestBody User user,
-                                     @RequestHeader(value = "token") String token,
-                                     @RequestHeader(value = "userid") String userId) {
+    public ResponseEntity updateUser(@RequestBody User user){
+                                    // @RequestHeader(value = "token") String token,
+                                    // @RequestHeader(value = "userid") String userId) {
         boolean isEmailAlreadyExist = dao.checkEmailExist(user.email, user.id);
         if (isEmailAlreadyExist) throw new UserException("email already exist");
 

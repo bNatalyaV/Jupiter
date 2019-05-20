@@ -10,11 +10,11 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserException.class)
     public ResponseEntity handleUserExeption (UserException exception) {
-        return ResponseEntity.ok(exception);
+        return ResponseEntity.status(405).body(exception);
     }
 
     @ExceptionHandler(NumberException.class)
     public ResponseEntity handleNumberException(NumberException exception) {
-        return ResponseEntity.ok(exception);
+        return ResponseEntity.status(405).body(exception);
     }
 }
