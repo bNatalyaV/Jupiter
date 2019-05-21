@@ -1,14 +1,17 @@
 package id.bnv.jupiter.interceptor;
 
 import id.bnv.jupiter.authentication.Authentication;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// TODO: add logging
 public class Interceptor extends HandlerInterceptorAdapter {
     private final Authentication authentication;
+    private static final Logger logger = LogManager.getLogger(Interceptor.class);
 
     public Interceptor(Authentication authentication) {
         this.authentication = authentication;
@@ -21,6 +24,11 @@ public class Interceptor extends HandlerInterceptorAdapter {
         super.preHandle(request, response, handler);
 
         String servletPath = request.getRequestURL().toString();
+
+        logger.info("============NEW REQUEST=============");
+        logger.info(("[preHandle][" + "\n[" + request.getMethod()
+                + "]\n" + request.getRequestURI() +"\n token: "+ request.getHeader("token")
+                +"\n userid:"+ request.getHeader("userid")));
 
         if (servletPath.contains("/authentication")) return true;
         if (servletPath.contains("/country/")) return true;
@@ -51,6 +59,17 @@ public class Interceptor extends HandlerInterceptorAdapter {
             response.getWriter().write(responseToClient);
             response.getWriter().flush();
             response.getWriter().close();
+
+            logger.info("NOT AUTHORIZED!");
+            logger.info("============REQUEST ENDED=============");
         }
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        super.postHandle(request, response, handler, modelAndView);
+
+        logger.info(("[postHandle][" + response + "]" + "[" + response.getStatus() + "]"));
+        logger.info("============REQUEST ENDED=============");
     }
 }
